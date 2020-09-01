@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/constants/const/defaults.dart';
-import 'package:highfives_ui/constants/const/sideMenuItems.dart';
+import 'package:highfives_ui/constants/const/employerSideMenuItems.dart';
 import 'package:highfives_ui/models/employer/employerProfileModel.dart';
 import 'package:highfives_ui/resources/profile/profile.dart';
 import 'package:highfives_ui/screens/employer/jobDescription/jd.dart';
@@ -22,26 +22,24 @@ class EmployerProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder(
-        future: getEmployerProfile(),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.hasData) {
-            return BuildEmployerProfile(snapshot.data);
-          } else if (snapshot.hasError) {
-            //TODO : SHOW ALERT AND ERROR
-            return Container(
-              //TODO
-              width: 100,
-              height: 100,
-              color: Colors.red,
-            );
-          } else {
-            //TODO LOADING
-            return Loading();
-          }
-        },
-      ),
+    return FutureBuilder(
+      future: getEmployerProfile(),
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        if (snapshot.hasData) {
+          return BuildEmployerProfile(snapshot.data);
+        } else if (snapshot.hasError) {
+          //TODO : SHOW ALERT AND ERROR
+          return Container(
+            //TODO
+            width: 100,
+            height: 100,
+            color: Colors.red,
+          );
+        } else {
+          //TODO LOADING
+          return Loading();
+        }
+      },
     );
   }
 
@@ -70,7 +68,7 @@ class BuildEmployerProfile extends StatelessWidget {
       color: Theme.of(context).primaryColor,
       child: ListView(
         children: [
-          _buildProfileTextAndIcon(context, PROFILE),
+          _buildProfileTextAndIcon(context, EMPLOYER_PROFILE),
           _buildBasicProfileSection(context, personalInfo),
           _buildProfileTextAndIcon(context, 'About Company'),
           _buildAboutCompnay(context),
@@ -114,7 +112,6 @@ Widget _buildProfileTextAndIcon(BuildContext context, String headline) {
 
 Widget _buildBasicProfileSection(BuildContext context, dynamic personalInfo) {
   // final personalInfo = PersonalInfo.fromMap(_profileData["personal"]);
-  print('#2 ${personalInfo["profilePicture"]}');
   Size size = MediaQuery.of(context).size;
   return Container(
     width: size.width,
@@ -250,7 +247,7 @@ Widget _buildAboutCompnay(BuildContext context) {
           padding: EdgeInsets.all(20),
           child: Text(
             //TODO THIS NEEDS TO COME FROM API CHANGE LATER
-            ABOUT_COLLEGE,
+            ABOUT_COLLEGE_TEXT,
             style: Theme.of(context).textTheme.headline4,
           ),
         ),

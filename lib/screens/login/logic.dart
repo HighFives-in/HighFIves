@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/resources/Identity/main.dart';
-import 'package:highfives_ui/screens/employer/profile/employer_profile.dart';
+import 'package:highfives_ui/screens/employer/dashboard/employerDashboard.dart';
 import 'package:highfives_ui/screens/home_page/main.dart';
 import 'package:highfives_ui/screens/login/roleChanger.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/tnpdashboard.dart';
@@ -157,8 +157,8 @@ class LoginLogicWithRole extends StatelessWidget {
             context, MaterialPageRoute(builder: (context) => TnpView()));
         break;
       case EMPLOYER:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => EmployerProfile()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => EmployerView()));
         break;
     }
   }

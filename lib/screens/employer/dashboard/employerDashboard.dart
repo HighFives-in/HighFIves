@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
+import 'package:highfives_ui/constants/const/employerSideMenuItems.dart';
 import 'package:highfives_ui/constants/const/size.dart';
-import 'package:highfives_ui/screens/tnp/communications/manage_existing/view.dart';
-import 'package:highfives_ui/screens/tnp/dashboard/sideview.dart';
-import 'package:highfives_ui/screens/tnp/dashboard/sidemenumodel.dart';
-import 'package:highfives_ui/screens/tnp/profile/profile.dart';
+import 'package:highfives_ui/screens/employer/dashboard/employerSideview.dart';
+import 'package:highfives_ui/screens/employer/dashboard/sidemenumodel.dart';
+import 'package:highfives_ui/screens/employer/profile/employer_profile.dart';
 import 'package:highfives_ui/screens/utils/navbar.dart';
 import 'package:provider/provider.dart';
 
-class TnpView extends StatelessWidget {
+class EmployerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return ChangeNotifierProvider<SideMenuModel>(
+    return ChangeNotifierProvider<EmployerSideMenuModel>(
       //By default build Profile
-      create: (_) => SideMenuModel(0),
-      child: TnpDashBoard(),
+      create: (_) => EmployerSideMenuModel(0),
+      child: EmployerDashBoard(),
     );
   }
 }
 
-class TnpDashBoard extends StatelessWidget {
+class EmployerDashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Now get the menu item selected on basis of sideMenu and build sideView and dashboard body
-    final item = Provider.of<SideMenuModel>(context).selectedItem;
+    final item = Provider.of<EmployerSideMenuModel>(context).selectedItem;
     Size size = MediaQuery.of(context).size;
     double navBarHeight = 100;
     return Builder(
@@ -42,7 +41,7 @@ class TnpDashBoard extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SideView(),
+                      EmployerSideView(),
                       DashBoardBody(item),
                     ],
                   ),
@@ -61,6 +60,7 @@ class DashBoardBody extends StatelessWidget {
   DashBoardBody(this._menuItem);
   @override
   Widget build(BuildContext context) {
+    print('BUILD $_menuItem');
     Size size = MediaQuery.of(context).size;
     return _getSelectedWidget(_menuItem, context);
   }
@@ -70,12 +70,9 @@ Widget _getSelectedWidget(String menuItem, BuildContext context) {
   Widget childWidget;
 
   //TODO THIS COMMUNICATION HAS SOME CATEGORIES
-  if (menuItem != null && menuItem == TNPSIDEMENULIST[1]) {
-    childWidget = ExistingRelations();
-  }
 
-  if (menuItem != null && menuItem == TNP_PROFILE) {
-    childWidget = TnpProfile();
+  if (menuItem != null && menuItem == EMPLOYER_PROFILE) {
+    childWidget = EmployerProfile();
   }
 
   Size size = MediaQuery.of(context).size;

@@ -45,7 +45,7 @@ final DARKTHEME = ThemeData(
         color: Colors.white,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.64),
-    bodyText1: TextStyle(fontSize: 20, fontFamily: customFontFamily),
+    bodyText1: TextStyle(fontSize: 10, fontFamily: customFontFamily),
     bodyText2: TextStyle(fontSize: 15, fontFamily: customFontFamily),
   ),
 );
