@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/constants/const/defaults.dart';
@@ -8,6 +6,7 @@ import 'package:highfives_ui/models/employer/employerProfileModel.dart';
 import 'package:highfives_ui/resources/profile/profile.dart';
 import 'package:highfives_ui/screens/employer/jobDescription/jd.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
+import 'package:highfives_ui/utils/responsiveLayout.dart';
 
 //Its a Scrollable View with many sections like basic profile
 // About Company Description and Job Description
@@ -73,6 +72,7 @@ class BuildEmployerProfile extends StatelessWidget {
           _buildProfileTextAndIcon(context, 'About Company'),
           _buildAboutCompnay(context),
           _buildProfileTextAndIcon(context, 'Job Descriptions'),
+          SizedBox(height: 40),
           EmployerJobDescriptions(jobDescriptions),
         ],
       ),
@@ -111,43 +111,47 @@ Widget _buildProfileTextAndIcon(BuildContext context, String headline) {
 }
 
 Widget _buildBasicProfileSection(BuildContext context, dynamic personalInfo) {
-  // final personalInfo = PersonalInfo.fromMap(_profileData["personal"]);
   Size size = MediaQuery.of(context).size;
   return Container(
     width: size.width,
     margin: EdgeInsets.fromLTRB(30, 30, 0, 0),
     padding: EdgeInsets.all(50),
-    height: 500,
     child: Row(
-      // mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: ResponsiveLayout.isSmallScreen(context)
+          ? MainAxisAlignment.spaceAround
+          : MainAxisAlignment.start,
       children: [
-        Column(
-          children: [
-            _displayProfilePicture(personalInfo["profilePicture"]),
-            SizedBox(
-              height: 10,
-            ),
-            _editProfilePicture(context),
-          ],
+        Container(
+          width: size.width * 0.3,
+          child: Column(
+            children: [
+              _displayProfilePicture(personalInfo["profilePicture"], context),
+              SizedBox(
+                height: 10,
+              ),
+              _editProfilePicture(context),
+            ],
+          ),
         ),
         SizedBox(
-          width: 100,
+          width: 10,
         ),
-        _displayProfileData(context, personalInfo),
+        Container(
+          alignment: Alignment.center,
+          width: size.width * 0.3,
+          child: _displayProfileData(context, personalInfo),
+        ),
       ],
     ),
   );
 }
 
-Widget _displayProfilePicture(String profileImage) {
+Widget _displayProfilePicture(String profileImage, BuildContext context) {
   if (profileImage == null) profileImage = DEFAULT_PROFILE_IMAGE;
   return Center(
     child: Container(
-      width: 300,
+      width: ResponsiveLayout.isSmallScreen(context) ? 200 : 300,
       height: 300,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(40),
-      ),
       child: Image(
         image: NetworkImage(profileImage),
       ),
@@ -157,8 +161,8 @@ Widget _displayProfilePicture(String profileImage) {
 
 Widget _editProfilePicture(BuildContext context) {
   return Container(
-    width: 300,
-    height: 50,
+    width: ResponsiveLayout.isSmallScreen(context) ? 100 : 200,
+    height: 40,
     decoration: BoxDecoration(
       color: Theme.of(context).accentColor,
       borderRadius: BorderRadius.circular(8.3),
@@ -166,7 +170,7 @@ Widget _editProfilePicture(BuildContext context) {
     child: InkWell(
       child: Center(
         child: Text(
-          'EDIT PROFILE',
+          'Edit Profile',
           style: Theme.of(context).textTheme.headline5,
         ),
       ),
@@ -175,66 +179,65 @@ Widget _editProfilePicture(BuildContext context) {
 }
 
 Widget _displayProfileData(BuildContext context, dynamic personalInfo) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      SizedBox(
-        height: 30,
-      ),
-      Container(
-        padding: EdgeInsets.all(7),
-        color: Theme.of(context).accentColor.withOpacity(0.2),
-        child: Text(
-          'Name :',
-          style: Theme.of(context).textTheme.headline4,
+  return Expanded(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: EdgeInsets.all(7),
+          color: Theme.of(context).accentColor.withOpacity(0.2),
+          child: Text(
+            'Name :',
+            style: Theme.of(context).textTheme.headline4,
+          ),
         ),
-      ),
-      Container(
-        padding: EdgeInsets.all(3),
-        child: Text(
-          personalInfo["firstName"] + " " + personalInfo["lastName"],
-          style: Theme.of(context).textTheme.headline6,
+        Container(
+          padding: EdgeInsets.all(3),
+          child: Text(
+            personalInfo["firstName"] + " " + personalInfo["lastName"],
+            style: Theme.of(context).textTheme.headline6,
+          ),
         ),
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      Container(
-        padding: EdgeInsets.all(7),
-        color: Theme.of(context).accentColor.withOpacity(0.2),
-        child: Text(
-          'Email :',
-          style: Theme.of(context).textTheme.headline4,
+        SizedBox(
+          height: 20,
         ),
-      ),
-      Container(
-        padding: EdgeInsets.all(3),
-        child: Text(
-          personalInfo["email"],
-          style: Theme.of(context).textTheme.headline6,
+        Container(
+          padding: EdgeInsets.all(7),
+          color: Theme.of(context).accentColor.withOpacity(0.2),
+          child: Text(
+            'Email :',
+            style: Theme.of(context).textTheme.headline4,
+          ),
         ),
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      Container(
-        padding: EdgeInsets.all(7),
-        color: Theme.of(context).accentColor.withOpacity(0.2),
-        child: Text(
-          'Contact Number :',
-          style: Theme.of(context).textTheme.headline4,
+        Container(
+          padding: EdgeInsets.all(3),
+          child: Text(
+            personalInfo["email"],
+            style: Theme.of(context).textTheme.headline6,
+          ),
         ),
-      ),
-      Container(
-        padding: EdgeInsets.all(3),
-        child: Text(
-          personalInfo["phone"],
-          style: Theme.of(context).textTheme.headline6,
+        SizedBox(
+          height: 20,
         ),
-      ),
-      // Text(''),
-      // Text(personalInfo["phone"]),
-    ],
+        Container(
+          padding: EdgeInsets.all(7),
+          color: Theme.of(context).accentColor.withOpacity(0.2),
+          child: Text(
+            'Contact Number:',
+            style: Theme.of(context).textTheme.headline4,
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.all(3),
+          child: Text(
+            personalInfo["phone"],
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        ),
+        // Text(''),
+        // Text(personalInfo["phone"]),
+      ],
+    ),
   );
 }
 

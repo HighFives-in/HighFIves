@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:html' as html;
 import 'dart:js' as js;
 
+import 'package:highfives_ui/utils/responsiveLayout.dart';
+
 class EmployerJobDescriptions extends StatelessWidget {
   List<dynamic> _jobDescriptions;
   EmployerJobDescriptions(this._jobDescriptions);
@@ -10,7 +12,6 @@ class EmployerJobDescriptions extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Column(
       children: [
-        _buildHeadings(),
         Container(
           width: size.width,
           height: size.height,
@@ -23,34 +24,6 @@ class EmployerJobDescriptions extends StatelessWidget {
       ],
     );
   }
-}
-
-Widget _buildHeadings() {
-  return Container(
-    height: 30,
-    padding: EdgeInsets.symmetric(horizontal: 20),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Expanded(
-          flex: 1,
-          child: Center(child: Text('No.')),
-        ),
-        Expanded(
-          flex: 4,
-          child: Center(child: Text('Titile')),
-        ),
-        Expanded(
-          flex: 2,
-          child: Center(child: Text('Created By')),
-        ),
-        Expanded(
-          flex: 1,
-          child: Center(child: Text('')),
-        ),
-      ],
-    ),
-  );
 }
 
 List<Widget> _buildAllJDs(BuildContext context, List<dynamic> jobDescriptions) {
@@ -91,7 +64,7 @@ Widget _buildSingleJobDescription(BuildContext context,
               ),
             ),
             Expanded(
-              flex: 4,
+              flex: ResponsiveLayout.isSmallScreen(context) ? 3 : 4,
               child: Center(
                   child: Text(
                 jobDescription["jobProfile"],
@@ -99,54 +72,45 @@ Widget _buildSingleJobDescription(BuildContext context,
               )),
             ),
             Expanded(
-              flex: 2,
-              child: Center(
-                child: Text('Author Name ?'),
-              ),
-            ),
-            Expanded(
               flex: 1,
-              child: Center(
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        js.context
-                            .callMethod("open", [jobDescription["pdfUrl"]]);
-                      },
-                      child: Icon(
-                        Icons.open_in_browser,
-                        color: Theme.of(context).accentColor,
-                        size: 30,
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: Center(
+                  child: Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          js.context
+                              .callMethod("open", [jobDescription["pdfUrl"]]);
+                        },
+                        child: Icon(
+                          Icons.open_in_browser,
+                          color: Theme.of(context).accentColor,
+                          size: 30,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: () {
-                        final url = jobDescription["pdfUrl"];
-                        final anchor = html.document.createElement('a')
-                            as html.AnchorElement
-                          ..href = url
-                          ..style.display = 'none'
-                          ..download = 'some_name.pdf';
-                        html.document.body.children.add(anchor);
-                        anchor.click();
-                        html.document.body.children.remove(anchor);
-                        html.Url.revokeObjectUrl(url);
-                      },
-                      child: Icon(
-                        Icons.download_rounded,
-                        color: Theme.of(context).accentColor,
-                        size: 30,
+                      SizedBox(width: 10),
+                      InkWell(
+                        onTap: () {
+                          final url = jobDescription["pdfUrl"];
+                          final anchor = html.document.createElement('a')
+                              as html.AnchorElement
+                            ..href = url
+                            ..style.display = 'none'
+                            ..download = 'some_name.pdf';
+                          html.document.body.children.add(anchor);
+                          anchor.click();
+                          html.document.body.children.remove(anchor);
+                          html.Url.revokeObjectUrl(url);
+                        },
+                        child: Icon(
+                          Icons.download_rounded,
+                          color: Theme.of(context).accentColor,
+                          size: 30,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 10),
-                    Icon(
-                      Icons.delete,
-                      color: Theme.of(context).accentColor,
-                      size: 30,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
