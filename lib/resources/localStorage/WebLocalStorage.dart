@@ -1,5 +1,5 @@
 import 'package:highfives_ui/constants/const/token.dart';
-import 'dart:html' as dhtml;
+import 'package:universal_html/html.dart' as dhtml;
 import 'dart:convert';
 
 class WebLocalStorage {

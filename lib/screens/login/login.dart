@@ -31,6 +31,7 @@ class LoginUI extends StatelessWidget {
 
   Widget _buildTopNavBar(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    if (ResponsiveLayout.isSmallScreen(context)) return Container();
     return Container(
       width: size.width,
       decoration: BoxDecoration(

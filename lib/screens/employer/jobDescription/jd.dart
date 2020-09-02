@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
-import 'dart:js' as js;
+import 'package:universal_html/js.dart' as js;
 
 import 'package:highfives_ui/utils/responsiveLayout.dart';
 
@@ -80,6 +79,7 @@ Widget _buildSingleJobDescription(BuildContext context,
                     children: [
                       InkWell(
                         onTap: () {
+                          //TODO FOR APPS
                           js.context
                               .callMethod("open", [jobDescription["pdfUrl"]]);
                         },
@@ -91,20 +91,8 @@ Widget _buildSingleJobDescription(BuildContext context,
                       ),
                       SizedBox(width: 10),
                       InkWell(
-                        onTap: () {
-                          final url = jobDescription["pdfUrl"];
-                          final anchor = html.document.createElement('a')
-                              as html.AnchorElement
-                            ..href = url
-                            ..style.display = 'none'
-                            ..download = 'some_name.pdf';
-                          html.document.body.children.add(anchor);
-                          anchor.click();
-                          html.document.body.children.remove(anchor);
-                          html.Url.revokeObjectUrl(url);
-                        },
                         child: Icon(
-                          Icons.download_rounded,
+                          Icons.delete,
                           color: Theme.of(context).accentColor,
                           size: 30,
                         ),
