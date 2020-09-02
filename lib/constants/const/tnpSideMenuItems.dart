@@ -1,4 +1,4 @@
-const SIDEMENULIST = [
+const TNPSIDEMENULIST = [
   'Profile',
   'Communications',
   'Ongoing Interviews',
@@ -7,9 +7,11 @@ const SIDEMENULIST = [
   'Help'
 ];
 
-const PROFILE = 'Profile';
+const TNP_PROFILE = 'Profile';
 const COMMUNICATIONS = 'Communications';
 const ONGOING_INTERVIEW = 'Ongoing Interviews';
 const STUDENTS = 'Students';
 const ANALYTICS = 'Analytics';
 const HELP = 'help';
+
+const ABOUT_COLLEGE = 'About College';

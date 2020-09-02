@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
+import 'package:highfives_ui/constants/const/employerSideMenuItems.dart';
 import 'package:highfives_ui/constants/const/size.dart';
-import 'package:highfives_ui/screens/tnp/dashboard/sidemenumodel.dart';
+import 'package:highfives_ui/screens/employer/dashboard/sidemenumodel.dart';
 import 'package:provider/provider.dart';
 
-class SideView extends StatelessWidget {
+class EmployerSideView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -33,48 +33,46 @@ class SideView extends StatelessWidget {
 //IT IS STILL POSSIBLE IN THIS LOOP BUT SEE LATER
 List<Widget> _sideMenuItemsList(BuildContext context) {
   Size size = MediaQuery.of(context).size;
-  String selectedItem = Provider.of<SideMenuModel>(context).selectedItem;
+  String selectedItem =
+      Provider.of<EmployerSideMenuModel>(context).selectedItem;
   List<Widget> _menuItems = List<Widget>();
-  for (int i = 0; i < TNPSIDEMENULIST.length; i++) {
+  for (int i = 0; i < EMPLOYERSIDEMENULIST.length; i++) {
     bool selected = false;
 
-    if (TNPSIDEMENULIST[i] == selectedItem) {
+    if (EMPLOYERSIDEMENULIST[i] == selectedItem) {
       selected = true;
     }
 
-    String item = TNPSIDEMENULIST[i];
+    String item = EMPLOYERSIDEMENULIST[i];
 
     Widget itemWidget = GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
-        Provider.of<SideMenuModel>(context, listen: false)
+        Provider.of<EmployerSideMenuModel>(context, listen: false)
             .setSideMenuItem(item);
       },
       // color: Colors.orange,
       child: Container(
-        width: size.width,
-        height: 50,
         color: selected
             ? Theme.of(context).accentColor.withOpacity(0.1)
             : Theme.of(context).primaryColor,
+        margin: EdgeInsets.only(top: 10),
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(5),
           child: Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Center(
-                  child: Icon(
-                    Icons.menu,
-                    size: 20,
-                    color: Theme.of(context).accentColor,
-                  ),
+                  child: getIcon(item),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: 5,
                 ),
-                Text(item, style: Theme.of(context).textTheme.headline6),
+                Text(item,
+                    style: Theme.of(context).textTheme.headline6,
+                    overflow: TextOverflow.ellipsis),
               ],
             ),
           ),
@@ -85,4 +83,50 @@ List<Widget> _sideMenuItemsList(BuildContext context) {
     _menuItems.add(itemWidget);
   }
   return _menuItems;
+}
+
+Widget getIcon(String item) {
+  switch (item) {
+    case EMPLOYER_PROFILE:
+      return Icon(
+        Icons.account_box,
+        size: 25,
+      );
+      break;
+    case COMMUNICATIONS:
+      return Icon(
+        Icons.insert_comment_outlined,
+        size: 25,
+      );
+      break;
+    case ONGOING_INTERVIEW:
+      return Icon(
+        Icons.people,
+        size: 25,
+      );
+      break;
+    case STUDENTS:
+      return Icon(
+        Icons.people_alt_sharp,
+        size: 25,
+      );
+      break;
+    case ANALYTICS:
+      return Icon(
+        Icons.analytics_outlined,
+        size: 25,
+      );
+      break;
+    case HELP:
+      return Icon(
+        Icons.help,
+        size: 25,
+      );
+      break;
+    default:
+      return Icon(
+        Icons.menu,
+        size: 25,
+      );
+  }
 }

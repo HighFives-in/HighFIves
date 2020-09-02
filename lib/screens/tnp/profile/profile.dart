@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/defaults.dart';
-import 'package:highfives_ui/constants/const/sideMenuItems.dart';
+import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
 import 'package:highfives_ui/models/tnp/tnpProfileModel.dart';
 import 'package:highfives_ui/resources/profile/profile.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
@@ -62,7 +62,7 @@ class BuildTnpProfile extends StatelessWidget {
       color: Theme.of(context).primaryColor,
       child: ListView(
         children: [
-          _buildProfileTextAndIcon(context, PROFILE),
+          _buildProfileTextAndIcon(context, TNP_PROFILE),
           _buildBasicProfileSection(context, personalInfo),
           _buildProfileTextAndIcon(context, 'About College'),
           _buildAboutCollege(context),
@@ -168,7 +168,6 @@ Widget _editProfilePicture(BuildContext context) {
 }
 
 Widget _displayProfileData(BuildContext context, dynamic personalInfo) {
-  print('ui ${personalInfo["firstName"]}');
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -241,7 +240,7 @@ Widget _buildAboutCollege(BuildContext context) {
           padding: EdgeInsets.all(20),
           child: Text(
             //TODO THIS NEEDS TO COME FROM API CHANGE LATER
-            ABOUT_COLLEGE,
+            ABOUT_COLLEGE_TEXT,
             style: Theme.of(context).textTheme.headline4,
           ),
         ),

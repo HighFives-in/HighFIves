@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/theme.dart';
 import 'package:highfives_ui/constants/const/token.dart';
 import 'package:highfives_ui/resources/Identity/main.dart';
+import 'package:highfives_ui/screens/employer/dashboard/employerDashboard.dart';
 import 'package:highfives_ui/screens/home_page/main.dart';
 import 'package:highfives_ui/screens/login/login.dart';
 import 'package:highfives_ui/utils/themeChanger.dart';
@@ -36,10 +37,10 @@ class MaterialAppWithTheme extends StatelessWidget {
         builder: (context, snapshot) {
           if (!snapshot.hasData) return CircularProgressIndicator();
           if (snapshot.data != null && snapshot.data) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MainHome()));
+            //TODO
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => EmployerView()));
           } else {
-            //TODO SHOULD BE LOGINUI
             return LoginUI();
           }
         },
