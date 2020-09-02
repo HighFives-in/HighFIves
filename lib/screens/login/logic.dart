@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/resources/Identity/main.dart';
 import 'package:highfives_ui/screens/employer/dashboard/employerDashboard.dart';
@@ -133,6 +134,17 @@ class LoginLogicWithRole extends StatelessWidget {
                     if (res != null && res) {
                       _formKey.currentState.reset();
                       navigateToHome(_selectedRole, context);
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: "Invalid Email Id or Password",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 5,
+                          backgroundColor: Colors.orange,
+                          webPosition: "center",
+                          textColor: Colors.white,
+                          webBgColor: "#fd9346",
+                          fontSize: 16.0);
                     }
                   }
                 },
