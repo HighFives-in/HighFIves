@@ -50,7 +50,7 @@ class MaterialAppWithTheme extends StatelessWidget {
           if (!snapshot.hasData) return CircularProgressIndicator();
           if (snapshot.data != null && snapshot.data) {
             //TODO
-            return EmployerView();
+            return TnpView();
           } else {
             return LoginUI();
           }

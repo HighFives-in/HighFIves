@@ -135,16 +135,18 @@ class LoginLogicWithRole extends StatelessWidget {
                       _formKey.currentState.reset();
                       navigateToHome(_selectedRole, context);
                     } else {
+                      //TODO THIS IS WRONG PUT A TRY CATCH ABOVE
                       Fluttertoast.showToast(
-                          msg: "Invalid Email Id or Password",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 5,
-                          backgroundColor: Colors.orange,
-                          webPosition: "center",
-                          textColor: Colors.white,
-                          webBgColor: "#fd9346",
-                          fontSize: 16.0);
+                        msg: "Invalid Email Id or Password",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.orange,
+                        webPosition: "center",
+                        textColor: Colors.white,
+                        webBgColor: "#fd9346",
+                        fontSize: 16.0,
+                      );
                     }
                   }
                 },

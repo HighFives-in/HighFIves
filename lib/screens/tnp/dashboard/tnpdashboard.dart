@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
 import 'package:highfives_ui/constants/const/size.dart';
-import 'package:highfives_ui/screens/tnp/communications/manage_existing/view.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/sideview.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/sidemenumodel.dart';
 import 'package:highfives_ui/screens/tnp/profile/profile.dart';
+import 'package:highfives_ui/screens/tnp/relations/existing/existing.dart';
 import 'package:highfives_ui/screens/utils/navbar.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +14,7 @@ class TnpView extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return ChangeNotifierProvider<SideMenuModel>(
       //By default build Profile
-      create: (_) => SideMenuModel(0),
+      create: (_) => SideMenuModel(),
       child: TnpDashBoard(),
     );
   }
@@ -70,8 +70,9 @@ Widget _getSelectedWidget(String menuItem, BuildContext context) {
   Widget childWidget;
 
   //TODO THIS COMMUNICATION HAS SOME CATEGORIES
-  if (menuItem != null && menuItem == TNPSIDEMENULIST[1]) {
+  if (menuItem != null && menuItem == COMMUNICATIONS) {
     childWidget = ExistingRelations();
+    // childWidget = ViewRelationDetails();
   }
 
   if (menuItem != null && menuItem == TNP_PROFILE) {
