@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:highfives_ui/screens/utils/pdfrender.dart';
+// import 'package:highfives_ui/screens/utils/pdfrender.dart';
 import 'dart:html' as html;
 import 'dart:js' as js;
 
@@ -135,11 +135,11 @@ Widget _buildSingleJobDescription(BuildContext context,
                         html.document.body.children.remove(anchor);
                         html.Url.revokeObjectUrl(url);
                       },
-                      child: Icon(
-                        Icons.download_rounded,
-                        color: Theme.of(context).accentColor,
-                        size: 30,
-                      ),
+                      // child: Icon(
+                      //   Icons.download_rounded,
+                      //   color: Theme.of(context).accentColor,
+                      //   size: 30,
+                      // ),
                     ),
                     SizedBox(width: 10),
                     Icon(

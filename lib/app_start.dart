@@ -1,17 +1,17 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/theme.dart';
 import 'package:highfives_ui/constants/const/token.dart';
 import 'package:highfives_ui/resources/Identity/main.dart';
 import 'package:highfives_ui/screens/home_page/main.dart';
-import 'package:highfives_ui/screens/login/login.dart';
+import 'package:highfives_ui/screens/home_page/Home.dart';
 import 'package:highfives_ui/utils/themeChanger.dart';
 import 'package:provider/provider.dart';
 import 'package:highfives_ui/utils/platform.dart';
+import 'package:highfives_ui/logging/logger.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  final log = getLogger('MyApp');
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +39,7 @@ class MaterialAppWithTheme extends StatelessWidget {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => MainHome()));
           } else {
-            //TODO SHOULD BE LOGINUI
-            return LoginUI();
+            return HOMEUI();
           }
         },
       ),

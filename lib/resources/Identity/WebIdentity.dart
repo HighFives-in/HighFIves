@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:highfives_ui/constants/const/token.dart';
+import 'package:highfives_ui/logging/logger.dart';
 import 'package:highfives_ui/resources/Identity/I_Identity.dart';
 import 'package:highfives_ui/resources/localStorage/WebLocalStorage.dart';
 import 'package:highfives_ui/services/Identity/signup/signup.dart';
@@ -9,6 +10,7 @@ import 'package:highfives_ui/services/Identity/login/login.dart';
 class WebIdentity extends I_Identity with WebLocalStorage {
   final _signupService = SignUpService();
   final _loginService = LoginService();
+  final log = getLogger('WebIdentity');
 
   @override
   Future<bool> signUp(String email, String password, String role) async {
@@ -43,6 +45,7 @@ class WebIdentity extends I_Identity with WebLocalStorage {
       //TODO:THROW_ERROR invalid response because we expect access and refresh in response;
     } catch (e) {
       //TODO:LOG_ERROR***
+      log.e(e);
       return false;
     }
     return false;
@@ -57,7 +60,7 @@ class WebIdentity extends I_Identity with WebLocalStorage {
       var tokenComponents = token.split(".");
       if (tokenComponents.length != 3) {
         //TODO:LOG_ERROR***
-        print("Invalid token format");
+        log.i("Invalid token format");
         return false;
       }
 
@@ -66,16 +69,15 @@ class WebIdentity extends I_Identity with WebLocalStorage {
       if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000)
           .isAfter(DateTime.now())) {
         //TODO:LOG_ERROR***
-        print("Token is Valid");
-        print(payload);
         return true;
       } else {
         //TODO:LOG_ERROR***
-        print("Token Expired");
+        log.i("Token Expired");
         return false;
       }
     } catch (e) {
       //TODO:LOG_ERROR***
+      log.e(e);
       return false;
     }
   }
@@ -88,6 +90,7 @@ class WebIdentity extends I_Identity with WebLocalStorage {
       return true;
     } catch (e) {
       //TODO:LOG_ERROR***
+      log.e(e);
       return false;
     }
   }

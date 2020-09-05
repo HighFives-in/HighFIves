@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/app_start.dart';
-import 'package:highfives_ui/config_reader.dart';
+// import 'package:highfives_ui/config_reader.dart';
 import 'package:highfives_ui/environment.dart';
 import 'package:provider/provider.dart';
 
 Future<void> mainCommon(String env) async {
   WidgetsFlutterBinding.ensureInitialized();
-  await ConfigReader.initialize();
+  // await ConfigReader.initialize();
 
   Color primaryColor;
   switch (env) {
