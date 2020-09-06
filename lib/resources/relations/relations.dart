@@ -14,4 +14,10 @@ class RelationResource {
     //   return employerProfileMock;
     // }
   }
+
+  Future<dynamic> getRelationDetails(int id) async {
+    //this is current logged in role
+    await Future.delayed(Duration(seconds: 1));
+    return relationDetailsMock;
+  }
 }

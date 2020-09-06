@@ -5,6 +5,7 @@ import 'package:highfives_ui/screens/tnp/dashboard/sideview.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/sidemenumodel.dart';
 import 'package:highfives_ui/screens/tnp/profile/profile.dart';
 import 'package:highfives_ui/screens/tnp/relations/existing/existing.dart';
+import 'package:highfives_ui/screens/tnp/relations/existing/relationDetails.dart';
 import 'package:highfives_ui/screens/utils/navbar.dart';
 import 'package:provider/provider.dart';
 
@@ -72,7 +73,7 @@ Widget _getSelectedWidget(String menuItem, BuildContext context) {
   //TODO THIS COMMUNICATION HAS SOME CATEGORIES
   if (menuItem != null && menuItem == COMMUNICATIONS) {
     childWidget = ExistingRelations();
-    // childWidget = ViewRelationDetails();
+    // childWidget = ViewRelationDetails(0, 0);
   }
 
   if (menuItem != null && menuItem == TNP_PROFILE) {

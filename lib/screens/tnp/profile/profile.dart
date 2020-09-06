@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/constants/const/defaults.dart';
 import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
 import 'package:highfives_ui/models/tnp/tnpProfileModel.dart';
@@ -39,7 +40,7 @@ class TnpProfile extends StatelessWidget {
   }
 
   Future<dynamic> getTnpProfile() {
-    return profile.getProfile('tnp');
+    return profile.getProfile(TNP, null);
   }
 }
 

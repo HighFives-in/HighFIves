@@ -40,9 +40,8 @@ class ExistingRelations extends StatelessWidget {
               );
             } else if (snapshot.hasError) {
               basicErrorFlutterToast();
-              return Container(
-                color: Colors.black38,
-              );
+              //TODO NOT FOUND OR SOMETHING ELSE
+              return Container();
             } else {
               return Loading();
             }
@@ -148,8 +147,10 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
             ),
           ),
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ViewRelationDetails()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ViewRelationDetails(0, 0)));
           },
           subtitle: Align(
             alignment: Alignment.center,
@@ -194,69 +195,72 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
         ),
         color: Theme.of(context).primaryColor,
         child: InkWell(
-          onTap: () {},
-          child: Flexible(
-            child: Container(
-              height: 105,
-              padding: EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          child: Image.network(
-                            relationData.companyLogo,
-                            scale: 2,
-                          ),
+          onTap: () {
+            //TODO
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) => ViewRelationDetails(0, 0)));
+          },
+          child: Container(
+            height: 105,
+            padding: EdgeInsets.all(20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        child: Image.network(
+                          relationData.companyLogo,
+                          scale: 2,
                         ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(relationData.companyName.toUpperCase(),
-                            style: Theme.of(context).textTheme.headline4),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(relationData.companyName.toUpperCase(),
+                          style: Theme.of(context).textTheme.headline4),
+                    ],
                   ),
-                  Spacer(),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          allRelationFromCompany["jobProfileName"]
-                              .toUpperCase(),
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'Accepted ' + allRelationFromCompany["date"],
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                      ],
-                    ),
+                ),
+                Spacer(),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        allRelationFromCompany["jobProfileName"].toUpperCase(),
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Accepted ' + allRelationFromCompany["date"],
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    ],
                   ),
-                  Spacer(),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Text(
-                          'View Details',
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                        SizedBox(width: 5),
-                        Icon(
-                          Icons.keyboard_arrow_right,
-                          size: 25,
-                          color: Theme.of(context).accentColor,
-                        ),
-                      ],
-                    ),
+                ),
+                Spacer(),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Text(
+                        'View Details',
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                      SizedBox(width: 5),
+                      Icon(
+                        Icons.keyboard_arrow_right,
+                        size: 25,
+                        color: Theme.of(context).accentColor,
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
