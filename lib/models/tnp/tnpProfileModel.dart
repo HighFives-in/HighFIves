@@ -12,7 +12,6 @@ class TnpProfileModel {
   });
 
   factory TnpProfileModel.fromMap(Map<String, dynamic> profile) {
-    print('PROFILE');
     return new TnpProfileModel(
         tnpId: profile["tnpId"],
         isAdmin: profile["isAdmin"],

@@ -1,51 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
+import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
+import 'package:highfives_ui/locator.dart';
 import 'package:highfives_ui/models/tnp/existingRelationsModel.dart';
 import 'package:highfives_ui/resources/relations/relations.dart';
 import 'package:highfives_ui/screens/tnp/relations/existing/relationDetails.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
+import 'package:highfives_ui/screens/utils/navigationService.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
 import 'package:highfives_ui/utils/toast.dart';
 
 class ExistingRelations extends StatelessWidget {
+  static const existingRelationsRoute = 'existing';
   final _relationResouce = RelationResource();
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(50),
-      child: FutureBuilder(
-          future: _relationResouce.getexistingRelations(TNP),
-          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            if (snapshot.hasData) {
-              return ResponsiveLayout(
-                largeScreen: ListView(
-                  children: [
-                    _buildSearchAndFilters(context),
-                    // _buildSortByDate(context),
-                    ...largeChild(context, snapshot.data)
-                  ],
-                ),
-                mediumScreen: ListView(
-                  children: [
-                    _buildSearchAndFilters(context),
-                    ...smallChild(context, snapshot.data),
-                  ],
-                ),
-                smallScreen: ListView(
-                  children: [
-                    _buildSearchAndFilters(context),
-                    ...smallChild(context, snapshot.data),
-                  ],
-                ),
-              );
-            } else if (snapshot.hasError) {
-              basicErrorFlutterToast();
-              //TODO NOT FOUND OR SOMETHING ELSE
-              return Container();
-            } else {
-              return Loading();
-            }
-          }),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Padding(
+        padding: EdgeInsets.all(50),
+        child: FutureBuilder(
+            future: _relationResouce.getexistingRelations(TNP),
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              if (snapshot.hasData) {
+                return ResponsiveLayout(
+                  largeScreen: ListView(
+                    children: [
+                      _buildSearchAndFilters(context),
+                      // _buildSortByDate(context),
+                      ...largeChild(context, snapshot.data)
+                    ],
+                  ),
+                  mediumScreen: ListView(
+                    children: [
+                      _buildSearchAndFilters(context),
+                      ...smallChild(context, snapshot.data),
+                    ],
+                  ),
+                  smallScreen: ListView(
+                    children: [
+                      _buildSearchAndFilters(context),
+                      ...smallChild(context, snapshot.data),
+                    ],
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                basicErrorFlutterToast();
+                //TODO NOT FOUND OR SOMETHING ELSE
+                return Container();
+              } else {
+                return Loading();
+              }
+            }),
+      ),
     );
   }
 }
@@ -147,10 +154,14 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
             ),
           ),
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ViewRelationDetails(0, 0)));
+            locator<NavigationService>().navitgateTo('/' +
+                TNP +
+                '/' +
+                COMMUNICATIONS +
+                '/' +
+                allRelationFromCompany["hiringId"].toString() +
+                '_' +
+                relationData.companyId.toString());
           },
           subtitle: Align(
             alignment: Alignment.center,
@@ -196,11 +207,15 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
         color: Theme.of(context).primaryColor,
         child: InkWell(
           onTap: () {
-            //TODO
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) => ViewRelationDetails(0, 0)));
+            //TODO DONT USE DIRECTLY
+            locator<NavigationService>().navitgateTo('/' +
+                TNP +
+                '/' +
+                COMMUNICATIONS +
+                '/' +
+                allRelationFromCompany["hiringId"].toString() +
+                '_' +
+                relationData.companyId.toString());
           },
           child: Container(
             height: 105,

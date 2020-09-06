@@ -31,10 +31,10 @@ dependencies:
   http: ^0.12.1
   flutter_secure_storage: ^3.3.3
   dio: ^3.0.9
-  get_it: ^4.0.3
   pdf: ^1.11.0
   universal_html: ^1.2.3
   fluttertoast: ^7.0.4
+  get_it: ^4.0.4
 
 dev_dependencies:
   flutter_test:

@@ -167,10 +167,12 @@ class LoginLogicWithRole extends StatelessWidget {
             context, MaterialPageRoute(builder: (context) => MainHome()));
         break;
       case TNP:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => TnpView()));
+        //TODO PUSHNAMED ?
+        // Navigator.pushNamed(context, '/' + TnpView.tnpMainRoute);
+        Navigator.pushReplacementNamed(context, '/' + TnpView.tnpMainRoute);
         break;
       case EMPLOYER:
+        //TODO LIKE ABOVE ONE
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => EmployerView()));
         break;

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
 import 'package:highfives_ui/constants/const/size.dart';
+import 'package:highfives_ui/locator.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/sidemenumodel.dart';
+import 'package:highfives_ui/screens/utils/navigationService.dart';
 import 'package:provider/provider.dart';
 
 class SideView extends StatelessWidget {
@@ -49,6 +52,7 @@ List<Widget> _sideMenuItemsList(BuildContext context) {
       onTap: () {
         Provider.of<SideMenuModel>(context, listen: false)
             .setSideMenuItem(item);
+        locator<NavigationService>().navitgateTo('/' + TNP + '/' + item);
       },
       // color: Colors.orange,
       child: Container(
