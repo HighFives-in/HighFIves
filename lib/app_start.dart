@@ -39,28 +39,29 @@ class MaterialAppWithTheme extends StatelessWidget {
       title: 'HighFives',
       theme: _theme.getTheme(),
       navigatorKey: locator<NavigationService>().navigatorKey,
-      home: FutureBuilder(
-        future: _findtoken(TokenType.AccessToken),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            Fluttertoast.showToast(
-                msg: "Something Went wrong in Login",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.CENTER,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.red,
-                textColor: Colors.white,
-                fontSize: 16.0);
-          }
-          if (!snapshot.hasData) return CircularProgressIndicator();
-          if (snapshot.data != null && snapshot.data) {
-            //TODO
-            return TnpView(TnpView.tnpMainRoute);
-          } else {
-            return LoginUI();
-          }
-        },
-      ),
+      // home: FutureBuilder(
+      //   future: _findtoken(TokenType.AccessToken),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.hasError) {
+      //       Fluttertoast.showToast(
+      //           msg: "Something Went wrong in Login",
+      //           toastLength: Toast.LENGTH_SHORT,
+      //           gravity: ToastGravity.CENTER,
+      //           timeInSecForIosWeb: 1,
+      //           backgroundColor: Colors.red,
+      //           textColor: Colors.white,
+      //           fontSize: 16.0);
+      //     }
+      //     if (!snapshot.hasData) return CircularProgressIndicator();
+      //     if (snapshot.data != null && snapshot.data) {
+      //       //TODO
+      //       // return TnpView(TnpView.tnpMainRoute);
+      //       return EmployerView(EmployerView.employerMainRoute);
+      //     } else {
+      //       return LoginUI();
+      //     }
+      //   },
+      // ),
       initialRoute: '/',
       onGenerateRoute: Path.onGenerateRoute,
       onUnknownRoute: (RouteSettings settings) => MaterialPageRoute<void>(

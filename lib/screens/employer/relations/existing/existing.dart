@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
 import 'package:highfives_ui/locator.dart';
-import 'package:highfives_ui/models/tnp/existingRelationsModel.dart';
+import 'package:highfives_ui/models/employer/employerRelationModel.dart';
 import 'package:highfives_ui/resources/relations/relations.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
 import 'package:highfives_ui/screens/utils/navigationService.dart';
@@ -12,7 +12,7 @@ import 'package:highfives_ui/utils/toast.dart';
 //TODO MANAGE NULL FOR EXAMPLE WHEN IMAGE WAS NULL NETWORK IMAGE THWORS AN ERROR
 // TAKE CARE OF BIG TEXT
 
-class ExistingRelations extends StatelessWidget {
+class EmployerExistingRelations extends StatelessWidget {
   static const existingRelationsRoute = 'existing';
   final _relationResouce = RelationResource();
   @override
@@ -22,7 +22,7 @@ class ExistingRelations extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(50),
         child: FutureBuilder(
-            future: _relationResouce.getexistingRelations(TNP),
+            future: _relationResouce.getexistingRelations(EMPLOYER),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               if (snapshot.hasData) {
                 return ResponsiveLayout(
@@ -111,7 +111,6 @@ Widget _buildSearchAndFilters(context) {
 
 List<Widget> smallChild(BuildContext context, final allJobs) {
   List<Widget> allJobsWidgets = List<Widget>();
-  double textMargin = ResponsiveLayout.isLargeScreen(context) ? 100 : 20;
   if (allJobs == null || allJobs.length == 0) {
     final emptyJobText = Center(
       child: Text('No Relations Found :('),
@@ -120,7 +119,7 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
     return allJobsWidgets;
   }
   for (int i = 0; i < allJobs.length; i++) {
-    final relationData = ExisTingRelationModel.fromMap(allJobs[i]);
+    final relationData = EmployerExisTingRelationModel.fromMap(allJobs[i]);
     final allRelationFromCompany = relationData.hiringInfo;
 
     final singleJob = Container(
@@ -137,13 +136,13 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
             children: [
               CircleAvatar(
                 child: Image.network(
-                  relationData.companyLogo,
+                  relationData.collegeLogo,
                   scale: 2,
                 ),
               ),
               SizedBox(width: 10),
               Text(
-                relationData.companyName.toUpperCase(),
+                relationData.collegeName.toUpperCase(),
                 style: Theme.of(context).textTheme.headline4,
               ),
             ],
@@ -157,7 +156,7 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
           ),
           onTap: () {
             locator<NavigationService>().navitgateTo('/' +
-                TNP +
+                EMPLOYER +
                 '/' +
                 COMMUNICATIONS +
                 '/' +
@@ -197,7 +196,7 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
     return allJobsWidgets;
   }
   for (int i = 0; i < allJobs.length; i++) {
-    final relationData = ExisTingRelationModel.fromMap(allJobs[i]);
+    final relationData = EmployerExisTingRelationModel.fromMap(allJobs[i]);
     final allRelationFromCompany = relationData.hiringInfo;
 
     final singleJob = Container(
@@ -211,7 +210,7 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
           onTap: () {
             //TODO DONT USE DIRECTLY
             locator<NavigationService>().navitgateTo('/' +
-                TNP +
+                EMPLOYER +
                 '/' +
                 COMMUNICATIONS +
                 '/' +
@@ -230,14 +229,14 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
                     children: [
                       CircleAvatar(
                         child: Image.network(
-                          relationData.companyLogo,
+                          relationData.collegeLogo,
                           scale: 2,
                         ),
                       ),
                       SizedBox(
                         width: 20,
                       ),
-                      Text(relationData.companyName.toUpperCase(),
+                      Text(relationData.collegeName.toUpperCase(),
                           style: Theme.of(context).textTheme.headline4),
                     ],
                   ),

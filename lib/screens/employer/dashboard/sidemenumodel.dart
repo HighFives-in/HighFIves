@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/employerSideMenuItems.dart';
+import 'package:highfives_ui/screens/employer/routes/allEmployerRoutes.dart';
 
 class EmployerSideMenuModel extends ChangeNotifier {
   String _menuItem;
   int _selectedIndex;
 
-  EmployerSideMenuModel(this._selectedIndex) {
-    _menuItem = EMPLOYERSIDEMENULIST[_selectedIndex];
+  //singleton relationRoutes
+  AllEmployerRoutesWithWidgets _allEmployerRoutesWithWidgets =
+      AllEmployerRoutesWithWidgets.instance;
+
+  EmployerSideMenuModel(String dynamicRoute) {
+    _allEmployerRoutesWithWidgets.setRoute(dynamicRoute);
   }
-  get selectedItem => _menuItem;
+
+  get selectedItem => _allEmployerRoutesWithWidgets.selectedItem;
   setSideMenuItem(String item) {
     _selectedIndex = EMPLOYERSIDEMENULIST.indexOf(item);
     if (_selectedIndex < 0) Error();

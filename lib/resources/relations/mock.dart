@@ -72,3 +72,59 @@ final relationDetailsMock = {
     {"studentId": "", "studentName": ""}
   ]
 };
+const employerExistingRelationMock = [
+  {
+    "collegeName": "IIT Ropar",
+    "collegeId": 123,
+    "collegeLogo": "http://www.iitrpr.ac.in/sites/default/files/image.jpg",
+    "hiringInfo": {
+      "hiringId": 1,
+      "jobProfileName": "SOFTWARE DEVELOPER",
+      "date": "12-09-2020" // Intern vs Full time
+    }
+  },
+  {
+    "collegeName": "IIT Madras",
+    "collegeId": 456,
+    "collegeLogo":
+        "https://iitmfoundation.org/wp-content/uploads/2018/08/IITM_Logo.png",
+    "hiringInfo": {
+      "hiringId": 1,
+      "jobProfileName": "Product Manager",
+      "date": "13-09-2020" // Intern vs Full time
+    }
+  },
+  {
+    "collegeName": "MIT",
+    "collegeId": 12,
+    "collegeLogo":
+        "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/0010/8586/brand.gif?itok=0_Xg_92B",
+    "hiringInfo": {
+      "hiringId": 1,
+      "jobProfileName": "SOFTWARE DEVELOPER",
+      "date": "13-09-2020" // Intern vs Full time
+    }
+  },
+  {
+    "collegeName": "Delhi University",
+    "collegeId": 23,
+    "collegeLogo":
+        "https://images.news18.com/ibnlive/uploads/2018/06/DU-875.jpg",
+    "hiringInfo": {
+      "hiringId": 1,
+      "jobProfileName": "SOFTWARE DEVELOPER",
+      "date": "14-09-2020" // Intern vs Full time
+    }
+  },
+  {
+    "collegeName": "Thapar University",
+    "collegeId": 123,
+    "collegeLogo":
+        "https://res-4.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/xphihf2jmsd9e6i8vcbh",
+    "hiringInfo": {
+      "hiringId": 1,
+      "jobProfileName": "Business Analyst",
+      "date": "15-09-2020" // Intern vs Full time
+    }
+  },
+];

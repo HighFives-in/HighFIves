@@ -174,7 +174,10 @@ class LoginLogicWithRole extends StatelessWidget {
       case EMPLOYER:
         //TODO LIKE ABOVE ONE
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => EmployerView()));
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    EmployerView(EmployerView.employerMainRoute)));
         break;
     }
   }
