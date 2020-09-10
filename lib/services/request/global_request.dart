@@ -58,15 +58,18 @@ class UiHttpClient {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
       if (e.response != null) {
-        print(e.response.data);
-        print(e.response.headers);
-        print(e.response.request);
+        //THIS WILL BE LOGGED IN DIFFERENT SERVICES
+        // print(e.response.data);
+        // print(e.response.headers);
+        // print(e.response.request);
       } else {
         // Something happened in setting up or sending the request that triggered an Error
-        print(e.request);
-        print(e.message);
+        print(
+            'Something happened in setting up or sending the request that triggered an Error ${e.request}');
+        print(
+            'Something happened in setting up or sending the request that triggered an Error ${e.message}');
       }
-      return null;
+      return e;
     }
   }
 }

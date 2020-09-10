@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:highfives_ui/app_start.dart';
 import 'package:highfives_ui/screens/employer/dashboard/employerDashboard.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/tnpdashboard.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
@@ -9,26 +10,25 @@ class Path {
   const Path(this.pathPattern, this.builder);
 
 //we need to enter a regex here to match
+// IMPORTANT NOTE Path(r'\/', (context, match) => AppStart()),
+// should be at the end of list in paths because this is the main path and will match every regex
   static List<Path> paths = [
+    Path(r'^tnp\/communications\/\d*_\d*', (context, match) => TnpView(match)),
+    Path(r'^\/tnp\/communications\/*', (context, match) => TnpView(match)),
+    Path(r'\/tnp\/communications', (context, match) => TnpView(match)),
+    Path(r'^\/tnp\/\d*_\d*', (context, match) => TnpView(match)),
+    Path(r'^\/tnp', (context, match) => TnpView(match)),
     Path(r'^' + '/loading', (context, match) => Loading()),
-    Path(r'tnp\/communications\/\d*_\d*', (context, match) => TnpView(match)),
-    Path(r'\/tnp\/communications\/*', (context, match) => TnpView(match)),
-    Path(r'\/tnp\/\d*_\d*', (context, match) => TnpView(match)),
-    Path(r'\/tnp', (context, match) => TnpView(match)),
-    Path(r'^' + '/loading', (context, match) => Loading()),
-    Path(r'employer\/communications\/\d*_\d*',
+    Path(r'^employer\/communications\/\d*_\d*',
         (context, match) => EmployerView(match)),
-    Path(r'\/employer\/communications\/*',
+    Path(r'^\/employer\/communications',
         (context, match) => EmployerView(match)),
-    Path(r'\/employer\/\d*_\d*', (context, match) => EmployerView(match)),
-    Path(r'\/employer', (context, match) => EmployerView(match)),
+    Path(r'^\/employer\/communications\/*',
+        (context, match) => EmployerView(match)),
+    Path(r'^\/employer\/\d*_\d*', (context, match) => EmployerView(match)),
+    Path(r'^\/employer', (context, match) => EmployerView(match)),
+    Path(r'\/', (context, match) => AppStart()),
   ];
-
-  // //TODO WIRNG ONLY FOR TNP
-  // Path(r'\/', (context, match) => TnpView(match)),
-
-  //TODO WIRNG ONLY FOR TNP
-  // Path(r'\/', (context, match) => EmployerView(match)),
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     //dynamic routes
@@ -56,17 +56,26 @@ class Path {
 }
 
 /*
-PageRouteBuilder(
-          transitionDuration: Duration(milliseconds: 200),
-          transitionsBuilder: (context, animation, animationTime, child) {
-            return ScaleTransition(
-              scale: animation,
-              alignment: Alignment.center,
-              child: child,
-            );
-          },
-          pageBuilder: (context, animation, animationTime) {
-            return path.builder(context, settings.name);
-          },
-        );    
+  
+
+
+        PageRouteBuilder(
+            transitionsBuilder: (context, animation, animationTime, child) {
+              animation = CurvedAnimation(
+                  parent: animation, curve: Curves.easeInToLinear);
+              return SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(-1.0, 0.0),
+                  end: const Offset(0, 0),
+                ).animate(animation),
+              );
+            },
+            pageBuilder: (context, animation, animationTime) {
+              return path.builder(context, settings.name);
+            },
+            settings: settings);
+
+       
+
+        
  */

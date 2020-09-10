@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:highfives_ui/services/Identity/mock/allmock.dart';
-import 'package:highfives_ui/services/Identity/signup/signup.dart';
+import 'package:highfives_ui/services/Identity/signup.dart';
 import 'package:highfives_ui/services/request/global_request.dart';
 import 'package:mockito/mockito.dart';
 

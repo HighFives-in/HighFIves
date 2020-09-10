@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:highfives_ui/services/request/global_request.dart';
 
 class LoginService {
@@ -10,18 +11,16 @@ class LoginService {
     final user = {'email': email, 'password': password, 'role': role};
     try {
       var response = await httpClient.postData(url, null, user);
+      if (response is DioError) {
+        //TODO LOG error status and error i.e. response.response.statusCode and response.response
+      }
       if (response.statusCode == 200 &&
           response.data != null &&
           response.data is Map) {
         return response.data;
-      } else {
-        //TODO:LOG_ERROR
-        //TODO:THROW_ERROR  //this error to be catch in resources and should be added to logging
-        throw Exception('Failed to login From LoginService');
       }
     } catch (e) {
-      print(e);
-      return null;
+      //may be some problem in dio or in code inside try
     }
   }
 }

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:highfives_ui/constants/const/business.dart';
+import 'package:highfives_ui/constants/const/errors.dart';
+import 'package:highfives_ui/locator.dart';
 import 'package:highfives_ui/resources/Identity/main.dart';
 import 'package:highfives_ui/screens/employer/dashboard/employerDashboard.dart';
-import 'package:highfives_ui/screens/home_page/main.dart';
 import 'package:highfives_ui/screens/login/roleChanger.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/tnpdashboard.dart';
+import 'package:highfives_ui/screens/utils/loading.dart';
 import 'package:highfives_ui/utils/platform.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
+import 'package:highfives_ui/utils/toast.dart';
 import 'package:provider/provider.dart';
 
 class LoginLogic extends StatelessWidget {
@@ -129,24 +132,18 @@ class LoginLogicWithRole extends StatelessWidget {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
 
-                    var res = await this
-                        ._attemptLogin(_email, _password, _selectedRole);
-                    if (res != null && res) {
-                      _formKey.currentState.reset();
-                      navigateToHome(_selectedRole, context);
-                    } else {
-                      //TODO THIS IS WRONG PUT A TRY CATCH ABOVE
-                      Fluttertoast.showToast(
-                        msg: "Invalid Email Id or Password",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.orange,
-                        webPosition: "center",
-                        textColor: Colors.white,
-                        webBgColor: "#fd9346",
-                        fontSize: 16.0,
-                      );
+                    try {
+                      dynamic res = await locator<Loading>().handleSubmit(
+                          context,
+                          this._attemptLogin(_email, _password, _selectedRole));
+                      if (res == null || !res) {
+                        basicErrorFlutterToast(LOGIN_ERROR);
+                      } else if (res != null && res) {
+                        _formKey.currentState.reset();
+                        navigateToHome(_selectedRole, context);
+                      }
+                    } catch (e) {
+                      basicErrorFlutterToast(LOGIN_ERROR);
                     }
                   }
                 },
@@ -163,8 +160,9 @@ class LoginLogicWithRole extends StatelessWidget {
   void navigateToHome(String role, BuildContext context) {
     switch (role) {
       case STUDENT:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MainHome()));
+        //TODO NOT IMPLEMENTED YET !!
+        // Navigator.pushNamed(context, '/' + TnpView.tnpMainRoute);
+        Navigator.pushReplacementNamed(context, '/' + TnpView.tnpMainRoute);
         break;
       case TNP:
         //TODO PUSHNAMED ?
@@ -173,18 +171,12 @@ class LoginLogicWithRole extends StatelessWidget {
         break;
       case EMPLOYER:
         //TODO LIKE ABOVE ONE
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    EmployerView(EmployerView.employerMainRoute)));
+        //TODO PUSHNAMED ?
+        // Navigator.pushNamed(context, '/' + TnpView.tnpMainRoute);
+        Navigator.pushReplacementNamed(
+            context, '/' + EmployerView.employerMainRoute);
         break;
     }
-  }
-
-  Future<dynamic> _attemptSignUp(
-      String email, String password, String role) async {
-    return await _identityResource.signUp(email, password, role);
   }
 
   Future<dynamic> _attemptLogin(
