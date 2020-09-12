@@ -157,14 +157,16 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
             ),
           ),
           onTap: () {
-            locator<NavigationService>().navitgateTo('/' +
-                EMPLOYER +
+            locator<NavigationService>().navitgateTo(
                 '/' +
-                COMMUNICATIONS +
-                '/' +
-                relationData.hiringId.toString() +
-                '_' +
-                relationData.employer.employerId.toString());
+                    EMPLOYER +
+                    '/' +
+                    COMMUNICATIONS +
+                    '/' +
+                    relationData.hiringId.toString() +
+                    '_' +
+                    relationData.employer.employerId.toString(),
+                relationData);
           },
           subtitle: Align(
             alignment: Alignment.center,
@@ -212,14 +214,17 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
         child: InkWell(
           onTap: () {
             //TODO DONT USE DIRECTLY
-            locator<NavigationService>().navitgateTo('/' +
-                EMPLOYER +
+            // sending data as the sencond format
+            locator<NavigationService>().navitgateTo(
                 '/' +
-                COMMUNICATIONS +
-                '/' +
-                relationData.hiringId.toString() +
-                '_' +
-                relationData.employer.employerId.toString());
+                    EMPLOYER +
+                    '/' +
+                    COMMUNICATIONS +
+                    '/' +
+                    relationData.hiringId.toString() +
+                    '_' +
+                    relationData.employer.employerId.toString(),
+                relationData);
           },
           child: Container(
             height: 105,

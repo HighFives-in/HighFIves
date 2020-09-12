@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:highfives_ui/models/employer/employerRelationModel.dart';
 
-class HiringInfo extends StatelessWidget {
-  final hiringInfo;
-  final employerProfile;
-  HiringInfo(this.hiringInfo, this.employerProfile);
+class EmployerHiringInfo extends StatelessWidget {
+  final _relationDetails;
+  EmployerHiringInfo(this._relationDetails);
   @override
   Widget build(BuildContext context) {
-    return _buildHiringInfoDetails(context, hiringInfo, employerProfile);
+    return _buildHiringInfoDetails(context, _relationDetails);
   }
 
-  _buildHiringInfoDetails(
-      BuildContext context, final hiringInfo, final employerProfile) {
-    final jobInfo = hiringInfo["jobInfo"];
-    final eligibilityDetailsMap = Map<String, dynamic>.from(jobInfo);
-    final eligibilityDetails = eligibilityDetailsMap["eligibility"];
-    final eligibility = Map<String, dynamic>.from(eligibilityDetails);
+  _buildHiringInfoDetails(BuildContext context, Relation _relationDetails) {
+    final eligibilityDetails = _relationDetails.eligiblity;
 
     return Column(
       children: [
-        Text(eligibility["combined"]),
+        Text(eligibilityDetails),
       ],
     );
   }

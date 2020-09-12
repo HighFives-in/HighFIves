@@ -156,14 +156,16 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
             ),
           ),
           onTap: () {
-            locator<NavigationService>().navitgateTo('/' +
-                TNP +
+            locator<NavigationService>().navitgateTo(
                 '/' +
-                COMMUNICATIONS +
-                '/' +
-                allRelationFromCompany["hiringId"].toString() +
-                '_' +
-                relationData.companyId.toString());
+                    TNP +
+                    '/' +
+                    COMMUNICATIONS +
+                    '/' +
+                    allRelationFromCompany["hiringId"].toString() +
+                    '_' +
+                    relationData.companyId.toString(),
+                null);
           },
           subtitle: Align(
             alignment: Alignment.center,
@@ -210,14 +212,16 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
         child: InkWell(
           onTap: () {
             //TODO DONT USE DIRECTLY
-            locator<NavigationService>().navitgateTo('/' +
-                TNP +
+            locator<NavigationService>().navitgateTo(
                 '/' +
-                COMMUNICATIONS +
-                '/' +
-                allRelationFromCompany["hiringId"].toString() +
-                '_' +
-                relationData.companyId.toString());
+                    TNP +
+                    '/' +
+                    COMMUNICATIONS +
+                    '/' +
+                    allRelationFromCompany["hiringId"].toString() +
+                    '_' +
+                    relationData.companyId.toString(),
+                null);
           },
           child: Container(
             height: 105,

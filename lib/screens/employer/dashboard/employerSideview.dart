@@ -53,7 +53,8 @@ List<Widget> _sideMenuItemsList(BuildContext context) {
       onTap: () {
         Provider.of<EmployerSideMenuModel>(context, listen: false)
             .setSideMenuItem(item);
-        locator<NavigationService>().navitgateTo('/' + EMPLOYER + '/' + item);
+        locator<NavigationService>()
+            .navitgateTo('/' + EMPLOYER + '/' + item, null);
       },
       // color: Colors.orange,
       child: Container(
