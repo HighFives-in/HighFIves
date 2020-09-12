@@ -32,8 +32,6 @@ class EmployerSideView extends StatelessWidget {
   }
 }
 
-//TODO MAKE SEPARATE WIDGET FOR EVERY MENU ITEM AS ICONS AND SOME PROPERTIES ARE TO BE DIFFERENT LIKE FOR COMMUNICATION THERE ARE SUB HEADINGS
-//IT IS STILL POSSIBLE IN THIS LOOP BUT SEE LATER
 List<Widget> _sideMenuItemsList(BuildContext context) {
   Size size = MediaQuery.of(context).size;
   String selectedItem =

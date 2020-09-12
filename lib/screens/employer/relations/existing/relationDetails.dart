@@ -4,11 +4,9 @@ import 'package:highfives_ui/models/employer/employerRelationModel.dart';
 import 'package:highfives_ui/screens/employer/relations/existing/hiringInfo.dart';
 import 'package:highfives_ui/utils/toast.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
-import 'package:highfives_ui/screens/tnp/relations/existing/hiringInfo.dart';
 import 'package:highfives_ui/screens/tnp/relations/existing/tabChoices.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
 import 'package:highfives_ui/resources/relations/relations.dart';
-import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/resources/profile/profile.dart';
 
 class ViewEmployerRelationDetails extends StatelessWidget {

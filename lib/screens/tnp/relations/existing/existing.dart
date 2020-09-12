@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
 import 'package:highfives_ui/locator.dart';
+import 'package:highfives_ui/models/employer/employerRelationModel.dart';
 import 'package:highfives_ui/models/tnp/existingRelationsModel.dart';
 import 'package:highfives_ui/resources/relations/relations.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
@@ -111,7 +112,6 @@ Widget _buildSearchAndFilters(context) {
 
 List<Widget> smallChild(BuildContext context, final allJobs) {
   List<Widget> allJobsWidgets = List<Widget>();
-  double textMargin = ResponsiveLayout.isLargeScreen(context) ? 100 : 20;
   if (allJobs == null || allJobs.length == 0) {
     final emptyJobText = Center(
       child: Text('No Relations Found :('),
@@ -120,9 +120,11 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
     return allJobsWidgets;
   }
   for (int i = 0; i < allJobs.length; i++) {
-    final relationData = ExisTingRelationModel.fromMap(allJobs[i]);
-    final allRelationFromCompany = relationData.hiringInfo;
-
+    final relationData = Relation.fromMap(allJobs[i]);
+    var companyName = relationData?.employer?.companyName != null
+        ? relationData?.employer?.companyName
+        : '';
+    //TODO COLLGEGE LOGO MAY BE NULL
     final singleJob = Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Card(
@@ -137,13 +139,13 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
             children: [
               CircleAvatar(
                 child: Image.network(
-                  relationData.companyLogo,
+                  relationData?.employer?.companyLogo,
                   scale: 2,
                 ),
               ),
               SizedBox(width: 10),
               Text(
-                relationData.companyName.toUpperCase(),
+                companyName.toUpperCase(),
                 style: Theme.of(context).textTheme.headline4,
               ),
             ],
@@ -151,7 +153,7 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
           title: Align(
             alignment: Alignment.center,
             child: Text(
-              allRelationFromCompany["jobProfileName"].toUpperCase(),
+              relationData.jobInfo.jobProfile.toUpperCase(),
               style: Theme.of(context).textTheme.headline4,
             ),
           ),
@@ -162,17 +164,17 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
                     '/' +
                     COMMUNICATIONS +
                     '/' +
-                    allRelationFromCompany["hiringId"].toString() +
+                    relationData.hiringId.toString() +
                     '_' +
-                    relationData.companyId.toString(),
-                null);
+                    relationData.employer.employerId.toString(),
+                relationData);
           },
           subtitle: Align(
             alignment: Alignment.center,
             child: Container(
               padding: EdgeInsets.all(5),
               child: Text(
-                'Accepted ' + allRelationFromCompany["date"],
+                'Accepted On' + relationData.dates.acceptedDate,
                 style: Theme.of(context).textTheme.headline6,
               ),
             ),
@@ -199,8 +201,7 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
     return allJobsWidgets;
   }
   for (int i = 0; i < allJobs.length; i++) {
-    final relationData = ExisTingRelationModel.fromMap(allJobs[i]);
-    final allRelationFromCompany = relationData.hiringInfo;
+    final relationData = Relation.fromMap(allJobs[i]);
 
     final singleJob = Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -218,10 +219,10 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
                     '/' +
                     COMMUNICATIONS +
                     '/' +
-                    allRelationFromCompany["hiringId"].toString() +
+                    relationData.hiringId.toString() +
                     '_' +
-                    relationData.companyId.toString(),
-                null);
+                    relationData.college.collegeId.toString(),
+                relationData);
           },
           child: Container(
             height: 105,
@@ -234,14 +235,15 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
                     children: [
                       CircleAvatar(
                         child: Image.network(
-                          relationData.companyLogo,
+                          relationData.employer.companyLogo,
                           scale: 2,
                         ),
                       ),
                       SizedBox(
                         width: 20,
                       ),
-                      Text(relationData.companyName.toUpperCase(),
+                      Text(relationData.employer.companyName.toUpperCase(),
+                          overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.headline4),
                     ],
                   ),
@@ -253,12 +255,12 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        allRelationFromCompany["jobProfileName"].toUpperCase(),
+                        relationData.jobInfo.jobProfile.toUpperCase(),
                         style: Theme.of(context).textTheme.headline4,
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'Accepted ' + allRelationFromCompany["date"],
+                        'Accepted On' + relationData.dates.acceptedDate,
                         style: Theme.of(context).textTheme.headline6,
                       ),
                     ],

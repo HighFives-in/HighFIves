@@ -37,8 +37,8 @@ class AllTNPRoutesWithWidgets {
         if (routeUrl.length == 3) {
           var idList = routeUrl[2].split('_');
           if (idList.length == 2) {
-            this.currentWidget =
-                ViewRelationDetails(int.parse(idList[0]), int.parse(idList[1]));
+            this.currentWidget = ViewTnpRelationDetails(
+                int.parse(idList[0]), int.parse(idList[1]));
           }
         } else if (routeUrl.length == 2 ||
             (routeUrl.length == 3 && routeUrl[2] == "")) {

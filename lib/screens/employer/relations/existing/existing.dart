@@ -165,7 +165,7 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
                     '/' +
                     relationData.hiringId.toString() +
                     '_' +
-                    relationData.employer.employerId.toString(),
+                    relationData.college.collegeId.toString(),
                 relationData);
           },
           subtitle: Align(
@@ -200,8 +200,6 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
     return allRelations;
   }
   for (int i = 0; i < allJobs.length; i++) {
-    final inf = allJobs[i];
-    print('aal jpobs ${inf['hiringId']}');
     final relationData = Relation.fromMap(allJobs[i]);
 
     final singleJob = Container(
@@ -223,7 +221,7 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
                     '/' +
                     relationData.hiringId.toString() +
                     '_' +
-                    relationData.employer.employerId.toString(),
+                    relationData.college.collegeId.toString(),
                 relationData);
           },
           child: Container(
