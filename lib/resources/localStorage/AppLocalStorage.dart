@@ -13,6 +13,9 @@ class AppLocalStorage {
       case TokenType.RefreshToken:
         await _storage.write(key: REFRESHTOKENKEY, value: token);
         break;
+      case TokenType.TraceId:
+        await _storage.write(key: TRACEID, value: token);
+        break;
       default:
         await _storage.write(key: ACCESSTOKENKEY, value: token);
         break;
@@ -26,6 +29,8 @@ class AppLocalStorage {
         return await _storage.read(key: ACCESSTOKENKEY);
       case TokenType.RefreshToken:
         return await _storage.read(key: REFRESHTOKENKEY);
+      case TokenType.TraceId:
+        return await _storage.read(key: TRACEID);
       default:
         return await _storage.read(key: ACCESSTOKENKEY);
     }
@@ -38,6 +43,8 @@ class AppLocalStorage {
         return await _storage.delete(key: ACCESSTOKENKEY);
       case TokenType.RefreshToken:
         return await _storage.delete(key: REFRESHTOKENKEY);
+      case TokenType.TraceId:
+        return await _storage.delete(key: TRACEID);
       default:
         return await _storage.delete(key: ACCESSTOKENKEY);
     }
@@ -46,4 +53,5 @@ class AppLocalStorage {
   Future<Map<String, String>> readAllStoredData() async {
     return await _storage.readAll();
   }
+
 }

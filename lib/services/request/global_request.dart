@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:highfives_ui/constants/const/token.dart';
+import 'package:highfives_ui/logging/trace.dart';
 
 class UiHttpClient {
   var _dio; //TODO Change later
   BaseOptions _options;
-
+  dynamic traceId = getTraceId(TokenType.TraceId);
   factory UiHttpClient() {
     return _uiHttpClientSingleton;
   }

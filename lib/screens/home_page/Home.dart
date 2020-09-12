@@ -382,7 +382,7 @@ class LargeChild extends StatelessWidget {
                         widthFactor: 0.50,
                         child: Container(
                           child: Image(
-                            image: AssetImage("assets/images/people_highfive.png"),
+                            image: AssetImage("assets/images/static_home.png"),
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -454,7 +454,7 @@ class LargeChild extends StatelessWidget {
                                   style: Theme.of(context).textTheme.headline2),
                                 Padding(
                                   padding: EdgeInsets.all(10),
-                                  child: Text('Get courses to prepare for your interviews.',
+                                  child: Text('Never miss out on any opportunity.', //Get real time notifications and never miss out on any opportunity
                                         style: Theme.of(context).textTheme.headline6),
                                 ),
                                 SizedBox(height: 30),
@@ -487,7 +487,7 @@ class LargeChild extends StatelessWidget {
                         widthFactor: 0.50,
                         child: Container(
                           child: Image(
-                            image: AssetImage("assets/images/Home2.png"),
+                            image: AssetImage("assets/images/static2.jpg"),
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -505,7 +505,7 @@ class LargeChild extends StatelessWidget {
                         widthFactor: 0.50,
                         child: Container(
                           child: Image(
-                            image: AssetImage("assets/images/Home3.png"),
+                            image: AssetImage("assets/images/static1.jpg"),
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -582,7 +582,7 @@ class SmallChild extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 child: Container(
                   child: Image(
-                    image: AssetImage("assets/images/people_highfive.png"),
+                    image: AssetImage("assets/images/static_home.png"),
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -663,7 +663,7 @@ class SmallChild extends StatelessWidget {
                               padding: EdgeInsets.all(10),
                               child: Container(
                                 child: Image(
-                                  image: AssetImage("assets/images/Home2.png"),
+                                  image: AssetImage("assets/images/static2.jpg"),
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -684,7 +684,7 @@ class SmallChild extends StatelessWidget {
                                   style: Theme.of(context).textTheme.headline3),
                                 Padding(
                                   padding: EdgeInsets.all(10),
-                                  child: Text('Get courses to prepare for your interviews.',
+                                  child: Text('Never miss out on any opportunity.',
                                         style: Theme.of(context).textTheme.headline6),
                                 ),
                                 SizedBox(height: 30),
@@ -721,7 +721,7 @@ class SmallChild extends StatelessWidget {
                               padding: EdgeInsets.all(10),
                               child: Container(
                                 child: Image(
-                                  image: AssetImage("assets/images/Home3.png"),
+                                  image: AssetImage("assets/images/static2.jpg"),
                                   fit: BoxFit.contain,
                                 ),
                               ),
