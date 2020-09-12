@@ -7,16 +7,16 @@ class RelationResource {
     //this is current logged in role
     if (role == TNP) {
       await Future.delayed(Duration(seconds: 1));
-      return existingRelationMock;
+      return relationsMock;
     } else if (role == EMPLOYER) {
       await Future.delayed(Duration(seconds: 2));
-      return employerExistingRelationMock;
+      return relationsMock;
     }
   }
 
   Future<dynamic> getRelationDetails(int id) async {
     //this is current logged in role
     await Future.delayed(Duration(seconds: 1));
-    return relationDetailsMock;
+    return relationsMock;
   }
 }

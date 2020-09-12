@@ -30,7 +30,7 @@ const employerProfileMock = {
     "phone": "9541141470",
     "email": "employer.microsoft@highfives.com",
     "profilePicture":
-        "https://upload.wikimedia.org/wikipedia/en/3/38/Blackbear_-_Hot_Girl_Bummer.png",
+        "https://ca.res.keymedia.com/files/image/kristine-emmett-bell-media.jpg",
     "position": "",
   },
   "company": {
