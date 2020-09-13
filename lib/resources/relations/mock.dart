@@ -31,7 +31,8 @@ final relationsMock = [
       "pdfUrl": "pdfUrl"
     },
     "sentBy": "employer",
-    "eligiblity": "REALLY LOOONG TEXT",
+    "eligiblity":
+        "Software Engineer Job Responsibilities: \n Develops information systems by designing, developing, and installing software solutions. \n Determines operational feasibility by evaluating analysis, problem definition, requirements, solution development, and proposed solutions. \n Develops software solutions by studying information needs, conferring with users, and studying systems flow, data usage, and work processes. \n Investigates problem areas. \n Follows the software development lifecycle. \n Documents and demonstrates solutions by developing documentation, flowcharts, layouts, diagrams, charts, code comments and clear code. \n Prepares and installs solutions by determining and designing system specifications, standards, and programming. \n Improves operations by conducting systems analysis and recommending changes in policies and procedures. \n Obtains and licenses software by obtaining required information from vendors, recommending purchases, and testing and approving products. \n Protects operations by keeping information confidential. \n Provides information by collecting, analyzing, and summarizing development and service issues. \n Accomplishes engineering and organization mission by completing related results as needed.",
     "status": "ACCEPTED",
     "isPublished": "false",
     "results": [

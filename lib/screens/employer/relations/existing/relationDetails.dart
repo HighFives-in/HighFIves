@@ -14,15 +14,14 @@ class ViewEmployerRelationDetails extends StatelessWidget {
   Profile _profile = Profile();
 
   int _hiringId;
-  int _companyId;
   dynamic _relationDetails;
 
-  ViewEmployerRelationDetails(this._hiringId, this._companyId);
+  ViewEmployerRelationDetails(this._hiringId);
   @override
   Widget build(BuildContext context) {
     _relationDetails = ModalRoute.of(context).settings.arguments;
     return FutureBuilder(
-      future: getHiringAndProfileInfo(_hiringId, _companyId),
+      future: getHiringAndProfileInfo(_hiringId),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasData) {
           _relationDetails = snapshot.data;
@@ -42,7 +41,7 @@ class ViewEmployerRelationDetails extends StatelessWidget {
     );
   }
 
-  Future<dynamic> getHiringAndProfileInfo(int hiringId, int companyId) async {
+  Future<dynamic> getHiringAndProfileInfo(int hiringId) async {
     if (_relationDetails != null && _relationDetails is Relation) {
       return _relationDetails;
     }
@@ -121,11 +120,11 @@ class _RelationDetailsLargeViewState extends State<RelationDetailsLargeView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(40),
+      padding: EdgeInsets.fromLTRB(30, 20, 30, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildBasicCollegeDetails(widget._relationDetails),
+          _buildBasicCollegeDetails(widget._relationDetails, context),
           Row(
             // mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -158,7 +157,7 @@ class _RelationDetailsLargeViewState extends State<RelationDetailsLargeView> {
                                 ? Theme.of(context).primaryColor
                                 : Theme.of(context)
                                     .accentColor
-                                    .withOpacity(0.15),
+                                    .withOpacity(0.05),
                           ),
                           width: MediaQuery.of(context).size.width * 0.7 * 0.3,
                           child: Center(
@@ -213,12 +212,25 @@ class _RelationDetailsLargeViewState extends State<RelationDetailsLargeView> {
   }
 }
 
-Widget _buildBasicCollegeDetails(Relation relationDetails) {
+Widget _buildBasicCollegeDetails(
+    Relation _relationDetails, BuildContext context) {
   // final company = empProfile.company;
 
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text('MICROSOFT TEST'),
+      Text(
+        _relationDetails.college.collegeName.toUpperCase() +
+            " - " +
+            _relationDetails.jobInfo.jobProfile.toUpperCase(),
+        style: Theme.of(context).textTheme.headline3,
+      ),
+      SizedBox(height: 10),
+      Text(
+        'Accepted on ' + _relationDetails.dates.acceptedDate,
+        style: Theme.of(context).textTheme.bodyText2,
+      ),
+      SizedBox(height: 10),
     ],
   );
 }

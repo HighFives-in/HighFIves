@@ -6,10 +6,10 @@ const customFontFamily = "Montserrat";
 
 final DARKTHEME = ThemeData(
   // primarySwatch: Colors.white,
-  primaryColor: Colors.black,
+  primaryColor: const Color(0xFF141414),
   brightness: Brightness.dark,
   backgroundColor: const Color(0xFF212121),
-  accentColor: Colors.white,
+  accentColor: const Color(0xFFffffff),
   accentIconTheme: IconThemeData(color: Colors.black),
   dividerColor: Colors.orange,
   fontFamily: customFontFamily,
@@ -57,10 +57,10 @@ final DARKTHEME = ThemeData(
 
 final LIGHTTHEME = ThemeData(
   // primarySwatch: Colors.black,
-  primaryColor: Colors.white,
+  primaryColor: const Color(0xFFffffff),
   brightness: Brightness.light,
   backgroundColor: const Color(0xFFE5E5E5),
-  accentColor: Colors.black,
+  accentColor: const Color(0xFF141414),
   accentIconTheme: IconThemeData(color: Colors.white),
   dividerColor: Colors.orange,
   fontFamily: customFontFamily,

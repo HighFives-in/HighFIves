@@ -218,7 +218,8 @@ Widget _buildBasicCompanyDetails(Relation _relationDetails) {
   // final company = empProfile.company;
   return Column(
     children: [
-      Text('MICROSOFT DUMMY DATA - '),
+      Text(_relationDetails.employer.companyName +
+          _relationDetails.jobInfo.jobProfile),
       SizedBox(height: 50),
     ],
   );
