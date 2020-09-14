@@ -1,11 +1,11 @@
 const COMPANY_NAME = "HighFives";
 final List<String> NAV_HEADLINES = ['How We Work ?', 'About Us', 'Blogs'];
 Map<String, String> CUSTOMERS = {
-  "TNP": "tnp",
-  "EMPLOYER": "employer",
-  "STUDENT": "student"
+  "TNP": "TnP",
+  "EMPLOYER": "Employer",
+  "STUDENT": "Student"
 };
 
-const TNP = "tnp";
-const EMPLOYER = "employer";
-const STUDENT = "student";
+const TNP = "TnP";
+const EMPLOYER = "Employer";
+const STUDENT = "Student";

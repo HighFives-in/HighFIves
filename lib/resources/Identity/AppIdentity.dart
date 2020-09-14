@@ -5,6 +5,7 @@ import 'package:highfives_ui/resources/Identity/I_Identity.dart';
 import 'package:highfives_ui/resources/localStorage/AppLocalStorage.dart';
 import 'package:highfives_ui/services/Identity/signup/signup.dart';
 import 'package:highfives_ui/services/Identity/login/login.dart';
+import 'package:highfives_ui/utils/randomId.dart';
 
 class AppIdentity extends I_Identity with AppLocalStorage {
   final _signupService = SignUpService();
@@ -15,8 +16,10 @@ class AppIdentity extends I_Identity with AppLocalStorage {
     try {
       var res = await _signupService.attemptSignUp(email, password, role);
       if (res != null) {
+        String traceId = getTimeBasedId();
         await this.storeToken(res['accessToken'], TokenType.AccessToken);
         await this.storeToken(res['refreshToken'], TokenType.RefreshToken);
+        await this.storeToken(traceId, TokenType.TraceId);
         return true;
       }
     } catch (e) {
@@ -33,8 +36,10 @@ class AppIdentity extends I_Identity with AppLocalStorage {
       if (res != null &&
           res['accessToken'] != null &&
           res['refreshToken'] != null) {
+        String traceId = getTimeBasedId();
         await this.storeToken(res['accessToken'], TokenType.AccessToken);
         await this.storeToken(res['refreshToken'], TokenType.RefreshToken);
+        await this.storeToken(traceId, TokenType.TraceId);
         return true;
       }
       //TODO:THROW_ERROR invalid response because we expect access and refresh in response;
@@ -82,6 +87,7 @@ class AppIdentity extends I_Identity with AppLocalStorage {
     try {
       await this.deleteToken(TokenType.AccessToken);
       await this.deleteToken(TokenType.RefreshToken);
+      await this.deleteToken(TokenType.TraceId);
       return true;
     } catch (e) {
       //TODO:LOG_ERROR***

@@ -5,7 +5,6 @@ import 'package:highfives_ui/logging/trace.dart';
 class UiHttpClient {
   var _dio; //TODO Change later
   BaseOptions _options;
-  dynamic traceId = getTraceId(TokenType.TraceId);
   factory UiHttpClient() {
     return _uiHttpClientSingleton;
   }
@@ -28,7 +27,9 @@ class UiHttpClient {
   }
 
   getData(String url, Map<String, String> headers) async {
+    dynamic traceId = getTraceId(TokenType.TraceId);
     try {
+      headers["traceId"] = traceId;
       var response = await dio.get(url);
       return response;
     } on DioError catch (e) {
@@ -52,6 +53,8 @@ class UiHttpClient {
   postData(
       String url, Map<String, String> headers, Map<String, String> body) async {
     try {
+      dynamic traceId = getTraceId(TokenType.TraceId);
+      headers["traceId"] = traceId;
       var response = await dio.post(url, data: body);
       return response;
     } on DioError catch (e) {
