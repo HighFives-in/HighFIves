@@ -1,3 +1,4 @@
+import 'package:highfives_ui/constants/const/token.dart';
 import 'package:highfives_ui/resources/Identity/I_Identity.dart';
 import 'package:highfives_ui/constants/const/platform.dart';
 import 'package:highfives_ui/resources/Identity/WebIdentity.dart';
@@ -40,16 +41,16 @@ class IdentityResource extends I_Identity {
   }
 
   @override
-  Future<bool> findtoken(dynamic tokenType) async {
+  Future<bool> verifyToken(dynamic tokenType) async {
     print(_platform);
     switch (_platform) {
       case PLATFORMS.Web:
-        return await _webIdentity.findtoken(tokenType);
+        return await _webIdentity.verifyToken(tokenType);
       case PLATFORMS.Android:
       case PLATFORMS.Ios:
       case PLATFORMS.App:
       default:
-        return await _appIdentity.findtoken(tokenType);
+        return await _appIdentity.verifyToken(tokenType);
     }
   }
 
@@ -65,6 +66,29 @@ class IdentityResource extends I_Identity {
       default:
         return await _appIdentity.logout();
     }
+  }
+
+  Future<String> getToken(dynamic tokenType) async {
+    switch (_platform) {
+      case PLATFORMS.Web:
+        return await _webIdentity.readToken(tokenType);
+      case PLATFORMS.Android:
+      case PLATFORMS.Ios:
+      case PLATFORMS.App:
+      default:
+        return await _appIdentity.readToken(tokenType);
+    }
+  }
+
+  bool authenticate() {
+    dynamic refreshToken = this.verifyToken(TokenType.RefreshToken);
+    if (!refreshToken) {
+      dynamic accessToken = this.verifyToken(TokenType.AccessToken);
+      if (!accessToken) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @override

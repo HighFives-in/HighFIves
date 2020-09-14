@@ -4,7 +4,7 @@ class SignUpService {
   final httpClient = UiHttpClient();
   Future<Map<String, dynamic>> attemptSignUp(
       String email, String password, String role) async {
-    const path = '/identity/signupWithEmailAndPasswordAndRole';
+    const path = '/identity/signUpWithEmailAndPasswordAndRole';
 
     final user = {'email': email, 'password': password, 'role': role};
     try {

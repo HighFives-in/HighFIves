@@ -28,7 +28,7 @@ class WebIdentity extends I_Identity with WebLocalStorage {
       }
       //TODO:THROW_ERROR invalid response because we expect access and refresh in response;
     } catch (e) {
-      //TODO:LOG_ERROR***
+      log.e(e);
       return false;
     }
     return false;
@@ -49,7 +49,6 @@ class WebIdentity extends I_Identity with WebLocalStorage {
       }
       //TODO:THROW_ERROR invalid response because we expect access and refresh in response;
     } catch (e) {
-      //TODO:LOG_ERROR***
       log.e(e);
       return false;
     }
@@ -57,31 +56,30 @@ class WebIdentity extends I_Identity with WebLocalStorage {
   }
 
   @override
-  Future<bool> findtoken(dynamic tokenType) async {
+  Future<bool> verifyToken(dynamic tokenType) async {
     try {
       var token = await this.readToken(tokenType);
-      if (token == null) token = "";
 
+      if (token == null) token = "";
       var tokenComponents = token.split(".");
       if (tokenComponents.length != 3) {
-        //TODO:LOG_ERROR***
-        log.i("Invalid token format");
+        log.i("Invalid token length");
         return false;
       }
 
       var payload = json.decode(
-          utf8.decode(base64.decode(base64.normalize(tokenComponents[1]))));
+          utf8.decode(base64.decode
+          (base64.normalize(tokenComponents[1]))
+        ));
       if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000)
           .isAfter(DateTime.now())) {
-        //TODO:LOG_ERROR***
+        log.i("Token Verified");
         return true;
       } else {
-        //TODO:LOG_ERROR***
         log.i("Token Expired");
         return false;
       }
     } catch (e) {
-      //TODO:LOG_ERROR***
       log.e(e);
       return false;
     }
@@ -95,7 +93,6 @@ class WebIdentity extends I_Identity with WebLocalStorage {
       await this.deleteToken(TokenType.TraceId);
       return true;
     } catch (e) {
-      //TODO:LOG_ERROR***
       log.e(e);
       return false;
     }

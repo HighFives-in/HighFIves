@@ -32,7 +32,7 @@ class MaterialAppWithTheme extends StatelessWidget {
       title: 'HighFives',
       theme: _theme.getTheme(),
       home: FutureBuilder(
-        future: _findtoken(TokenType.AccessToken),
+        future: _verifyToken(TokenType.AccessToken),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return CircularProgressIndicator();
           if (snapshot.data != null && snapshot.data) {
@@ -46,7 +46,7 @@ class MaterialAppWithTheme extends StatelessWidget {
     );
   }
 
-  Future<dynamic> _findtoken(dynamic tokenType) async {
-    return await _identityResource.findtoken(tokenType);
+  Future<dynamic> _verifyToken(dynamic tokenType) async {
+    return await _identityResource.verifyToken(tokenType);
   }
 }
