@@ -1,6 +1,5 @@
 import 'package:highfives_ui/constants/const/business.dart';
-import 'package:highfives_ui/models/employer/employerRelationModel.dart';
-import 'package:highfives_ui/models/relations/allColleges.dart';
+import 'package:highfives_ui/models/relations/relation.dart';
 import 'package:highfives_ui/resources/relations/mock.dart';
 
 class RelationResource {
@@ -27,5 +26,10 @@ class RelationResource {
   Future<dynamic> getAllColleges() async {
     await Future.delayed(Duration(seconds: 1));
     return newRelationMock;
+  }
+
+  Future<dynamic> getAllEmployers() async {
+    await Future.delayed(Duration(seconds: 1));
+    return allEmployersMock;
   }
 }

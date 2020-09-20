@@ -27,7 +27,6 @@ class AllEmployerRoutesWithWidgets {
     if (route == null) return;
     this._dynamicRoute = route;
     var routeUrl = route.split('/');
-    print('FFF $routeUrl');
     //routes start with / so after split first element will be ""
     routeUrl.removeAt(0);
     if (routeUrl.length > 0) {

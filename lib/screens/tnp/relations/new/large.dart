@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:highfives_ui/models/relations/allCollegesRelationModel.dart';
+import 'package:highfives_ui/models/relations/allEployersRelationModel.dart';
 import 'package:highfives_ui/screens/utils/commons.dart';
 
-class LargeBuildNewRelation extends StatelessWidget {
-  List<BuildNewRelationCollegeModel> _allColleges;
-  LargeBuildNewRelation(this._allColleges);
+class LargeBuildTnpNewRelation extends StatelessWidget {
+  List<BuildNewRelationEmployerModel> _allCompanies;
+  LargeBuildTnpNewRelation(this._allCompanies);
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: viewCollegesInGrid(context, _allColleges),
+      child: viewCollegesInGrid(context, _allCompanies),
     );
   }
 
   viewCollegesInGrid(
-      BuildContext context, List<BuildNewRelationCollegeModel> allColleges) {
-    if (allColleges.length == 0)
+      BuildContext context, List<BuildNewRelationEmployerModel> allCompanies) {
+    if (allCompanies.length == 0)
       return Center(
-        child: Text('No Colleges Found'),
+        child: Text('No Companies Found'),
       );
     return new StaggeredGridView.countBuilder(
       crossAxisCount: 8,
-      itemCount: allColleges.length,
+      itemCount: allCompanies.length,
       itemBuilder: (BuildContext context, int index) =>
-          _getCollegeItemWidget(context, allColleges[index]),
+          _getComapnyItemWidget(context, allCompanies[index]),
       staggeredTileBuilder: (int index) => new StaggeredTile.count(2, 2),
       mainAxisSpacing: 5.0,
       crossAxisSpacing: 10.0,
@@ -31,8 +31,8 @@ class LargeBuildNewRelation extends StatelessWidget {
   }
 }
 
-Widget _getCollegeItemWidget(
-    BuildContext context, BuildNewRelationCollegeModel college) {
+Widget _getComapnyItemWidget(
+    BuildContext context, BuildNewRelationEmployerModel company) {
   return Padding(
     padding: EdgeInsets.all(20),
     child: Container(
@@ -52,9 +52,9 @@ Widget _getCollegeItemWidget(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CommonWidgetUtils.buildCircularImage(college.collegeLogo, 80),
+            CommonWidgetUtils.buildCircularImage(company.companyLogo, 80),
             Text(
-              college.collegeName,
+              company.companyName,
               style: Theme.of(context).textTheme.headline4,
             ),
             Container(

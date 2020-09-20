@@ -6,8 +6,9 @@ class CommonWidgetUtils {
         width: width != null ? width : 80,
         height: 90,
         decoration: new BoxDecoration(
+            color: Colors.white,
             shape: BoxShape.circle,
             image: new DecorationImage(
-                fit: BoxFit.fill, image: new NetworkImage(imageUrl))));
+                fit: BoxFit.cover, image: new NetworkImage(imageUrl))));
   }
 }

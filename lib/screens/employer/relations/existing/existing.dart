@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
-import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
+import 'package:highfives_ui/constants/const/employerSideMenuItems.dart';
 import 'package:highfives_ui/locator.dart';
-import 'package:highfives_ui/models/employer/employerRelationModel.dart';
+import 'package:highfives_ui/models/relations/relation.dart';
 import 'package:highfives_ui/resources/relations/relations.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
 import 'package:highfives_ui/screens/utils/navigationService.dart';
@@ -162,7 +162,7 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
                 '/' +
                     EMPLOYER +
                     '/' +
-                    COMMUNICATIONS +
+                    EMPLOYER_COMMUNICATIONS +
                     '/' +
                     relationData.hiringId.toString() +
                     '_' +
@@ -218,7 +218,7 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
                 '/' +
                     EMPLOYER +
                     '/' +
-                    COMMUNICATIONS +
+                    EMPLOYER_COMMUNICATIONS +
                     '/' +
                     relationData.hiringId.toString() +
                     '_' +

@@ -76,7 +76,7 @@ List<Widget> _sideMenuItemsList(BuildContext context) {
                   ),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: 5,
                 ),
                 Text(item, style: Theme.of(context).textTheme.headline6),
               ],

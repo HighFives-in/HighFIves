@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/tnp-relations-tabs.dart';
-import 'package:highfives_ui/models/employer/employerProfileModel.dart';
-import 'package:highfives_ui/models/employer/employerRelationModel.dart';
 import 'package:highfives_ui/utils/toast.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
 import 'package:highfives_ui/screens/tnp/relations/existing/hiringInfo.dart';
 import 'package:highfives_ui/screens/tnp/relations/existing/tabChoices.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
 import 'package:highfives_ui/resources/relations/relations.dart';
-import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/resources/profile/profile.dart';
+import 'package:highfives_ui/models/relations/relation.dart';
 
 class ViewTnpRelationDetails extends StatelessWidget {
   RelationResource _relationResource = RelationResource();
