@@ -1,5 +1,6 @@
 import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/models/employer/employerRelationModel.dart';
+import 'package:highfives_ui/models/relations/allColleges.dart';
 import 'package:highfives_ui/resources/relations/mock.dart';
 
 class RelationResource {
@@ -10,7 +11,7 @@ class RelationResource {
       await Future.delayed(Duration(seconds: 1));
       return relationsMock;
     } else if (role == EMPLOYER) {
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 1));
       return relationsMock;
     }
   }
@@ -20,5 +21,11 @@ class RelationResource {
     await Future.delayed(Duration(seconds: 1));
     Relation relation = Relation.fromMap(relationsMock[0]);
     return relation;
+  }
+
+// new relations
+  Future<dynamic> getAllColleges() async {
+    await Future.delayed(Duration(seconds: 1));
+    return newRelationMock;
   }
 }

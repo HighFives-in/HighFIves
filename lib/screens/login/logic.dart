@@ -181,7 +181,7 @@ class LoginLogicWithRole extends StatelessWidget {
 
   Future<dynamic> _attemptLogin(
       String email, String password, String role) async {
-    return await _identityResource.login(email, password, role);
+    return _identityResource.login(email, password, role);
   }
 }
 

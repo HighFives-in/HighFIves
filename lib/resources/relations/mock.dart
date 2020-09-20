@@ -1,3 +1,38 @@
+final newRelationMock = [
+  {
+    "collegeId": 1,
+    "collegeName": "IIT ROPAR",
+    "collegeLogo":
+        "https://timesofindia.indiatimes.com/thumb/msid-71721983,width-1200,height-900,resizemode-4/.jpg",
+    "status": "null",
+    "date": "null"
+  },
+  {
+    "collegeId": 2,
+    "collegeName": "IIT BOMBAY",
+    "collegeLogo":
+        "https://img.theweek.in/content/dam/week/news/india/images/2020/6/25/iit-bombay.jpg",
+    "status": "null",
+    "date": "null"
+  },
+  {
+    "collegeId": 3,
+    "collegeName": "MIT ",
+    "collegeLogo":
+        "https://img.theweek.in/content/dam/week/news/india/images/2020/6/25/iit-bombay.jpg",
+    "status": "null",
+    "date": "null"
+  },
+  {
+    "collegeId": 4,
+    "collegeName": "IISC BANGALORE",
+    "collegeLogo":
+        "https://upload.wikimedia.org/wikipedia/en/thumb/8/83/West_Herts_College_logo.svg/1200px-West_Herts_College_logo.svg.png",
+    "status": "null",
+    "date": "null"
+  }
+];
+
 final relationsMock = [
   {
     "hiringId": 1,

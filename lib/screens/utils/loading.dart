@@ -2,8 +2,6 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class Loading extends StatelessWidget {
-  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -21,6 +19,8 @@ class Loading extends StatelessWidget {
   }
 
   Future<dynamic> handleSubmit(BuildContext context, Future future) async {
+    final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+
     Dialogs.showLoadingDialog(context, _keyLoader); //invoking login
 
     try {
@@ -33,10 +33,10 @@ class Loading extends StatelessWidget {
     }
   }
 
-//is needed if above function throws an error
-  popDialogFromNavigation() {
-    Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
-  }
+// //is needed if above function throws an error
+//   popDialogFromNavigation() {
+//     Navigator.of(_keyLoader.currentContext, rootNavigator: true).pop();
+//   }
 }
 
 class Dialogs {
