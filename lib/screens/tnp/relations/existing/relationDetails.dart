@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/tnp-relations-tabs.dart';
 import 'package:highfives_ui/models/employer/employerProfileModel.dart';
+import 'package:highfives_ui/models/employer/employerRelationModel.dart';
 import 'package:highfives_ui/utils/toast.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
 import 'package:highfives_ui/screens/tnp/relations/existing/hiringInfo.dart';
@@ -10,23 +11,24 @@ import 'package:highfives_ui/resources/relations/relations.dart';
 import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/resources/profile/profile.dart';
 
-class ViewRelationDetails extends StatelessWidget {
+class ViewTnpRelationDetails extends StatelessWidget {
   RelationResource _relationResource = RelationResource();
   Profile _profile = Profile();
 
   int _hiringId;
   int _companyId;
-  ViewRelationDetails(this._hiringId, this._companyId);
+  dynamic _relationDetails;
+
+  ViewTnpRelationDetails(this._hiringId, this._companyId);
   @override
   Widget build(BuildContext context) {
+    _relationDetails = ModalRoute.of(context).settings.arguments;
     return FutureBuilder(
       future: getHiringAndProfileInfo(_hiringId, _companyId),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasData) {
-          final hiringInfo = snapshot.data[0];
-          final employerProfile = snapshot.data[1];
-          return buildResponsiveRelationDetailsView(
-              context, hiringInfo, employerProfile);
+          this._relationDetails = snapshot.data;
+          return buildResponsiveRelationDetailsView(context, _relationDetails);
         } else if (snapshot.hasError) {
           basicErrorFlutterToast(null);
           //TODO
@@ -43,17 +45,17 @@ class ViewRelationDetails extends StatelessWidget {
   }
 
   Future<dynamic> getHiringAndProfileInfo(int hiringId, int companyId) async {
-    var hiringInfo = _relationResource.getRelationDetails(hiringId);
-    var profile = _profile.getProfile(EMPLOYER, companyId);
-    List responses = await Future.wait([hiringInfo, profile]);
-    return responses;
+    if (_relationDetails != null && _relationDetails is Relation) {
+      return _relationDetails;
+    }
+    return _relationResource.getRelationDetails(hiringId);
   }
 }
 
 Widget buildResponsiveRelationDetailsView(
-    BuildContext context, final hiringInfo, final employerProfile) {
+    BuildContext context, Relation relationDetails) {
   return ResponsiveLayout(
-    largeScreen: RelationDetailsLargeView(hiringInfo, employerProfile),
+    largeScreen: RelationDetailsLargeView(relationDetails),
     // smallScreen: //TODO SMALL SCREEN,
   );
 }
@@ -108,10 +110,9 @@ Widget buildResponsiveRelationDetailsView(
 //   return
 // }
 class RelationDetailsLargeView extends StatefulWidget {
-  final hiringInfo;
-  final employerProfile;
+  final _relationDetails;
   @override
-  RelationDetailsLargeView(this.hiringInfo, this.employerProfile);
+  RelationDetailsLargeView(this._relationDetails);
   _RelationDetailsLargeViewState createState() =>
       _RelationDetailsLargeViewState();
 }
@@ -125,7 +126,7 @@ class _RelationDetailsLargeViewState extends State<RelationDetailsLargeView> {
       padding: EdgeInsets.all(40),
       child: ListView(
         children: [
-          _buildBasicCompanyDetails(widget.hiringInfo, widget.employerProfile),
+          _buildBasicCompanyDetails(widget._relationDetails),
           Row(
             // mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -189,16 +190,16 @@ class _RelationDetailsLargeViewState extends State<RelationDetailsLargeView> {
     Widget selectedTabView;
     switch (tabSelected) {
       case JOB_DETAILS_TAB:
-        selectedTabView = HiringInfo(widget.hiringInfo, widget.employerProfile);
+        selectedTabView = TnpHiringInfo(widget._relationDetails);
         break;
       case COMMUNICATION_TAB:
-        selectedTabView = HiringInfo(widget.hiringInfo, widget.employerProfile);
+        selectedTabView = TnpHiringInfo(widget._relationDetails);
         break;
       case VOLUNTEER_TAB:
-        selectedTabView = HiringInfo(widget.hiringInfo, widget.employerProfile);
+        selectedTabView = TnpHiringInfo(widget._relationDetails);
         break;
       default:
-        selectedTabView = HiringInfo(widget.hiringInfo, widget.employerProfile);
+        selectedTabView = TnpHiringInfo(widget._relationDetails);
         break;
     }
     return Container(
@@ -213,12 +214,12 @@ class _RelationDetailsLargeViewState extends State<RelationDetailsLargeView> {
   }
 }
 
-Widget _buildBasicCompanyDetails(final hiringInfo, final employerProfile) {
-  final empProfile = EmployerProfileModel.fromMap(employerProfile);
+Widget _buildBasicCompanyDetails(Relation _relationDetails) {
   // final company = empProfile.company;
   return Column(
     children: [
-      Text('MICROSOFT DUMMY DATA - '),
+      Text(_relationDetails.employer.companyName +
+          _relationDetails.jobInfo.jobProfile),
       SizedBox(height: 50),
     ],
   );

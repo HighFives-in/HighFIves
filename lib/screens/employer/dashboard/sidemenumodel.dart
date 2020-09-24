@@ -16,6 +16,7 @@ class EmployerSideMenuModel extends ChangeNotifier {
 
   get selectedItem => _allEmployerRoutesWithWidgets.selectedItem;
   setSideMenuItem(String item) {
+    if (_allEmployerRoutesWithWidgets.selectedItem == item) return;
     _selectedIndex = EMPLOYERSIDEMENULIST.indexOf(item);
     if (_selectedIndex < 0) Error();
     _menuItem = item;

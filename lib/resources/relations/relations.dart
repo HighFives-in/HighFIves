@@ -1,4 +1,5 @@
 import 'package:highfives_ui/constants/const/business.dart';
+import 'package:highfives_ui/models/employer/employerRelationModel.dart';
 import 'package:highfives_ui/resources/relations/mock.dart';
 
 class RelationResource {
@@ -7,16 +8,17 @@ class RelationResource {
     //this is current logged in role
     if (role == TNP) {
       await Future.delayed(Duration(seconds: 1));
-      return existingRelationMock;
+      return relationsMock;
     } else if (role == EMPLOYER) {
       await Future.delayed(Duration(seconds: 2));
-      return employerExistingRelationMock;
+      return relationsMock;
     }
   }
 
   Future<dynamic> getRelationDetails(int id) async {
     //this is current logged in role
     await Future.delayed(Duration(seconds: 1));
-    return relationDetailsMock;
+    Relation relation = Relation.fromMap(relationsMock[0]);
+    return relation;
   }
 }

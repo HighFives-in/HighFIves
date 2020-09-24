@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/tnp-relations-tabs.dart';
-import 'package:highfives_ui/models/tnp/tnpProfileModel.dart';
+import 'package:highfives_ui/models/employer/employerRelationModel.dart';
+import 'package:highfives_ui/screens/employer/relations/existing/hiringInfo.dart';
 import 'package:highfives_ui/utils/toast.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
-import 'package:highfives_ui/screens/tnp/relations/existing/hiringInfo.dart';
 import 'package:highfives_ui/screens/tnp/relations/existing/tabChoices.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
 import 'package:highfives_ui/resources/relations/relations.dart';
-import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/resources/profile/profile.dart';
 
 class ViewEmployerRelationDetails extends StatelessWidget {
@@ -15,18 +14,18 @@ class ViewEmployerRelationDetails extends StatelessWidget {
   Profile _profile = Profile();
 
   int _hiringId;
-  int _companyId;
-  ViewEmployerRelationDetails(this._hiringId, this._companyId);
+  dynamic _relationDetails;
+
+  ViewEmployerRelationDetails(this._hiringId);
   @override
   Widget build(BuildContext context) {
+    _relationDetails = ModalRoute.of(context).settings.arguments;
     return FutureBuilder(
-      future: getHiringAndProfileInfo(_hiringId, _companyId),
+      future: getHiringAndProfileInfo(_hiringId),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasData) {
-          final hiringInfo = snapshot.data[0];
-          final tnpProfile = snapshot.data[1];
-          return buildResponsiveRelationDetailsView(
-              context, hiringInfo, tnpProfile);
+          _relationDetails = snapshot.data;
+          return buildResponsiveRelationDetailsView(context, _relationDetails);
         } else if (snapshot.hasError) {
           basicErrorFlutterToast(null);
           //TODO
@@ -42,18 +41,18 @@ class ViewEmployerRelationDetails extends StatelessWidget {
     );
   }
 
-  Future<dynamic> getHiringAndProfileInfo(int hiringId, int companyId) async {
-    var hiringInfo = _relationResource.getRelationDetails(hiringId);
-    var profile = _profile.getProfile(TNP, companyId);
-    List responses = await Future.wait([hiringInfo, profile]);
-    return responses;
+  Future<dynamic> getHiringAndProfileInfo(int hiringId) async {
+    if (_relationDetails != null && _relationDetails is Relation) {
+      return _relationDetails;
+    }
+    return _relationResource.getRelationDetails(hiringId);
   }
 }
 
 Widget buildResponsiveRelationDetailsView(
-    BuildContext context, final hiringInfo, final tnpProfile) {
+    BuildContext context, Relation relationDetails) {
   return ResponsiveLayout(
-    largeScreen: RelationDetailsLargeView(hiringInfo, tnpProfile),
+    largeScreen: RelationDetailsLargeView(relationDetails),
     // smallScreen: //TODO SMALL SCREEN,
   );
 }
@@ -108,10 +107,9 @@ Widget buildResponsiveRelationDetailsView(
 //   return
 // }
 class RelationDetailsLargeView extends StatefulWidget {
-  final hiringInfo;
-  final tnpProfile;
+  final _relationDetails;
   @override
-  RelationDetailsLargeView(this.hiringInfo, this.tnpProfile);
+  RelationDetailsLargeView(this._relationDetails);
   _RelationDetailsLargeViewState createState() =>
       _RelationDetailsLargeViewState();
 }
@@ -122,11 +120,11 @@ class _RelationDetailsLargeViewState extends State<RelationDetailsLargeView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(40),
+      padding: EdgeInsets.fromLTRB(30, 20, 30, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildBasicCollegeDetails(widget.hiringInfo, widget.tnpProfile),
+          _buildBasicCollegeDetails(widget._relationDetails, context),
           Row(
             // mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -159,7 +157,7 @@ class _RelationDetailsLargeViewState extends State<RelationDetailsLargeView> {
                                 ? Theme.of(context).primaryColor
                                 : Theme.of(context)
                                     .accentColor
-                                    .withOpacity(0.15),
+                                    .withOpacity(0.05),
                           ),
                           width: MediaQuery.of(context).size.width * 0.7 * 0.3,
                           child: Center(
@@ -178,28 +176,28 @@ class _RelationDetailsLargeViewState extends State<RelationDetailsLargeView> {
                 .values
                 .toList(),
           ),
-          _buildSelectedChoiceView(context, _selectedIndex),
+          _buildSelectedTabChoiceView(context, _selectedIndex),
         ],
       ),
     );
   }
 
-  Widget _buildSelectedChoiceView(BuildContext context, int index) {
+  Widget _buildSelectedTabChoiceView(BuildContext context, int index) {
     //THIS 200 is subtracted for 2 * padding(40) + tab height (90)
     String tabSelected = tabsChoiceList[index].title;
     Widget selectedTabView;
     switch (tabSelected) {
       case JOB_DETAILS_TAB:
-        selectedTabView = HiringInfo(widget.hiringInfo, widget.tnpProfile);
+        selectedTabView = EmployerHiringInfo(widget._relationDetails);
         break;
       case COMMUNICATION_TAB:
-        selectedTabView = HiringInfo(widget.hiringInfo, widget.tnpProfile);
+        selectedTabView = EmployerHiringInfo(widget._relationDetails);
         break;
       case VOLUNTEER_TAB:
-        selectedTabView = HiringInfo(widget.hiringInfo, widget.tnpProfile);
+        selectedTabView = EmployerHiringInfo(widget._relationDetails);
         break;
       default:
-        selectedTabView = HiringInfo(widget.hiringInfo, widget.tnpProfile);
+        selectedTabView = EmployerHiringInfo(widget._relationDetails);
         break;
     }
     return Container(
@@ -214,13 +212,25 @@ class _RelationDetailsLargeViewState extends State<RelationDetailsLargeView> {
   }
 }
 
-Widget _buildBasicCollegeDetails(final hiringInfo, final tnpProfile) {
-  final empProfile = TnpProfileModel.fromMap(tnpProfile);
+Widget _buildBasicCollegeDetails(
+    Relation _relationDetails, BuildContext context) {
   // final company = empProfile.company;
 
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text('MICROSOFT TEST'),
+      Text(
+        _relationDetails.college.collegeName.toUpperCase() +
+            " - " +
+            _relationDetails.jobInfo.jobProfile.toUpperCase(),
+        style: Theme.of(context).textTheme.headline3,
+      ),
+      SizedBox(height: 10),
+      Text(
+        'Accepted on ' + _relationDetails.dates.acceptedDate,
+        style: Theme.of(context).textTheme.bodyText2,
+      ),
+      SizedBox(height: 10),
     ],
   );
 }

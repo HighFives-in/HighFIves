@@ -52,7 +52,7 @@ List<Widget> _sideMenuItemsList(BuildContext context) {
       onTap: () {
         Provider.of<SideMenuModel>(context, listen: false)
             .setSideMenuItem(item);
-        locator<NavigationService>().navitgateTo('/' + TNP + '/' + item);
+        locator<NavigationService>().navitgateTo('/' + TNP + '/' + item, null);
       },
       // color: Colors.orange,
       child: Container(

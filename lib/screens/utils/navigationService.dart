@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class NavigationService {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  Future<dynamic> navitgateTo(String routeName) {
-    return navigatorKey.currentState.pushNamed(routeName);
+  Future<dynamic> navitgateTo(String routeName, final arguments) {
+    return navigatorKey.currentState.pushNamed(routeName, arguments: arguments);
   }
 
   goBack() {

@@ -119,8 +119,10 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
     return allJobsWidgets;
   }
   for (int i = 0; i < allJobs.length; i++) {
-    final relationData = EmployerExisTingRelationModel.fromMap(allJobs[i]);
-    final allRelationFromCompany = relationData.hiringInfo;
+    final relationData = Relation.fromMap(allJobs[i]);
+    var collegeName = relationData?.college?.collegeName != null
+        ? relationData?.college?.collegeName
+        : '';
 
     final singleJob = Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -136,13 +138,13 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
             children: [
               CircleAvatar(
                 child: Image.network(
-                  relationData.collegeLogo,
+                  relationData?.college?.collegeLogo,
                   scale: 2,
                 ),
               ),
               SizedBox(width: 10),
               Text(
-                relationData.collegeName.toUpperCase(),
+                collegeName.toUpperCase(),
                 style: Theme.of(context).textTheme.headline4,
               ),
             ],
@@ -150,26 +152,28 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
           title: Align(
             alignment: Alignment.center,
             child: Text(
-              allRelationFromCompany["jobProfileName"].toUpperCase(),
+              relationData.jobInfo.jobProfile.toUpperCase(),
               style: Theme.of(context).textTheme.headline4,
             ),
           ),
           onTap: () {
-            locator<NavigationService>().navitgateTo('/' +
-                EMPLOYER +
+            locator<NavigationService>().navitgateTo(
                 '/' +
-                COMMUNICATIONS +
-                '/' +
-                allRelationFromCompany["hiringId"].toString() +
-                '_' +
-                relationData.companyId.toString());
+                    EMPLOYER +
+                    '/' +
+                    COMMUNICATIONS +
+                    '/' +
+                    relationData.hiringId.toString() +
+                    '_' +
+                    relationData.college.collegeId.toString(),
+                relationData);
           },
           subtitle: Align(
             alignment: Alignment.center,
             child: Container(
               padding: EdgeInsets.all(5),
               child: Text(
-                'Accepted ' + allRelationFromCompany["date"],
+                'Accepted On' + relationData.dates.acceptedDate,
                 style: Theme.of(context).textTheme.headline6,
               ),
             ),
@@ -187,17 +191,16 @@ List<Widget> smallChild(BuildContext context, final allJobs) {
 }
 
 List<Widget> largeChild(BuildContext context, final allJobs) {
-  List<Widget> allJobsWidgets = List<Widget>();
+  List<Widget> allRelations = List<Widget>();
   if (allJobs == null || allJobs.length == 0) {
     final emptyJobText = Center(
       child: Text('No Relations Found :('),
     );
-    allJobsWidgets.add(emptyJobText);
-    return allJobsWidgets;
+    allRelations.add(emptyJobText);
+    return allRelations;
   }
   for (int i = 0; i < allJobs.length; i++) {
-    final relationData = EmployerExisTingRelationModel.fromMap(allJobs[i]);
-    final allRelationFromCompany = relationData.hiringInfo;
+    final relationData = Relation.fromMap(allJobs[i]);
 
     final singleJob = Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -209,14 +212,17 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
         child: InkWell(
           onTap: () {
             //TODO DONT USE DIRECTLY
-            locator<NavigationService>().navitgateTo('/' +
-                EMPLOYER +
+            // sending data as the sencond format
+            locator<NavigationService>().navitgateTo(
                 '/' +
-                COMMUNICATIONS +
-                '/' +
-                allRelationFromCompany["hiringId"].toString() +
-                '_' +
-                relationData.companyId.toString());
+                    EMPLOYER +
+                    '/' +
+                    COMMUNICATIONS +
+                    '/' +
+                    relationData.hiringId.toString() +
+                    '_' +
+                    relationData.college.collegeId.toString(),
+                relationData);
           },
           child: Container(
             height: 105,
@@ -229,14 +235,14 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
                     children: [
                       CircleAvatar(
                         child: Image.network(
-                          relationData.collegeLogo,
+                          relationData.college.collegeLogo,
                           scale: 2,
                         ),
                       ),
                       SizedBox(
                         width: 20,
                       ),
-                      Text(relationData.collegeName.toUpperCase(),
+                      Text(relationData.college.collegeName.toUpperCase(),
                           style: Theme.of(context).textTheme.headline4),
                     ],
                   ),
@@ -248,12 +254,12 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        allRelationFromCompany["jobProfileName"].toUpperCase(),
+                        relationData.jobInfo.jobProfile.toUpperCase(),
                         style: Theme.of(context).textTheme.headline4,
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'Accepted ' + allRelationFromCompany["date"],
+                        'Accepted On' + relationData.dates.acceptedDate,
                         style: Theme.of(context).textTheme.headline6,
                       ),
                     ],
@@ -282,7 +288,7 @@ List<Widget> largeChild(BuildContext context, final allJobs) {
         ),
       ),
     );
-    allJobsWidgets.add(singleJob);
+    allRelations.add(singleJob);
   }
-  return allJobsWidgets;
+  return allRelations;
 }

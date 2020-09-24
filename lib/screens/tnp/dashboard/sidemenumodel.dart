@@ -17,6 +17,7 @@ class SideMenuModel extends ChangeNotifier {
       ? _allTNPRoutesWithWidgets.selectedItem
       : TNP_PROFILE;
   setSideMenuItem(String item) {
+    if (_allTNPRoutesWithWidgets.selectedItem == item) return;
     _selectedIndex = TNPSIDEMENULIST.indexOf(item);
     if (_selectedIndex < 0) Error();
     _menuItem = item;

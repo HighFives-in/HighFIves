@@ -36,8 +36,8 @@ class AllEmployerRoutesWithWidgets {
         if (routeUrl.length == 3) {
           var idList = routeUrl[2].split('_');
           if (idList.length == 2) {
-            this.currentWidget = ViewEmployerRelationDetails(
-                int.parse(idList[0]), int.parse(idList[1]));
+            this.currentWidget =
+                ViewEmployerRelationDetails(int.parse(idList[0]));
           }
         } else if (routeUrl.length == 2 ||
             (routeUrl.length == 3 && routeUrl[2] == "")) {
