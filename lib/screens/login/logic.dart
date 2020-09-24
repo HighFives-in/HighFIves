@@ -135,16 +135,18 @@ class LoginLogicWithRole extends StatelessWidget {
                       _formKey.currentState.reset();
                       navigateToHome(_selectedRole, context);
                     } else {
+                      //TODO THIS IS WRONG PUT A TRY CATCH ABOVE
                       Fluttertoast.showToast(
-                          msg: "Invalid Email Id or Password",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 5,
-                          backgroundColor: Colors.orange,
-                          webPosition: "center",
-                          textColor: Colors.white,
-                          webBgColor: "#fd9346",
-                          fontSize: 16.0);
+                        msg: "Invalid Email Id or Password",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.orange,
+                        webPosition: "center",
+                        textColor: Colors.white,
+                        webBgColor: "#fd9346",
+                        fontSize: 16.0,
+                      );
                     }
                   }
                 },
@@ -165,10 +167,12 @@ class LoginLogicWithRole extends StatelessWidget {
             context, MaterialPageRoute(builder: (context) => MainHome()));
         break;
       case TNP:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => TnpView()));
+        //TODO PUSHNAMED ?
+        // Navigator.pushNamed(context, '/' + TnpView.tnpMainRoute);
+        Navigator.pushReplacementNamed(context, '/' + TnpView.tnpMainRoute);
         break;
       case EMPLOYER:
+        //TODO LIKE ABOVE ONE
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => EmployerView()));
         break;

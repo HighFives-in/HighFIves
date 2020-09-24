@@ -43,7 +43,7 @@ class EmployerProfile extends StatelessWidget {
   }
 
   Future<dynamic> getEmployerProfile() {
-    return profile.getProfile(EMPLOYER);
+    return profile.getProfile(EMPLOYER, null);
   }
 }
 

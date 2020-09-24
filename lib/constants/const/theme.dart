@@ -26,7 +26,12 @@ final DARKTHEME = ThemeData(
       color: Colors.white,
       fontWeight: FontWeight.bold,
     ),
-    headline3: TextStyle(fontSize: 25, fontFamily: customFontFamily),
+    headline3: TextStyle(
+        fontSize: 20,
+        fontFamily: customFontFamily,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+        letterSpacing: 0.64),
     headline4: TextStyle(
         fontSize: 15,
         fontFamily: customFontFamily,
@@ -72,7 +77,12 @@ final LIGHTTHEME = ThemeData(
       color: Colors.black,
       fontWeight: FontWeight.bold,
     ),
-    headline3: TextStyle(fontSize: 25, fontFamily: customFontFamily),
+    headline3: TextStyle(
+        fontSize: 20,
+        fontFamily: customFontFamily,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+        letterSpacing: 0.64),
     headline4: TextStyle(
         fontSize: 15,
         fontFamily: customFontFamily,

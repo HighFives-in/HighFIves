@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:highfives_ui/constants/const/theme.dart';
 import 'package:highfives_ui/constants/const/token.dart';
+import 'package:highfives_ui/locator.dart';
 import 'package:highfives_ui/resources/Identity/main.dart';
 import 'package:highfives_ui/screens/employer/dashboard/employerDashboard.dart';
 import 'package:highfives_ui/screens/home_page/main.dart';
 import 'package:highfives_ui/screens/login/login.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/tnpdashboard.dart';
+import 'package:highfives_ui/screens/utils/navigationService.dart';
+import 'package:highfives_ui/utils/route.dart';
 import 'package:highfives_ui/utils/themeChanger.dart';
+import 'package:highfives_ui/utils/unknownPage.dart';
 import 'package:provider/provider.dart';
 import 'package:highfives_ui/utils/platform.dart';
 
@@ -34,6 +38,7 @@ class MaterialAppWithTheme extends StatelessWidget {
     return MaterialApp(
       title: 'HighFives',
       theme: _theme.getTheme(),
+      navigatorKey: locator<NavigationService>().navigatorKey,
       home: FutureBuilder(
         future: _findtoken(TokenType.AccessToken),
         builder: (context, snapshot) {
@@ -50,11 +55,19 @@ class MaterialAppWithTheme extends StatelessWidget {
           if (!snapshot.hasData) return CircularProgressIndicator();
           if (snapshot.data != null && snapshot.data) {
             //TODO
-            return EmployerView();
+            return TnpView(TnpView.tnpMainRoute);
           } else {
             return LoginUI();
           }
         },
+      ),
+      initialRoute: '/',
+      onGenerateRoute: Path.onGenerateRoute,
+      onUnknownRoute: (RouteSettings settings) => MaterialPageRoute<void>(
+        settings: settings,
+        builder: (context) => UnknownPage(
+          name: settings.name,
+        ),
       ),
     );
   }

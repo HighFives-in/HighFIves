@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/constants/const/defaults.dart';
 import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
 import 'package:highfives_ui/models/tnp/tnpProfileModel.dart';
@@ -39,7 +40,7 @@ class TnpProfile extends StatelessWidget {
   }
 
   Future<dynamic> getTnpProfile() {
-    return profile.getProfile('tnp');
+    return profile.getProfile(TNP, null);
   }
 }
 
@@ -55,7 +56,6 @@ class BuildTnpProfile extends StatelessWidget {
     _tnpProfileModel = TnpProfileModel.fromMap(this._profileData);
     var _profileMap = _tnpProfileModel.toMap();
     var personalInfo = _profileMap["personal"];
-    print('#1 $personalInfo');
     return Container(
       width: size.width,
       height: size.height,
@@ -103,8 +103,6 @@ Widget _buildProfileTextAndIcon(BuildContext context, String headline) {
 }
 
 Widget _buildBasicProfileSection(BuildContext context, dynamic personalInfo) {
-  // final personalInfo = PersonalInfo.fromMap(_profileData["personal"]);
-  print('#2 ${personalInfo["profilePicture"]}');
   Size size = MediaQuery.of(context).size;
   return Container(
     width: size.width,

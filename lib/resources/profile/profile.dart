@@ -4,7 +4,7 @@ import 'package:highfives_ui/resources/profile/mock.dart';
 
 class Profile extends IProfile {
   //TODO INTEGRATE WITH SERVICE
-  Future<dynamic> getProfile(String role) async {
+  Future<dynamic> getProfile(String role, int id) async {
     if (role == TNP) {
       await Future.delayed(Duration(seconds: 2));
       return tnpProfileMock;

@@ -34,6 +34,7 @@ const employerProfileMock = {
     "position": "",
   },
   "company": {
+    "name": "Microsoft",
     "logo": "",
     "info": "",
   },

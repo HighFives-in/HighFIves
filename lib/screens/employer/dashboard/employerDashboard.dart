@@ -73,8 +73,6 @@ class DashBoardBody extends StatelessWidget {
   DashBoardBody(this._menuItem);
   @override
   Widget build(BuildContext context) {
-    print('BUILD $_menuItem');
-    Size size = MediaQuery.of(context).size;
     return _getSelectedWidget(_menuItem, context);
   }
 }

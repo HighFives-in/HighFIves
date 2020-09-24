@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
 import 'package:highfives_ui/constants/const/size.dart';
-import 'package:highfives_ui/screens/tnp/communications/manage_existing/view.dart';
+import 'package:highfives_ui/screens/tnp/allTnpRoutes.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/sideview.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/sidemenumodel.dart';
-import 'package:highfives_ui/screens/tnp/profile/profile.dart';
 import 'package:highfives_ui/screens/utils/navbar.dart';
 import 'package:provider/provider.dart';
 
 class TnpView extends StatelessWidget {
+  static const String tnpMainRoute = 'tnp';
+  String dynamicRoute;
+  TnpView(this.dynamicRoute);
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return ChangeNotifierProvider<SideMenuModel>(
       //By default build Profile
-      create: (_) => SideMenuModel(0),
+      create: (_) => SideMenuModel(this.dynamicRoute),
       child: TnpDashBoard(),
     );
   }
@@ -29,7 +29,7 @@ class TnpDashBoard extends StatelessWidget {
     double navBarHeight = 100;
     return Builder(
       builder: (context) {
-        return new Scaffold(
+        return Scaffold(
           body: Container(
             width: size.width,
             height: size.height,
@@ -58,55 +58,25 @@ class TnpDashBoard extends StatelessWidget {
 
 class DashBoardBody extends StatelessWidget {
   String _menuItem;
+  AllTNPRoutesWithWidgets _allTNPRoutesWithWidgets =
+      AllTNPRoutesWithWidgets.instance;
   DashBoardBody(this._menuItem);
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return _getSelectedWidget(_menuItem, context);
   }
-}
 
-Widget _getSelectedWidget(String menuItem, BuildContext context) {
-  Widget childWidget;
-
-  //TODO THIS COMMUNICATION HAS SOME CATEGORIES
-  if (menuItem != null && menuItem == TNPSIDEMENULIST[1]) {
-    childWidget = ExistingRelations();
+  Widget _getSelectedWidget(String menuItem, BuildContext context) {
+    Widget childWidget = _allTNPRoutesWithWidgets.currentWidget;
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width - SIDE_VIEW_WIDTH,
+      height: size.height,
+      // padding: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        color: Theme.of(context).accentColor.withOpacity(0.05),
+      ),
+      child: childWidget,
+    );
   }
-
-  if (menuItem != null && menuItem == TNP_PROFILE) {
-    childWidget = TnpProfile();
-  }
-
-  Size size = MediaQuery.of(context).size;
-  return Container(
-    width: size.width - SIDE_VIEW_WIDTH,
-    height: size.height,
-    // padding: EdgeInsets.all(5),
-    decoration: BoxDecoration(
-      color: Theme.of(context).accentColor.withOpacity(0.05),
-
-      // boxShadow: [
-      //   BoxShadow(
-      //     blurRadius: 3,
-      //   ),
-      // ],
-    ),
-    // color: Theme.of(context).accentColor.withOpacity(0.05),
-    // padding: EdgeInsets.all(40),
-    child: childWidget,
-  );
-
-  // if (menuItem != null && menuItem == SIDEMENULIST[2]) {
-  //   return BuildOnGoingInterview();
-  // }
-  // if (menuItem != null && menuItem == SIDEMENULIST[3]) {
-  //   return BuildStudentsView();
-  // }
-  // if (menuItem != null && menuItem == SIDEMENULIST[4]) {
-  //   return BuildAnalytics();
-  // }
-  // if (menuItem != null && menuItem == SIDEMENULIST[5]) {
-  //   return BuildHelp();
-  // }
 }
