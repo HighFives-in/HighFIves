@@ -16,9 +16,10 @@ class EmployerSideView extends StatelessWidget {
       height: size.height,
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor,
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).accentColor.withOpacity(0.2),
             blurRadius: 3,
           ),
         ],
@@ -123,6 +124,12 @@ Widget getIcon(String item) {
     case EMPLOYER_HELP:
       return Icon(
         Icons.help,
+        size: 25,
+      );
+      break;
+    case EMPLOYER_BUILD_NEW_RELATIONS:
+      return Icon(
+        Icons.new_releases_rounded,
         size: 25,
       );
       break;

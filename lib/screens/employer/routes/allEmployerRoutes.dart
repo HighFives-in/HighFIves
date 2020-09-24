@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
+import 'package:highfives_ui/constants/const/employerSideMenuAndRoutes.dart';
 import 'package:highfives_ui/constants/const/employerSideMenuItems.dart';
 import 'package:highfives_ui/screens/employer/profile/employer_profile.dart';
 import 'package:highfives_ui/screens/employer/relations/existing/existing.dart';
 import 'package:highfives_ui/screens/employer/relations/existing/relationDetails.dart';
+import 'package:highfives_ui/screens/employer/relations/new/buildNewRelations.dart';
 
 //SINGLETON CLASS
 class AllEmployerRoutesWithWidgets {
@@ -25,7 +27,7 @@ class AllEmployerRoutesWithWidgets {
     if (route == null) return;
     this._dynamicRoute = route;
     var routeUrl = route.split('/');
-
+    print('FFF $routeUrl');
     //routes start with / so after split first element will be ""
     routeUrl.removeAt(0);
     if (routeUrl.length > 0) {
@@ -61,6 +63,10 @@ class AllEmployerRoutesWithWidgets {
         this.selectedItem = EMPLOYER_HELP;
         this.currentWidget = EmployerProfile();
       }
+      if (buildNewRelationRoute(routeUrl)) {
+        this.selectedItem = EMPLOYER_BUILD_NEW_RELATIONS;
+        this.currentWidget = BuildNewRelations();
+      }
       if (isEmployerProfileRoute(routeUrl)) {
         this.selectedItem = EMPLOYER_PROFILE;
         this.currentWidget = EmployerProfile();
@@ -73,6 +79,20 @@ class AllEmployerRoutesWithWidgets {
 
   getSelectedItem() {
     return this.selectedItem;
+  }
+
+  static buildNewRelationRoute(List routeUrl) {
+    if (routeUrl.length == 2 && routeUrl[1] != null) {
+      if (routeUrl[1].split('%20').join(' ') == EMPLOYER_BUILD_NEW_RELATIONS)
+        return true;
+    }
+    if (routeUrl == null && routeUrl.length == 0) return false;
+    if ((routeUrl.length == 2 &&
+        routeUrl[0] == EMPLOYER &&
+        routeUrl[1] == EMPLOYER_BUILD_NEW_RELATIONS)) {
+      return true;
+    }
+    return false;
   }
 
   static isEmployerStudentsRoute(List routeUrl) {

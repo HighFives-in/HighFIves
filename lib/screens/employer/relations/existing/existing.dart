@@ -22,38 +22,39 @@ class EmployerExistingRelations extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(50),
         child: FutureBuilder(
-            future: _relationResouce.getexistingRelations(EMPLOYER),
-            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              if (snapshot.hasData) {
-                return ResponsiveLayout(
-                  largeScreen: ListView(
-                    children: [
-                      _buildSearchAndFilters(context),
-                      // _buildSortByDate(context),
-                      ...largeChild(context, snapshot.data)
-                    ],
-                  ),
-                  mediumScreen: ListView(
-                    children: [
-                      _buildSearchAndFilters(context),
-                      ...smallChild(context, snapshot.data),
-                    ],
-                  ),
-                  smallScreen: ListView(
-                    children: [
-                      _buildSearchAndFilters(context),
-                      ...smallChild(context, snapshot.data),
-                    ],
-                  ),
-                );
-              } else if (snapshot.hasError) {
-                basicErrorFlutterToast(null);
-                //TODO NOT FOUND OR SOMETHING ELSE
-                return Container();
-              } else {
-                return Loading();
-              }
-            }),
+          future: _relationResouce.getexistingRelations(EMPLOYER),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.hasData) {
+              return ResponsiveLayout(
+                largeScreen: ListView(
+                  children: [
+                    _buildSearchAndFilters(context),
+                    // _buildSortByDate(context),
+                    ...largeChild(context, snapshot.data)
+                  ],
+                ),
+                mediumScreen: ListView(
+                  children: [
+                    _buildSearchAndFilters(context),
+                    ...smallChild(context, snapshot.data),
+                  ],
+                ),
+                smallScreen: ListView(
+                  children: [
+                    _buildSearchAndFilters(context),
+                    ...smallChild(context, snapshot.data),
+                  ],
+                ),
+              );
+            } else if (snapshot.hasError) {
+              basicErrorFlutterToast(null);
+              //TODO NOT FOUND OR SOMETHING ELSE
+              return Container();
+            } else {
+              return Loading();
+            }
+          },
+        ),
       ),
     );
   }
