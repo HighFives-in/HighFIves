@@ -28,7 +28,7 @@ class ViewEmployerRelationDetails extends StatelessWidget {
           return buildResponsiveRelationDetailsView(
               context, hiringInfo, tnpProfile);
         } else if (snapshot.hasError) {
-          basicErrorFlutterToast();
+          basicErrorFlutterToast(null);
           //TODO
           return Container(
             color: Colors.black38,

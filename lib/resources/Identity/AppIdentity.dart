@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:highfives_ui/constants/const/token.dart';
 import 'package:highfives_ui/resources/Identity/I_Identity.dart';
 import 'package:highfives_ui/resources/localStorage/AppLocalStorage.dart';
-import 'package:highfives_ui/services/Identity/signup/signup.dart';
-import 'package:highfives_ui/services/Identity/login/login.dart';
+import 'package:highfives_ui/services/Identity/signup.dart';
+import 'package:highfives_ui/services/Identity/login.dart';
 
 class AppIdentity extends I_Identity with AppLocalStorage {
   final _signupService = SignUpService();
@@ -46,7 +46,7 @@ class AppIdentity extends I_Identity with AppLocalStorage {
   }
 
   @override
-  Future<bool> findtoken(dynamic tokenType) async {
+  Future<dynamic> findtoken(dynamic tokenType) async {
     try {
       var token = await this.readToken(tokenType);
       if (token == null) token = "";
@@ -55,25 +55,27 @@ class AppIdentity extends I_Identity with AppLocalStorage {
       if (tokenComponents.length != 3) {
         //TODO:LOG_ERROR***
         print("Invalid token format");
-        return false;
+        return "";
+        // return false;
       }
 
       var payload = json.decode(
           utf8.decode(base64.decode(base64.normalize(tokenComponents[1]))));
       if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000)
           .isAfter(DateTime.now())) {
-        //TODO:LOG_ERROR***
-        print("Token is Valid");
-        print(payload);
-        return true;
+        return payload;
+        // return true;
       } else {
         //TODO:LOG_ERROR***
         print("Token Expired");
-        return false;
+        return "";
+        // return false;
       }
     } catch (e) {
       //TODO:LOG_ERROR***
-      return false;
+      print(e);
+      return "";
+      // return false;
     }
   }
 

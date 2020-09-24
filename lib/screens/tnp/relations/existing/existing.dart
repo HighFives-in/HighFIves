@@ -47,7 +47,7 @@ class ExistingRelations extends StatelessWidget {
                   ),
                 );
               } else if (snapshot.hasError) {
-                basicErrorFlutterToast();
+                basicErrorFlutterToast(null);
                 //TODO NOT FOUND OR SOMETHING ELSE
                 return Container();
               } else {

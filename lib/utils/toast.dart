@@ -1,9 +1,9 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 
-basicErrorFlutterToast() {
+basicErrorFlutterToast(String msg) {
   Fluttertoast.showToast(
-    msg: "SomeThing Went Wrong Please refresh page !",
+    msg: msg != null ? msg : "SomeThing Went Wrong Please refresh page !",
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.BOTTOM,
     timeInSecForIosWeb: 1,

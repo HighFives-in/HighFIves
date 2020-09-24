@@ -40,7 +40,7 @@ class IdentityResource extends I_Identity {
   }
 
   @override
-  Future<bool> findtoken(dynamic tokenType) async {
+  Future<dynamic> findtoken(dynamic tokenType) async {
     print(_platform);
     switch (_platform) {
       case PLATFORMS.Web:

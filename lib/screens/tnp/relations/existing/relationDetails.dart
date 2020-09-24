@@ -28,7 +28,7 @@ class ViewRelationDetails extends StatelessWidget {
           return buildResponsiveRelationDetailsView(
               context, hiringInfo, employerProfile);
         } else if (snapshot.hasError) {
-          basicErrorFlutterToast();
+          basicErrorFlutterToast(null);
           //TODO
           return Container(
             color: Colors.black38,
@@ -123,8 +123,7 @@ class _RelationDetailsLargeViewState extends State<RelationDetailsLargeView> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(40),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: [
           _buildBasicCompanyDetails(widget.hiringInfo, widget.employerProfile),
           Row(
@@ -217,10 +216,10 @@ class _RelationDetailsLargeViewState extends State<RelationDetailsLargeView> {
 Widget _buildBasicCompanyDetails(final hiringInfo, final employerProfile) {
   final empProfile = EmployerProfileModel.fromMap(employerProfile);
   // final company = empProfile.company;
-
   return Column(
     children: [
-      Text('MICROSOFT TEST'),
+      Text('MICROSOFT DUMMY DATA - '),
+      SizedBox(height: 50),
     ],
   );
 }
