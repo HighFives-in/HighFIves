@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/screens/login/logic.dart';
+import 'package:highfives_ui/screens/signup/signup.dart';
+import 'package:highfives_ui/screens/utils/bottombar.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
 import 'package:highfives_ui/utils/themeChanger.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +24,7 @@ class LoginUI extends StatelessWidget {
             children: [
               _buildTopNavBar(context),
               _buildLoginBody(context),
+              BottomBarCommon(size),
             ],
           ),
         ),
@@ -89,6 +92,8 @@ class LoginUI extends StatelessWidget {
                   InkWell(
                     onTap: () async {
                       //TODO ONCLICK
+                       Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => SIGNUPUI()));
                       return null;
                     },
                     child: Container(

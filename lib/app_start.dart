@@ -1,17 +1,17 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/theme.dart';
 import 'package:highfives_ui/constants/const/token.dart';
 import 'package:highfives_ui/resources/Identity/main.dart';
 import 'package:highfives_ui/screens/home_page/main.dart';
-import 'package:highfives_ui/screens/login/login.dart';
+import 'package:highfives_ui/screens/home_page/Home.dart';
 import 'package:highfives_ui/utils/themeChanger.dart';
 import 'package:provider/provider.dart';
 import 'package:highfives_ui/utils/platform.dart';
+import 'package:highfives_ui/logging/logger.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  final log = getLogger('MyApp');
 
   @override
   Widget build(BuildContext context) {
@@ -32,21 +32,21 @@ class MaterialAppWithTheme extends StatelessWidget {
       title: 'HighFives',
       theme: _theme.getTheme(),
       home: FutureBuilder(
-        future: _findtoken(TokenType.AccessToken),
+        future: _verifyToken(TokenType.AccessToken),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return CircularProgressIndicator();
           if (snapshot.data != null && snapshot.data) {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => MainHome()));
           } else {
-            return LoginUI();
+            return HOMEUI();
           }
         },
       ),
     );
   }
 
-  Future<dynamic> _findtoken(dynamic tokenType) async {
-    return await _identityResource.findtoken(tokenType);
+  Future<dynamic> _verifyToken(dynamic tokenType) async {
+    return await _identityResource.verifyToken(tokenType);
   }
 }

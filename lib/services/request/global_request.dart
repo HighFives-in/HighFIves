@@ -1,10 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:highfives_ui/constants/const/token.dart';
+import 'package:highfives_ui/logging/logger.dart';
+import 'package:highfives_ui/resources/Identity/main.dart';
+import 'package:highfives_ui/utils/platform.dart';
 
 class UiHttpClient {
-  var _dio;
-  final baseUrl = 'http://localhost:2020'; //TODO Change later
+  var _dio; //TODO Change later
   BaseOptions _options;
-
+  static final log = getLogger('GlobalRequestHandler');
+  static final _identityResource = IdentityResource(findPlatform());
   factory UiHttpClient() {
     return _uiHttpClientSingleton;
   }
@@ -13,7 +17,6 @@ class UiHttpClient {
 
   UiHttpClient._internal() {
     _options = new BaseOptions(
-      baseUrl: baseUrl,
       connectTimeout: 5000,
       receiveTimeout: 3000,
     );
@@ -27,13 +30,13 @@ class UiHttpClient {
     return _dio;
   }
 
-  getData(String path, Map<String, String> headers) async {
+  getData(String url, Map<String, String> headers) async {
     try {
-      var response = await dio.get(baseUrl + path);
+      dynamic traceId = _identityResource.getToken(TokenType.TraceId);
+      headers["traceId"] = traceId;
+      var response = await dio.get(url);
       return response;
     } on DioError catch (e) {
-      //TODO : LOGGING
-
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
       if (e.response != null) {
@@ -49,10 +52,17 @@ class UiHttpClient {
     }
   }
 
-  postData(String path, Map<String, String> headers,
-      Map<String, String> body) async {
+  postData(
+      String url, Map<String, String> headers, Map<String, String> body) async {
     try {
-      var response = await dio.post(baseUrl + path, data: body);
+
+      // flow
+      // if(_identityResource.authenticate()){
+      //   return
+      // }
+      dynamic traceId = _identityResource.getToken(TokenType.TraceId);
+      headers["traceId"] = traceId;
+      var response = await dio.post(url, data: body);
       return response;
     } on DioError catch (e) {
       //TODO : LOGGING
@@ -60,7 +70,7 @@ class UiHttpClient {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
       if (e.response != null) {
-        print(e.response.data);
+        log.e(e);
         print(e.response.headers);
         print(e.response.request);
       } else {

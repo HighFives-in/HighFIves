@@ -4,13 +4,11 @@ class SignUpService {
   final httpClient = UiHttpClient();
   Future<Map<String, dynamic>> attemptSignUp(
       String email, String password, String role) async {
-    const path = '/identity/loginWithEmailAndPasswordAndRole';
+    const path = '/identity/signUpWithEmailAndPasswordAndRole';
 
     final user = {'email': email, 'password': password, 'role': role};
     try {
       var response = await httpClient.postData(path, null, user);
-
-      // var response2 = await httpClient2.getData(path, null);
       if (response.statusCode == 200 &&
           response.data != null &&
           response.data is Map) {

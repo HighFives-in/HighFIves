@@ -6,7 +6,7 @@ abstract class I_Identity {
 
   Future<bool> signUp(String e, String p, String role);
   Future<bool> login(String e, String p, String role);
-  Future<bool> findtoken(dynamic token);
+  Future<bool> verifyToken(dynamic token);
   void refresh();
   Future<bool> logout();
 }

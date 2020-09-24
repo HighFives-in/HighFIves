@@ -14,6 +14,9 @@ class WebLocalStorage {
       case TokenType.RefreshToken:
         _localStorage[REFRESHTOKENKEY] = token;
         break;
+      case TokenType.TraceId:
+        _localStorage[TRACEID] = token;
+        break;
       default:
         _localStorage[ACCESSTOKENKEY] = token;
         break;
@@ -31,6 +34,10 @@ class WebLocalStorage {
         return _localStorage.containsKey(REFRESHTOKENKEY)
             ? _localStorage[REFRESHTOKENKEY]
             : "";
+      case TokenType.TraceId:
+        return _localStorage.containsKey(TRACEID)
+            ? _localStorage[TRACEID]
+            : "";
       default:
         return _localStorage.containsKey(ACCESSTOKENKEY)
             ? _localStorage[ACCESSTOKENKEY]
@@ -45,6 +52,8 @@ class WebLocalStorage {
         return _localStorage.remove(ACCESSTOKENKEY);
       case TokenType.RefreshToken:
         return _localStorage.remove(REFRESHTOKENKEY);
+      case TokenType.TraceId:
+        return _localStorage.remove(TRACEID);
       default:
         return _localStorage.remove(ACCESSTOKENKEY);
     }
