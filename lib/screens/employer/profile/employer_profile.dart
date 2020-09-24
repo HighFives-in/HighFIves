@@ -179,65 +179,63 @@ Widget _editProfilePicture(BuildContext context) {
 }
 
 Widget _displayProfileData(BuildContext context, dynamic personalInfo) {
-  return Expanded(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: EdgeInsets.all(7),
-          color: Theme.of(context).accentColor.withOpacity(0.2),
-          child: Text(
-            'Name :',
-            style: Theme.of(context).textTheme.headline4,
-          ),
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Container(
+        padding: EdgeInsets.all(7),
+        color: Theme.of(context).accentColor.withOpacity(0.2),
+        child: Text(
+          'Name :',
+          style: Theme.of(context).textTheme.headline4,
         ),
-        Container(
-          padding: EdgeInsets.all(3),
-          child: Text(
-            personalInfo["firstName"] + " " + personalInfo["lastName"],
-            style: Theme.of(context).textTheme.headline6,
-          ),
+      ),
+      Container(
+        padding: EdgeInsets.all(3),
+        child: Text(
+          personalInfo["firstName"] + " " + personalInfo["lastName"],
+          style: Theme.of(context).textTheme.headline6,
         ),
-        SizedBox(
-          height: 20,
+      ),
+      SizedBox(
+        height: 20,
+      ),
+      Container(
+        padding: EdgeInsets.all(7),
+        color: Theme.of(context).accentColor.withOpacity(0.2),
+        child: Text(
+          'Email :',
+          style: Theme.of(context).textTheme.headline4,
         ),
-        Container(
-          padding: EdgeInsets.all(7),
-          color: Theme.of(context).accentColor.withOpacity(0.2),
-          child: Text(
-            'Email :',
-            style: Theme.of(context).textTheme.headline4,
-          ),
+      ),
+      Container(
+        padding: EdgeInsets.all(3),
+        child: Text(
+          personalInfo["email"],
+          style: Theme.of(context).textTheme.headline6,
         ),
-        Container(
-          padding: EdgeInsets.all(3),
-          child: Text(
-            personalInfo["email"],
-            style: Theme.of(context).textTheme.headline6,
-          ),
+      ),
+      SizedBox(
+        height: 20,
+      ),
+      Container(
+        padding: EdgeInsets.all(7),
+        color: Theme.of(context).accentColor.withOpacity(0.2),
+        child: Text(
+          'Contact Number:',
+          style: Theme.of(context).textTheme.headline4,
         ),
-        SizedBox(
-          height: 20,
+      ),
+      Container(
+        padding: EdgeInsets.all(3),
+        child: Text(
+          personalInfo["phone"],
+          style: Theme.of(context).textTheme.headline6,
         ),
-        Container(
-          padding: EdgeInsets.all(7),
-          color: Theme.of(context).accentColor.withOpacity(0.2),
-          child: Text(
-            'Contact Number:',
-            style: Theme.of(context).textTheme.headline4,
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.all(3),
-          child: Text(
-            personalInfo["phone"],
-            style: Theme.of(context).textTheme.headline6,
-          ),
-        ),
-        // Text(''),
-        // Text(personalInfo["phone"]),
-      ],
-    ),
+      ),
+      // Text(''),
+      // Text(personalInfo["phone"]),
+    ],
   );
 }
 

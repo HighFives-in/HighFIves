@@ -16,8 +16,7 @@ class AllTNPRoutesWithWidgets {
   Widget currentWidget;
 
   get getcurrentWidget {
-    switch (this._dynamicRoute) {
-    }
+    return this.currentWidget;
   }
 
   get route => this._dynamicRoute;

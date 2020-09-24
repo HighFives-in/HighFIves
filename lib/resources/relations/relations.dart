@@ -8,11 +8,10 @@ class RelationResource {
     if (role == TNP) {
       await Future.delayed(Duration(seconds: 1));
       return existingRelationMock;
+    } else if (role == EMPLOYER) {
+      await Future.delayed(Duration(seconds: 2));
+      return employerExistingRelationMock;
     }
-    // } else if (role == EMPLOYER) {
-    //   await Future.delayed(Duration(seconds: 2));
-    //   return employerProfileMock;
-    // }
   }
 
   Future<dynamic> getRelationDetails(int id) async {

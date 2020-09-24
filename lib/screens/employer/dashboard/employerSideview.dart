@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/constants/const/employerSideMenuItems.dart';
 import 'package:highfives_ui/constants/const/size.dart';
+import 'package:highfives_ui/locator.dart';
 import 'package:highfives_ui/screens/employer/dashboard/sidemenumodel.dart';
+import 'package:highfives_ui/screens/utils/navigationService.dart';
 import 'package:provider/provider.dart';
 
 class EmployerSideView extends StatelessWidget {
@@ -50,6 +53,7 @@ List<Widget> _sideMenuItemsList(BuildContext context) {
       onTap: () {
         Provider.of<EmployerSideMenuModel>(context, listen: false)
             .setSideMenuItem(item);
+        locator<NavigationService>().navitgateTo('/' + EMPLOYER + '/' + item);
       },
       // color: Colors.orange,
       child: Container(
@@ -93,31 +97,31 @@ Widget getIcon(String item) {
         size: 25,
       );
       break;
-    case COMMUNICATIONS:
+    case EMPLOYER_COMMUNICATIONS:
       return Icon(
         Icons.insert_comment_outlined,
         size: 25,
       );
       break;
-    case ONGOING_INTERVIEW:
+    case EMPLOYER_ONGOING_INTERVIEW:
       return Icon(
         Icons.people,
         size: 25,
       );
       break;
-    case STUDENTS:
+    case EMPLOYER_STUDENTS:
       return Icon(
         Icons.people_alt_sharp,
         size: 25,
       );
       break;
-    case ANALYTICS:
+    case EMPLOYER_ANALYTICS:
       return Icon(
         Icons.analytics_outlined,
         size: 25,
       );
       break;
-    case HELP:
+    case EMPLOYER_HELP:
       return Icon(
         Icons.help,
         size: 25,

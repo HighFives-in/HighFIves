@@ -5,8 +5,7 @@ class LoginService {
   Future<Map<String, dynamic>> attemptLogin(
       String email, String password, String role) async {
     //
-    const url =
-        'https://be-identity.azurewebsites.net/Identity/LoginWithEmailAndPasswordAndRole';
+    const url = 'https://be-identity.azurewebsites.net/identity/signIn';
 
     final user = {'email': email, 'password': password, 'role': role};
     try {

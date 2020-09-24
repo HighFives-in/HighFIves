@@ -8,10 +8,10 @@ const EMPLOYERSIDEMENULIST = [
 ];
 
 const EMPLOYER_PROFILE = 'Profile';
-const COMMUNICATIONS = 'Communications';
-const ONGOING_INTERVIEW = 'Ongoing Interviews';
-const STUDENTS = 'Students';
-const ANALYTICS = 'Analytics';
-const HELP = 'help';
+const EMPLOYER_COMMUNICATIONS = 'Communications';
+const EMPLOYER_ONGOING_INTERVIEW = 'Ongoing Interviews';
+const EMPLOYER_STUDENTS = 'Students';
+const EMPLOYER_ANALYTICS = 'Analytics';
+const EMPLOYER_HELP = 'help';
 
 const ABOUT_COMPANY = 'About Company';

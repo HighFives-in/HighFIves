@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:highfives_ui/screens/employer/dashboard/employerDashboard.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/tnpdashboard.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
 
@@ -14,9 +15,20 @@ class Path {
     Path(r'\/tnp\/communications\/*', (context, match) => TnpView(match)),
     Path(r'\/tnp\/\d*_\d*', (context, match) => TnpView(match)),
     Path(r'\/tnp', (context, match) => TnpView(match)),
-    //TODO WIRNG ONLY FOR TNP
-    Path(r'\/', (context, match) => TnpView(match)),
+    Path(r'^' + '/loading', (context, match) => Loading()),
+    Path(r'employer\/communications\/\d*_\d*',
+        (context, match) => EmployerView(match)),
+    Path(r'\/employer\/communications\/*',
+        (context, match) => EmployerView(match)),
+    Path(r'\/employer\/\d*_\d*', (context, match) => EmployerView(match)),
+    Path(r'\/employer', (context, match) => EmployerView(match)),
   ];
+
+  // //TODO WIRNG ONLY FOR TNP
+  // Path(r'\/', (context, match) => TnpView(match)),
+
+  //TODO WIRNG ONLY FOR TNP
+  // Path(r'\/', (context, match) => EmployerView(match)),
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     //dynamic routes
