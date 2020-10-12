@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
+import 'package:highfives_ui/screens/tnp/analytics/analytics.dart';
 import 'package:highfives_ui/screens/tnp/profile/profile.dart';
 import 'package:highfives_ui/screens/tnp/relations/existing/existing.dart';
 import 'package:highfives_ui/screens/tnp/relations/existing/relationDetails.dart';
+import 'package:highfives_ui/screens/tnp/relations/new/buildNewRelations.dart';
+import 'package:highfives_ui/screens/tnp/students/allStudents.dart';
 
 //SINGLETON CLASS
 class AllTNPRoutesWithWidgets {
@@ -33,7 +36,7 @@ class AllTNPRoutesWithWidgets {
       if (isCommunicationRoute(routeUrl)) {
         //By Default  show existing relations
         //       /tnp/communications || /tnp/communications/
-        this.selectedItem = COMMUNICATIONS;
+        this.selectedItem = TNP_COMMUNICATIONS;
         if (routeUrl.length == 3) {
           var idList = routeUrl[2].split('_');
           if (idList.length == 2) {
@@ -50,16 +53,20 @@ class AllTNPRoutesWithWidgets {
         }
       }
       if (isStudentsRoute(routeUrl)) {
-        this.selectedItem = STUDENTS;
-        this.currentWidget = TnpProfile();
+        this.selectedItem = TNP_STUDENTS;
+        this.currentWidget = AllStudentsForTnp();
       }
       if (isAnalyticsRoute(routeUrl)) {
-        this.selectedItem = ANALYTICS;
-        this.currentWidget = TnpProfile();
+        this.selectedItem = TNP_ANALYTICS;
+        this.currentWidget = TnpAnalytics();
       }
       if (isHelpRoute(routeUrl)) {
-        this.selectedItem = HELP;
+        this.selectedItem = TNP_HELP;
         this.currentWidget = TnpProfile();
+      }
+      if (buildNewRelationRoute(routeUrl)) {
+        this.selectedItem = EMPLOYER_BUILD_NEW_RELATIONS;
+        this.currentWidget = TnpBuildNewRelations();
       }
       if (isProfileRoute(routeUrl)) {
         this.selectedItem = TNP_PROFILE;
@@ -75,11 +82,25 @@ class AllTNPRoutesWithWidgets {
     return this.selectedItem;
   }
 
+  static buildNewRelationRoute(List routeUrl) {
+    if (routeUrl.length == 2 && routeUrl[1] != null) {
+      if (routeUrl[1].split('%20').join(' ') == EMPLOYER_BUILD_NEW_RELATIONS)
+        return true;
+    }
+    if (routeUrl == null && routeUrl.length == 0) return false;
+    if ((routeUrl.length == 2 &&
+        routeUrl[0] == EMPLOYER &&
+        routeUrl[1] == EMPLOYER_BUILD_NEW_RELATIONS)) {
+      return true;
+    }
+    return false;
+  }
+
   static isStudentsRoute(List routeUrl) {
     if (routeUrl == null && routeUrl.length == 0) return false;
     if ((routeUrl.length == 2 &&
         routeUrl[0] == TNP &&
-        routeUrl[1] == STUDENTS)) {
+        routeUrl[1] == TNP_STUDENTS)) {
       return true;
     }
     return false;
@@ -89,7 +110,7 @@ class AllTNPRoutesWithWidgets {
     if (routeUrl == null && routeUrl.length == 0) return false;
     if ((routeUrl.length == 2 &&
         routeUrl[0] == TNP &&
-        routeUrl[1] == ANALYTICS)) {
+        routeUrl[1] == TNP_ANALYTICS)) {
       return true;
     }
     return false;
@@ -97,7 +118,9 @@ class AllTNPRoutesWithWidgets {
 
   static isHelpRoute(List routeUrl) {
     if (routeUrl == null && routeUrl.length == 0) return false;
-    if ((routeUrl.length == 2 && routeUrl[0] == TNP && routeUrl[1] == HELP)) {
+    if ((routeUrl.length == 2 &&
+        routeUrl[0] == TNP &&
+        routeUrl[1] == TNP_HELP)) {
       return true;
     }
     return false;
@@ -107,7 +130,7 @@ class AllTNPRoutesWithWidgets {
     if (routeUrl == null && routeUrl.length == 0) return false;
     if (routeUrl.length > 1 &&
         routeUrl[0] == TNP &&
-        routeUrl[1] == COMMUNICATIONS) {
+        routeUrl[1] == TNP_COMMUNICATIONS) {
       return true;
     }
     return false;

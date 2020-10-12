@@ -1,5 +1,5 @@
+import 'package:highfives_ui/models/relations/relation.dart';
 import 'package:flutter/material.dart';
-import 'package:highfives_ui/models/employer/employerRelationModel.dart';
 
 class TnpHiringInfo extends StatelessWidget {
   final _relationDetails;

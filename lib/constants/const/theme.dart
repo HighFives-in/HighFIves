@@ -20,7 +20,7 @@ final DARKTHEME = ThemeData(
         letterSpacing: 0.64,
         fontWeight: FontWeight.bold),
     headline2: TextStyle(
-      fontSize: 44,
+      fontSize: 35,
       fontFamily: customFontFamily,
       letterSpacing: 0.64,
       color: Colors.white,
@@ -71,7 +71,7 @@ final LIGHTTHEME = ThemeData(
         letterSpacing: 0.64,
         fontWeight: FontWeight.bold),
     headline2: TextStyle(
-      fontSize: 44,
+      fontSize: 35,
       fontFamily: customFontFamily,
       letterSpacing: 0.64,
       color: Colors.black,

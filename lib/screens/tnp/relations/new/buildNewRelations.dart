@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:highfives_ui/models/relations/allCollegesRelationModel.dart';
-import 'package:highfives_ui/screens/employer/relations/new/large.dart';
+import 'package:highfives_ui/models/relations/allEployersRelationModel.dart';
+import 'package:highfives_ui/screens/tnp/relations/new/large.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
 import 'package:highfives_ui/resources/relations/relations.dart';
 import 'package:highfives_ui/utils/toast.dart';
 
-class BuildNewRelations extends StatelessWidget {
+class TnpBuildNewRelations extends StatelessWidget {
   RelationResource _relationResource = RelationResource();
 
-  Future<dynamic> _getAllColleges() {
-    return _relationResource.getAllColleges();
+  Future<dynamic> _getAllEmployers() {
+    return _relationResource.getAllEmployers();
   }
 
   @override
@@ -20,14 +20,15 @@ class BuildNewRelations extends StatelessWidget {
       width: size.width,
       height: size.height,
       child: FutureBuilder(
-        future: this._getAllColleges(),
+        future: this._getAllEmployers(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
-            var allColleges = (snapshot.data as List)
-                .map((college) => BuildNewRelationCollegeModel.fromMap(college))
+            var allcompanies = (snapshot.data as List)
+                .map(
+                    (company) => BuildNewRelationEmployerModel.fromMap(company))
                 .toList();
             return ResponsiveLayout(
-              largeScreen: LargeBuildNewRelation(allColleges),
+              largeScreen: LargeBuildTnpNewRelation(allcompanies),
               smallScreen: Container(
                 color: Colors.red,
               ),

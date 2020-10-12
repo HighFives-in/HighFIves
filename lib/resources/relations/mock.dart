@@ -33,6 +33,54 @@ final newRelationMock = [
   }
 ];
 
+final allEmployersMock = [
+  {
+    "employerId": 1,
+    "companyName": "Tesla",
+    "companyLogo":
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTNkX7dHzcLDu74a4PR1BBp1quTHeqafTG7Zg&usqp=CAU",
+    "employerName": "Elan flask",
+    "status": "null",
+    "date": "null"
+  },
+  {
+    "employerId": 2,
+    "companyName": "Microsoft",
+    "companyLogo":
+        "https://agsol.com/wp-content/uploads/2018/09/new-microsoft-logo-SIZED-SQUARE-300x297.jpg",
+    "employerName": "Tiwari Suneja",
+    "status": "null",
+    "date": "null"
+  },
+  {
+    "employerId": 3,
+    "companyName": "Jugnoo",
+    "companyLogo":
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSal1Zgicx9JNaDg_C3Ef1nyjkH-FGwHUYgQg&usqp=CAU",
+    "employerName": "Keshav Bho",
+    "status": "null",
+    "date": "null"
+  },
+  {
+    "employerId": 4,
+    "companyName": "Tesco",
+    "companyLogo":
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQO-7a0hJIuspQONlP1jiJsacYtZi5hqYvDqA&usqp=CAU",
+    "employerName": "Kavya sharma",
+    "status": "null",
+    "date": "null"
+  },
+  {
+    "employerId": 5,
+    "companyName": "Google",
+    "companyLogo":
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQaeP3FFNP5kiuUmu4wy0RgycQv9KOOK9ghhQ&usqp=CAU",
+    "employerName": "Ashley Brown",
+    "status": "null",
+    "date": "null"
+  }
+];
+
 final relationsMock = [
   {
     "hiringId": 1,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:highfives_ui/models/employer/employerRelationModel.dart';
+import 'package:highfives_ui/models/relations/relation.dart';
 
 class EmployerHiringInfo extends StatelessWidget {
   final _relationDetails;
