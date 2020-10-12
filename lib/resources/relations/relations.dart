@@ -1,6 +1,7 @@
 import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/models/relations/relation.dart';
 import 'package:highfives_ui/resources/relations/mock.dart';
+import 'package:highfives_ui/resources/relations/studentsMock.dart';
 
 class RelationResource {
   //TODO INTEGRATE WITH SERVICE
@@ -31,5 +32,11 @@ class RelationResource {
   Future<dynamic> getAllEmployers() async {
     await Future.delayed(Duration(seconds: 1));
     return allEmployersMock;
+  }
+
+  //This is not a property relations will move it later, keeping all mocks in one file
+  Future<dynamic> getAllStudents() async {
+    await Future.delayed(Duration(seconds: 1));
+    return allStudentsMock;
   }
 }

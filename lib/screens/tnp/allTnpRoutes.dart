@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/constants/const/tnpSideMenuItems.dart';
+import 'package:highfives_ui/screens/tnp/analytics/analytics.dart';
 import 'package:highfives_ui/screens/tnp/profile/profile.dart';
 import 'package:highfives_ui/screens/tnp/relations/existing/existing.dart';
 import 'package:highfives_ui/screens/tnp/relations/existing/relationDetails.dart';
 import 'package:highfives_ui/screens/tnp/relations/new/buildNewRelations.dart';
+import 'package:highfives_ui/screens/tnp/students/allStudents.dart';
 
 //SINGLETON CLASS
 class AllTNPRoutesWithWidgets {
@@ -52,11 +54,11 @@ class AllTNPRoutesWithWidgets {
       }
       if (isStudentsRoute(routeUrl)) {
         this.selectedItem = TNP_STUDENTS;
-        this.currentWidget = TnpProfile();
+        this.currentWidget = AllStudentsForTnp();
       }
       if (isAnalyticsRoute(routeUrl)) {
         this.selectedItem = TNP_ANALYTICS;
-        this.currentWidget = TnpProfile();
+        this.currentWidget = TnpAnalytics();
       }
       if (isHelpRoute(routeUrl)) {
         this.selectedItem = TNP_HELP;

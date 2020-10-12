@@ -123,6 +123,7 @@ class LoginLogicWithRole extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Container(
               width: 130,
+              height: 40,
               decoration: BoxDecoration(
                 color: Theme.of(context).accentColor,
                 borderRadius: BorderRadius.circular(10),
