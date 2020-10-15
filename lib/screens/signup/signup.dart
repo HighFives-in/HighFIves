@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
-import 'package:highfives_ui/screens/login/logic.dart';
-import 'package:highfives_ui/screens/signup/signup.dart';
+import 'package:highfives_ui/screens/login/login.dart';
+import 'package:highfives_ui/screens/signup/logic.dart';
 import 'package:highfives_ui/screens/utils/bottombar.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
 import 'package:highfives_ui/utils/themeChanger.dart';
 import 'package:provider/provider.dart';
 
-class LoginUI extends StatelessWidget {
+class SignupUI extends StatelessWidget {
   ThemeChanger _themeChanger;
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class LoginUI extends StatelessWidget {
           child: Column(
             children: [
               _buildTopNavBar(context),
-              _buildLoginBody(context),
+              _buildSignupBody(context),
               BottomBarCommon(size),
             ],
           ),
@@ -34,7 +34,6 @@ class LoginUI extends StatelessWidget {
 
   Widget _buildTopNavBar(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    if (ResponsiveLayout.isSmallScreen(context)) return Container();
     return Container(
       width: size.width,
       decoration: BoxDecoration(
@@ -94,7 +93,7 @@ class LoginUI extends StatelessWidget {
                     onTap: () async {
                       //TODO ONCLICK
                       Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => SignupUI()));
+                      MaterialPageRoute(builder: (context) => LoginUI()));
                     },
                     child: Container(
                       margin: EdgeInsets.fromLTRB(50, 30, 100, 30),
@@ -107,7 +106,7 @@ class LoginUI extends StatelessWidget {
                             color: Theme.of(context).accentColor, width: 1.667),
                       ),
                       child: Center(
-                        child: Text('Sign Up',
+                        child: Text('Log In',
                             style: Theme.of(context).textTheme.headline5),
                       ),
                     ),
@@ -128,7 +127,7 @@ class LoginUI extends StatelessWidget {
     }).toList();
   }
 
-  Widget _buildLoginBody(BuildContext context) {
+  Widget _buildSignupBody(BuildContext context) {
     return ResponsiveLayout(
       largeScreen: LargeChild(),
       smallScreen: SmallChild(),
@@ -157,7 +156,7 @@ class LargeChild extends StatelessWidget {
                             width: 1, color: Theme.of(context).dividerColor)),
                   ),
                   child: Image(
-                    image: AssetImage("assets/images/people_highfive.png"),
+                    image: AssetImage("assets/images/static2.jpg"),
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -173,7 +172,7 @@ class LargeChild extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 50),
-                        Text('Welcome back !',
+                        Text('Lets do highfives !',
                             style: Theme.of(context).textTheme.headline2),
                         Padding(
                           padding: EdgeInsets.all(10),
@@ -181,7 +180,7 @@ class LargeChild extends StatelessWidget {
                               style: Theme.of(context).textTheme.headline6),
                         ),
                         SizedBox(height: 87),
-                        LoginLogic(),
+                        SignupLogic(),
                         //submit login
                       ],
                     ),
@@ -214,7 +213,7 @@ class SmallChild extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Welcome back !',
+                    Text('Lets do highfives !',
                         style: Theme.of(context).textTheme.headline2),
                     Padding(
                       padding: EdgeInsets.all(10),
@@ -233,7 +232,7 @@ class SmallChild extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 child: Container(
                   child: Image(
-                    image: AssetImage("assets/images/people_highfive.png"),
+                    image: AssetImage("assets/images/static2.jpg"),
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -244,7 +243,7 @@ class SmallChild extends StatelessWidget {
             ),
             FractionallySizedBox(
               widthFactor: 1,
-              child: LoginLogic(),
+              child: SignupLogic(),
             ),
           ],
         ),

@@ -7,7 +7,7 @@ import 'package:highfives_ui/constants/const/token.dart';
 import 'package:highfives_ui/locator.dart';
 import 'package:highfives_ui/resources/Identity/main.dart';
 import 'package:highfives_ui/screens/employer/dashboard/employerDashboard.dart';
-import 'package:highfives_ui/screens/login/login.dart';
+import 'package:highfives_ui/screens/home.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/tnpdashboard.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
 import 'package:highfives_ui/screens/utils/navigationService.dart';
@@ -82,7 +82,7 @@ class AppStart extends StatelessWidget {
               break;
           }
         } else {
-          return LoginUI();
+          return HomeUi();
         }
       },
     );
