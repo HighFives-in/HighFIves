@@ -326,7 +326,11 @@ class LargeChild extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: FlatButton(
-                            onPressed: null,
+                            onPressed: () async {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => SignupUI()));
+                              return null;
+                            },
                             child: Row(
                               children: [
                                 Text('Search  ',

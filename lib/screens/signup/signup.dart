@@ -19,15 +19,13 @@ class SignupUI extends StatelessWidget {
         width: size.width,
         height: size.height,
         color: Theme.of(context).primaryColor,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
+        child: ListView(
+          children: [
               _buildTopNavBar(context),
               _buildSignupBody(context),
               BottomBarCommon(size),
             ],
-          ),
-        ),
+        )
       ),
     );
   }
@@ -140,9 +138,8 @@ class LargeChild extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 100),
         SizedBox(
-          height: 600,
+          height: 700,
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -167,7 +164,7 @@ class LargeChild extends StatelessWidget {
                 child: Container(
                   // color: Colors.green,
                   child: Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(50),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -179,7 +176,7 @@ class LargeChild extends StatelessWidget {
                           child: Text('Don\'t miss out an opportunity ',
                               style: Theme.of(context).textTheme.headline6),
                         ),
-                        SizedBox(height: 87),
+                        SizedBox(height: 30),
                         SignupLogic(),
                         //submit login
                       ],

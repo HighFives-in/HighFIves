@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
+import 'package:highfives_ui/constants/const/errors.dart';
 import 'package:highfives_ui/resources/Identity/main.dart';
 import 'package:highfives_ui/screens/employer/dashboard/employerDashboard.dart';
 import 'package:highfives_ui/screens/employer/profile/employer_profile.dart';
 import 'package:highfives_ui/screens/login/roleChanger.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/tnpdashboard.dart';
+import 'package:highfives_ui/screens/utils/loading.dart';
 import 'package:highfives_ui/utils/platform.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
+import 'package:highfives_ui/utils/toast.dart';
 import 'package:provider/provider.dart';
+
+import '../../locator.dart';
 
 class SignupLogic extends StatelessWidget {
   @override
@@ -25,6 +30,8 @@ class SignupLogicWithRole extends StatelessWidget {
   String _email;
   String _password;
   String _selectedRole;
+  final TextEditingController _pass = TextEditingController();
+
   //TODO CORRECT ?
   final _identityResource = IdentityResource(findPlatform());
   @override
@@ -98,6 +105,7 @@ class SignupLogicWithRole extends StatelessWidget {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                       ),
+                      controller: _pass,
                       validator: (value) {
                         if (value.isEmpty || value.length <= 6)
                           return 'Password too short!';
@@ -113,8 +121,48 @@ class SignupLogicWithRole extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10),
-          RoleWithRadioButtons(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Text('Confirm password',
+                style: Theme.of(context).textTheme.headline4),
+          ),
           SizedBox(height: 10),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: FractionallySizedBox(
+              widthFactor: ResponsiveLayout.isLargeScreen(context) ? 0.67 : 1,
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.3),
+                  border: Border.all(
+                      color: Theme.of(context).accentColor, width: 0.83),
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                      ),
+                      validator: (value) {
+                        if(value.isEmpty)
+                          return 'Empty';
+                        if(value != _pass.text){
+                          return 'Password doesn\'t match';
+                        }
+                        return null;
+                      }
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          RoleWithRadioButtons(),
+          SizedBox(height: 30),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Container(
@@ -127,17 +175,24 @@ class SignupLogicWithRole extends StatelessWidget {
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
-
-                    var res = await this
-                        ._attemptSignUp(_email, _password, _selectedRole);
-                    if (res != null && res) {
-                      _formKey.currentState.reset();
-                      navigateToHome(_selectedRole, context);
+                    try {
+                      dynamic res = await locator<Loading>().handleSubmit(
+                          context,
+                          this._attemptSignUp(
+                              _email, _password, _selectedRole));
+                      if (res == null || !res) {
+                        basicErrorFlutterToast(SIGNUP_ERROR);
+                      } else if (res != null && res) {
+                        _formKey.currentState.reset();
+                        navigateToHome(_selectedRole, context);
+                      }
+                    } catch (e) {
+                      basicErrorFlutterToast(SIGNUP_SERVICE_DOWN);
                     }
                   }
                 },
-                child:
-                    Text('Sign Up', style: Theme.of(context).textTheme.headline5),
+                child: Text('Sign Up',
+                    style: Theme.of(context).textTheme.headline5),
               ),
             ),
           ),
@@ -172,7 +227,6 @@ class SignupLogicWithRole extends StatelessWidget {
       String email, String password, String role) async {
     return await _identityResource.signUp(email, password, role);
   }
-
 }
 
 class RoleWithRadioButtons extends StatelessWidget {

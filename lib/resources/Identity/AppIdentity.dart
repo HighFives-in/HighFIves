@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:highfives_ui/constants/const/token.dart';
+import 'package:highfives_ui/logging/logger.dart';
 import 'package:highfives_ui/resources/Identity/I_Identity.dart';
 import 'package:highfives_ui/resources/localStorage/AppLocalStorage.dart';
 import 'package:highfives_ui/services/Identity/signup.dart';
@@ -9,6 +10,7 @@ import 'package:highfives_ui/services/Identity/login.dart';
 class AppIdentity extends I_Identity with AppLocalStorage {
   final _signupService = SignUpService();
   final _loginService = LoginService();
+  final log = getLogger('AppIdentity');
 
   @override
   Future<bool> signUp(String email, String password, String role) async {
@@ -20,7 +22,7 @@ class AppIdentity extends I_Identity with AppLocalStorage {
         return true;
       }
     } catch (e) {
-      //TODO:LOG_ERROR***
+      log.e(e);
       return false;
     }
     return false;
@@ -39,7 +41,7 @@ class AppIdentity extends I_Identity with AppLocalStorage {
       }
       //TODO:THROW_ERROR invalid response because we expect access and refresh in response;
     } catch (e) {
-      //TODO:LOG_ERROR***
+      log.e(e);
       return false;
     }
     return false;
@@ -53,10 +55,8 @@ class AppIdentity extends I_Identity with AppLocalStorage {
 
       var tokenComponents = token.split(".");
       if (tokenComponents.length != 3) {
-        //TODO:LOG_ERROR***
-        print("Invalid token format");
+        log.i("Invalid token format");
         return "";
-        // return false;
       }
 
       var payload = json.decode(
@@ -64,18 +64,13 @@ class AppIdentity extends I_Identity with AppLocalStorage {
       if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000)
           .isAfter(DateTime.now())) {
         return payload;
-        // return true;
       } else {
-        //TODO:LOG_ERROR***
-        print("Token Expired");
+        log.i("Token Expired");
         return "";
-        // return false;
       }
     } catch (e) {
-      //TODO:LOG_ERROR***
-      print(e);
+      log.e(e);
       return "";
-      // return false;
     }
   }
 
@@ -86,7 +81,7 @@ class AppIdentity extends I_Identity with AppLocalStorage {
       await this.deleteToken(TokenType.RefreshToken);
       return true;
     } catch (e) {
-      //TODO:LOG_ERROR***
+      log.e(e);
       return false;
     }
   }

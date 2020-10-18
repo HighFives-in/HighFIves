@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:highfives_ui/constants/const/token.dart';
+import 'package:highfives_ui/logging/logger.dart';
 import 'package:highfives_ui/models/error.dart';
 import 'package:highfives_ui/resources/Identity/I_Identity.dart';
 import 'package:highfives_ui/resources/localStorage/WebLocalStorage.dart';
@@ -10,21 +11,27 @@ import 'package:highfives_ui/services/Identity/login.dart';
 class WebIdentity extends I_Identity with WebLocalStorage {
   final _signupService = SignUpService();
   final _loginService = LoginService();
+  final log = getLogger('WebIdentity');
 
   @override
   Future<bool> signUp(String email, String password, String role) async {
     try {
       var res = await _signupService.attemptSignUp(email, password, role);
-      if (res != null &&
-          res['accessToken'] != null &&
-          res['refreshToken'] != null) {
-        await this.storeToken(res['accessToken'], TokenType.AccessToken);
-        await this.storeToken(res['refreshToken'], TokenType.RefreshToken);
+      // if (res != null &&
+      //     res['accessToken'] != null &&
+      //     res['refreshToken'] != null) {
+      //   await this.storeToken(res['accessToken'], TokenType.AccessToken);
+      //   await this.storeToken(res['refreshToken'], TokenType.RefreshToken);
+      //   return true;
+      // }
+
+      if (res != null) {
         return true;
       }
+
       //TODO:THROW_ERROR invalid response because we expect access and refresh in response;
     } catch (e) {
-      //TODO:LOG_ERROR***
+      log.e(e);
       return false;
     }
     return false;
@@ -41,7 +48,6 @@ class WebIdentity extends I_Identity with WebLocalStorage {
       await this.storeToken(res['refreshToken'], TokenType.RefreshToken);
       return true;
     }
-    print('resourcesss $res');
 
     //TODO:LOG ERROR invalid response because we expect access and refresh in response;
     return false;
@@ -55,10 +61,8 @@ class WebIdentity extends I_Identity with WebLocalStorage {
 
       var tokenComponents = token.split(".");
       if (tokenComponents.length != 3) {
-        //TODO:LOG_ERROR***
-        print("Invalid token format");
+        log.i("Invalid token format");
         return "";
-        // return false;
       }
 
       var payload = json.decode(
@@ -68,15 +72,12 @@ class WebIdentity extends I_Identity with WebLocalStorage {
         return payload;
         // return true;
       } else {
-        print("Token Expired");
+        log.i("Token Expired");
         return "";
-        // return false;
       }
     } catch (e) {
-      //TODO:LOG_ERROR***
-      print(e);
+      log.e(e);
       return "";
-      // return false;
     }
   }
 
@@ -87,7 +88,7 @@ class WebIdentity extends I_Identity with WebLocalStorage {
       await this.deleteToken(TokenType.RefreshToken);
       return true;
     } catch (e) {
-      //TODO:LOG_ERROR***
+      log.e(e);
       return false;
     }
   }

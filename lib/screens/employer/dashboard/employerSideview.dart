@@ -99,7 +99,8 @@ Widget getIcon(String item) {
       break;
     case EMPLOYER_COMMUNICATIONS:
       return Icon(
-        Icons.insert_comment_outlined,
+        Icons.people,
+        // Icons.insert_comment_outlined,
         size: 25,
       );
       break;
@@ -111,13 +112,15 @@ Widget getIcon(String item) {
       break;
     case EMPLOYER_STUDENTS:
       return Icon(
-        Icons.people_alt_sharp,
+        Icons.people,
+        // Icons.people_alt_sharp,
         size: 25,
       );
       break;
     case EMPLOYER_ANALYTICS:
       return Icon(
-        Icons.analytics_outlined,
+        Icons.people,
+        // Icons.analytics_outlined,
         size: 25,
       );
       break;
@@ -129,7 +132,8 @@ Widget getIcon(String item) {
       break;
     case EMPLOYER_BUILD_NEW_RELATIONS:
       return Icon(
-        Icons.new_releases_rounded,
+        Icons.people,
+        // Icons.new_releases_rounded,
         size: 25,
       );
       break;
