@@ -1,155 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:highfives_ui/constants/const/business.dart';
-import 'package:highfives_ui/screens/login/login.dart';
-import 'package:highfives_ui/screens/signup/signup.dart';
-// import 'package:highfives_ui/screens/signup/signup.dart';
 import 'package:highfives_ui/screens/utils/bottombar.dart';
+import 'package:highfives_ui/screens/utils/topNavBarNotLoggedIn.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
-import 'package:highfives_ui/utils/themeChanger.dart';
-import 'package:provider/provider.dart';
-
 
 class HomeUi extends StatelessWidget {
-  ThemeChanger _themeChanger;
   @override
   Widget build(BuildContext context) {
-    _themeChanger = Provider.of<ThemeChanger>(context);
-
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         width: size.width,
         height: size.height,
         color: Theme.of(context).primaryColor,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _buildTopNavBar(context),
-              _buildHomeBody(context),
-              BottomBarCommon(size),
-            ],
-          ),
+        child: ListView(
+          children: [
+            TopNavBarNotLoggedIn(),
+            _buildHomeBody(context),
+            BottomBarCommon(size),
+          ],
         ),
       ),
     );
-  }
-
-  Widget _buildTopNavBar(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width,
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-        boxShadow: [
-          BoxShadow(
-              color: Theme.of(context).accentColor.withOpacity(0.2),
-              blurRadius: 3),
-        ],
-      ),
-      height: 100,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: Image(
-                  image: AssetImage("assets/images/logo.png"),
-                ),
-              ),
-              Text(
-                COMPANY_NAME,
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
-          ),
-          InkWell(
-            onTap: () {
-              _themeChanger.toggleTheme();
-            },
-            child: Container(
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.3),
-                border:
-                    Border.all(color: Theme.of(context).dividerColor, width: 1),
-              ),
-              child: Icon(Icons.brightness_3,
-                  size: 40, color: Theme.of(context).accentColor),
-            ),
-          ),
-          if (ResponsiveLayout.isSmallScreen(context))
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Icon(
-                Icons.menu,
-                color: Theme.of(context).accentColor,
-                size: 40,
-              ),
-            )
-          else
-            Row(children: [
-              ...getListOfNavHeadings(context),
-              InkWell(
-                onTap: () async {
-                  //TODO ONCLICK
-                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignupUI()));
-                  return null;
-                },
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(40, 30, 0, 30),
-                  width: 80,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).accentColor,
-                    borderRadius: BorderRadius.circular(8.3),
-                    border: Border.all(
-                        color: Theme.of(context).accentColor, width: 1.667),
-                  ),
-                  child: Center(
-                    child: Text('Sign Up',
-                        style: Theme.of(context).textTheme.headline5),
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () async {
-                  //TODO ONCLICK
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginUI()));
-                  return null;
-                },
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(40, 30, 50, 30),
-                  width: 80,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).accentColor,
-                    borderRadius: BorderRadius.circular(8.3),
-                    border: Border.all(
-                        color: Theme.of(context).accentColor, width: 1.667),
-                  ),
-                  child: Center(
-                    child: Text('Log In',
-                        style: Theme.of(context).textTheme.headline5),
-                  ),
-                ),
-              ),
-            ]),
-        ],
-      ),
-    );
-  }
-
-  List<Widget> getListOfNavHeadings(BuildContext context) {
-    return NAV_HEADLINES.map((headline) {
-      return Padding(
-        padding: EdgeInsets.fromLTRB(30, 30, 0, 30),
-        child: Text(headline, style: Theme.of(context).textTheme.headline4),
-      );
-    }).toList();
   }
 
   Widget _buildHomeBody(BuildContext context) {
@@ -176,11 +47,9 @@ class LargeChild extends StatelessWidget {
                 widthFactor: 0.50,
                 child: Padding(
                   padding: const EdgeInsets.all(20),
-                  child: Container(
-                    child: Image(
-                      image: AssetImage("assets/images/static_home.png"),
-                      fit: BoxFit.contain,
-                    ),
+                  child: Image(
+                    image: AssetImage("assets/images/static3.jpg"),
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
@@ -208,13 +77,16 @@ class LargeChild extends StatelessWidget {
                           ),
                           child: FlatButton(
                             onPressed: null,
-                            child: Row(children: [
-                              Text('Take a tour  ',
-                                  style:
-                                      Theme.of(context).textTheme.headline5),
-                              Icon(Icons.trending_flat,
-                                  color: Theme.of(context).primaryColor),
-                            ]),
+                            child: Container(
+                              height: 50,
+                              child: Row(children: [
+                                Text('Take a tour  ',
+                                    style:
+                                        Theme.of(context).textTheme.headline5),
+                                Icon(Icons.trending_flat,
+                                    color: Theme.of(context).primaryColor),
+                              ]),
+                            ),
                           ),
                         ),
                       ],
@@ -255,13 +127,16 @@ class LargeChild extends StatelessWidget {
                           ),
                           child: FlatButton(
                             onPressed: null,
-                            child: Row(children: [
-                              Text('Explore  ',
-                                  style:
-                                      Theme.of(context).textTheme.headline5),
-                              Icon(Icons.trending_flat,
-                                  color: Theme.of(context).primaryColor),
-                            ]),
+                            child: Container(
+                              height: 50,
+                              child: Row(children: [
+                                Text('Explore  ',
+                                    style:
+                                        Theme.of(context).textTheme.headline5),
+                                Icon(Icons.trending_flat,
+                                    color: Theme.of(context).primaryColor),
+                              ]),
+                            ),
                           ),
                         ),
                       ],
@@ -326,20 +201,19 @@ class LargeChild extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: FlatButton(
-                            onPressed: () async {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => SignupUI()));
-                              return null;
-                            },
-                            child: Row(
-                              children: [
-                                Text('Search  ',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline5),
-                                Icon(Icons.trending_flat,
-                                    color: Theme.of(context).primaryColor),
-                              ],
+                            onPressed: null,
+                            child: Container(
+                              height: 50,
+                              child: Row(
+                                children: [
+                                  Text('Search  ',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline5),
+                                  Icon(Icons.trending_flat,
+                                      color: Theme.of(context).primaryColor),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -360,181 +234,200 @@ class LargeChild extends StatelessWidget {
 class SmallChild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: AlwaysScrollableScrollPhysics(),
-      child: Padding(
-        padding: const EdgeInsets.all(40),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            FractionallySizedBox(
-              alignment: Alignment.bottomLeft,
-              widthFactor: 0.8,
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Container(
-                  child: Image(
-                    image: AssetImage("assets/images/static_home.png"),
-                    fit: BoxFit.contain,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FractionallySizedBox(
+                alignment: Alignment.bottomLeft,
+                widthFactor: 1,
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Container(
+                    child: Image(
+                      image: AssetImage("assets/images/static3.jpg"),
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            FractionallySizedBox(
-              alignment: Alignment.centerRight,
-              widthFactor: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Container(
-                  // color: Colors.green,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Integrated platform for placements',
-                          style: Theme.of(context).textTheme.headline3),
-                      Text('Faster. Efficient. Secure.',
-                          style: Theme.of(context).textTheme.headline6),
-                      SizedBox(height: 30),
-                      Container(
-                        width: 150,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).accentColor,
-                          borderRadius: BorderRadius.circular(10),
+              SizedBox(
+                height: 20,
+              ),
+              FractionallySizedBox(
+                alignment: Alignment.centerRight,
+                widthFactor: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Container(
+                    // color: Colors.green,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Integrated platform for placements',
+                            style: Theme.of(context).textTheme.headline3),
+                        Text('Faster. Efficient. Secure.',
+                            style: Theme.of(context).textTheme.headline6),
+                        SizedBox(height: 30),
+                        Container(
+                          width: 150,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).accentColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: FlatButton(
+                            onPressed: null,
+                            child: Container(
+                              height: 50,
+                              child: Row(children: [
+                                Text('Take a tour  ',
+                                    style:
+                                        Theme.of(context).textTheme.headline5),
+                                Icon(Icons.trending_flat,
+                                    color: Theme.of(context).primaryColor),
+                              ]),
+                            ),
+                          ),
                         ),
-                        child: FlatButton(
-                          onPressed: null,
-                          child: Row(children: [
-                            Text('Take a tour  ',
-                                style: Theme.of(context).textTheme.headline5),
-                            Icon(Icons.trending_flat,
-                                color: Theme.of(context).primaryColor),
-                          ]),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            FractionallySizedBox(
-              alignment: Alignment.bottomLeft,
-              widthFactor: 0.8,
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Container(
-                  child: Image(
-                    image: AssetImage("assets/images/static2.jpg"),
-                    fit: BoxFit.contain,
+              SizedBox(
+                height: 50,
+              ),
+              FractionallySizedBox(
+                alignment: Alignment.bottomLeft,
+                widthFactor: 1,
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Container(
+                    child: Image(
+                      image: AssetImage("assets/images/static2.jpg"),
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            FractionallySizedBox(
-              alignment: Alignment.centerRight,
-              widthFactor: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Container(
-                  // color: Colors.green,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Be prepared for anything',
-                          style: Theme.of(context).textTheme.headline3),
-                      Text('Never miss out on any opportunity.',
-                          style: Theme.of(context).textTheme.headline6),
-                      SizedBox(height: 30),
-                      Container(
-                        width: 150,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).accentColor,
-                          borderRadius: BorderRadius.circular(10),
+              SizedBox(
+                height: 20,
+              ),
+              FractionallySizedBox(
+                alignment: Alignment.centerRight,
+                widthFactor: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Container(
+                    // color: Colors.green,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Be prepared for anything',
+                            style: Theme.of(context).textTheme.headline3),
+                        Text('Never miss out on any opportunity.',
+                            style: Theme.of(context).textTheme.headline6),
+                        SizedBox(height: 30),
+                        Container(
+                          width: 150,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).accentColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: FlatButton(
+                            onPressed: null,
+                            child: Container(
+                              height: 50,
+                              child: Row(
+                                children: [
+                                  Text('Explore  ',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline5),
+                                  Icon(Icons.trending_flat,
+                                      color: Theme.of(context).primaryColor),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
-                        child: FlatButton(
-                          onPressed: null,
-                          child: Row(children: [
-                            Text('Explore  ',
-                                style: Theme.of(context).textTheme.headline5),
-                            Icon(Icons.trending_flat,
-                                color: Theme.of(context).primaryColor),
-                          ]),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            FractionallySizedBox(
-              alignment: Alignment.bottomLeft,
-              widthFactor: 0.8,
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Container(
-                  child: Image(
-                    image: AssetImage("assets/images/static2.jpg"),
-                    fit: BoxFit.contain,
+              SizedBox(
+                height: 50,
+              ),
+              FractionallySizedBox(
+                alignment: Alignment.bottomLeft,
+                widthFactor: 1,
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Container(
+                    child: Image(
+                      image: AssetImage("assets/images/static1.jpg"),
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            FractionallySizedBox(
-              alignment: Alignment.centerRight,
-              widthFactor: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Container(
-                  // color: Colors.green,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Hire the best minds',
-                          style: Theme.of(context).textTheme.headline3),
-                      Text('Easily connect with the college graduates.',
-                          style: Theme.of(context).textTheme.headline6),
-                      SizedBox(height: 30),
-                      Container(
-                        width: 150,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).accentColor,
-                          borderRadius: BorderRadius.circular(10),
+              SizedBox(
+                height: 20,
+              ),
+              FractionallySizedBox(
+                alignment: Alignment.centerRight,
+                widthFactor: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Container(
+                    // color: Colors.green,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Hire the best minds',
+                            style: Theme.of(context).textTheme.headline3),
+                        Text('Easily connect with the college graduates.',
+                            style: Theme.of(context).textTheme.headline6),
+                        SizedBox(height: 30),
+                        Container(
+                          width: 150,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).accentColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: FlatButton(
+                            onPressed: null,
+                            child: Container(
+                              height: 50,
+                              child: Row(
+                                children: [
+                                  Text('Search  ',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline5),
+                                  Icon(Icons.trending_flat,
+                                      color: Theme.of(context).primaryColor),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
-                        child: FlatButton(
-                          onPressed: null,
-                          child: Row(children: [
-                            Text('Search  ',
-                                style: Theme.of(context).textTheme.headline5),
-                            Icon(Icons.trending_flat,
-                                color: Theme.of(context).primaryColor),
-                          ]),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-          ],
+              SizedBox(
+                height: 50,
+              ),
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

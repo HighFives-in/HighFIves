@@ -50,7 +50,12 @@ final DARKTHEME = ThemeData(
         color: Colors.white,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.64),
-    bodyText1: TextStyle(fontSize: 10, fontFamily: customFontFamily),
+    bodyText1: TextStyle(
+      fontSize: 25,
+      fontFamily: customFontFamily,
+      color: Colors.black,
+      decoration: TextDecoration.underline,
+    ),
     bodyText2: TextStyle(fontSize: 15, fontFamily: customFontFamily),
   ),
 );
@@ -102,7 +107,12 @@ final LIGHTTHEME = ThemeData(
         color: Colors.black,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.64),
-    bodyText1: TextStyle(fontSize: 20, fontFamily: customFontFamily),
+    bodyText1: TextStyle(
+      fontSize: 25,
+      fontFamily: customFontFamily,
+      color: Colors.white,
+      decoration: TextDecoration.underline,
+    ),
     bodyText2: TextStyle(fontSize: 15, fontFamily: customFontFamily),
   ),
 );

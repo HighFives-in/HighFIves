@@ -6,7 +6,7 @@ class BottomBarCommon extends StatelessWidget {
   Size bottomBarHeight;
   BottomBarCommon(this.bottomBarHeight);
   @override
-   Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return ResponsiveLayout(
       largeScreen: LargeBottom(),
       smallScreen: SmallBottom(),
@@ -33,27 +33,23 @@ class LargeBottom extends StatelessWidget {
             ),
             Text(
               'HighFives',
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             SizedBox(
               height: 40,
             ),
             FlatButton(
               onPressed: () {},
-              textColor: Theme.of(context).primaryColor,
-              child: Text('Help'),
+              child: Text('Help', style: Theme.of(context).textTheme.headline5),
             ),
             FlatButton(
               onPressed: () {},
-              textColor: Theme.of(context).primaryColor,
-              child: Text('FAQ'),
+              child: Text('FAQ', style: Theme.of(context).textTheme.headline5),
             ),
             FlatButton(
               onPressed: () {},
-              textColor: Theme.of(context).primaryColor,
-              child: Text('Contact Us'),
+              child: Text('Contact Us',
+                  style: Theme.of(context).textTheme.headline5),
             ),
             SizedBox(
               height: 40,
@@ -65,27 +61,25 @@ class LargeBottom extends StatelessWidget {
             ),
             Text(
               'Company',
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             SizedBox(
               height: 40,
             ),
             FlatButton(
               onPressed: () {},
-              textColor: Theme.of(context).primaryColor,
-              child: Text('About Us'),
+              child: Text('About Us',
+                  style: Theme.of(context).textTheme.headline5),
             ),
             FlatButton(
               onPressed: () {},
-              textColor: Theme.of(context).primaryColor,
-              child: Text('Careers'),
+              child:
+                  Text('Careers', style: Theme.of(context).textTheme.headline5),
             ),
             FlatButton(
               onPressed: () {},
-              textColor: Theme.of(context).primaryColor,
-              child: Text('Terms & Policies'),
+              child: Text('Terms & Policies',
+                  style: Theme.of(context).textTheme.headline5),
             ),
             SizedBox(
               height: 40,
@@ -96,10 +90,10 @@ class LargeBottom extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              Text('Social',
-                  style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold)),
+              Text(
+                'Social',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
               SizedBox(height: 40),
               Row(children: [
                 FlatButton(
@@ -126,15 +120,15 @@ class LargeBottom extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              Text('Support',
-                  style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold)),
+              Text(
+                'Support',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
               SizedBox(height: 40),
               FlatButton(
                 onPressed: () {},
-                textColor: Theme.of(context).primaryColor,
-                child: Text('help@highfives.in'),
+                child: Text('highfives.in@gmail.com',
+                    style: Theme.of(context).textTheme.headline5),
               ),
               SizedBox(
                 height: 40,
@@ -166,9 +160,7 @@ class SmallBottom extends StatelessWidget {
             ),
             Text(
               'HighFives',
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             SizedBox(
               height: 20,
@@ -194,10 +186,10 @@ class SmallBottom extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Text('Social',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold)),
+            Text(
+              'Social',
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
             SizedBox(height: 20),
             Row(children: [
               FlatButton(
@@ -224,9 +216,7 @@ class SmallBottom extends StatelessWidget {
             ),
             Text(
               'Company',
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             SizedBox(
               height: 20,
@@ -252,15 +242,15 @@ class SmallBottom extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Text('Support',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold)),
+            Text(
+              'Support',
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
             SizedBox(height: 20),
             FlatButton(
               onPressed: () {},
               textColor: Theme.of(context).primaryColor,
-              child: Text('help@highfives.in'),
+              child: Text('highfives.in@gmail.com'),
             ),
             SizedBox(
               height: 20,

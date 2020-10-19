@@ -16,17 +16,16 @@ class SignupUI extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        width: size.width,
-        height: size.height,
-        color: Theme.of(context).primaryColor,
-        child: ListView(
-          children: [
+          width: size.width,
+          height: size.height,
+          color: Theme.of(context).primaryColor,
+          child: ListView(
+            children: [
               _buildTopNavBar(context),
               _buildSignupBody(context),
               BottomBarCommon(size),
             ],
-        )
-      ),
+          )),
     );
   }
 
@@ -91,7 +90,7 @@ class SignupUI extends StatelessWidget {
                     onTap: () async {
                       //TODO ONCLICK
                       Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => LoginUI()));
+                          MaterialPageRoute(builder: (context) => LoginUI()));
                     },
                     child: Container(
                       margin: EdgeInsets.fromLTRB(50, 30, 100, 30),
@@ -198,28 +197,24 @@ class SmallChild extends StatelessWidget {
     return SingleChildScrollView(
       physics: AlwaysScrollableScrollPhysics(),
       child: Padding(
-        padding: EdgeInsets.all(40),
+        padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            FractionallySizedBox(
-              alignment: Alignment.centerRight,
-              widthFactor: 1,
-              child: Container(
-                // color: Colors.green,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Lets do highfives !',
-                        style: Theme.of(context).textTheme.headline2),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text('Don\'t miss out an opportunity ',
-                          style: Theme.of(context).textTheme.headline6),
-                    ),
-                    SizedBox(height: 30), //submit login
-                  ],
-                ),
+            Container(
+              // color: Colors.green,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Lets do highfives !',
+                      style: Theme.of(context).textTheme.headline2),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text('Don\'t miss out an opportunity ',
+                        style: Theme.of(context).textTheme.headline6),
+                  ),
+                  SizedBox(height: 30), //submit login
+                ],
               ),
             ),
             FractionallySizedBox(
