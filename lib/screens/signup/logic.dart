@@ -142,19 +142,17 @@ class SignupLogicWithRole extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(5),
                     child: TextFormField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                      validator: (value) {
-                        if(value.isEmpty)
-                          return 'Empty';
-                        if(value != _pass.text){
-                          return 'Password doesn\'t match';
-                        }
-                        return null;
-                      }
-                    ),
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                        ),
+                        validator: (value) {
+                          if (value.isEmpty) return 'Empty';
+                          if (value != _pass.text) {
+                            return 'Password doesn\'t match';
+                          }
+                          return null;
+                        }),
                   ),
                 ),
               ),
@@ -191,8 +189,12 @@ class SignupLogicWithRole extends StatelessWidget {
                     }
                   }
                 },
-                child: Text('Sign Up',
-                    style: Theme.of(context).textTheme.headline5),
+                child: Container(
+                  height: 50,
+                  alignment: Alignment.center,
+                  child: Text('Sign Up',
+                      style: Theme.of(context).textTheme.headline5),
+                ),
               ),
             ),
           ),

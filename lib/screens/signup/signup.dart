@@ -144,13 +144,9 @@ class LargeChild extends StatelessWidget {
             children: [
               FractionallySizedBox(
                 alignment: Alignment.bottomLeft,
-                widthFactor: 0.55,
+                widthFactor: 0.5,
                 child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                        right: BorderSide(
-                            width: 1, color: Theme.of(context).dividerColor)),
-                  ),
+                  padding: EdgeInsets.all(20),
                   child: Image(
                     image: AssetImage("assets/images/static2.jpg"),
                     fit: BoxFit.contain,
@@ -159,9 +155,8 @@ class LargeChild extends StatelessWidget {
               ),
               FractionallySizedBox(
                 alignment: Alignment.centerRight,
-                widthFactor: 0.45,
+                widthFactor: 0.5,
                 child: Container(
-                  // color: Colors.green,
                   child: Padding(
                     padding: EdgeInsets.all(50),
                     child: Column(
@@ -219,7 +214,7 @@ class SmallChild extends StatelessWidget {
             ),
             FractionallySizedBox(
               alignment: Alignment.bottomLeft,
-              widthFactor: 0.8,
+              widthFactor: 1,
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Container(
