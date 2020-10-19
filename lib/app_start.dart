@@ -5,9 +5,10 @@ import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/constants/const/theme.dart';
 import 'package:highfives_ui/constants/const/token.dart';
 import 'package:highfives_ui/locator.dart';
+import 'package:highfives_ui/logging/logger.dart';
 import 'package:highfives_ui/resources/Identity/main.dart';
 import 'package:highfives_ui/screens/employer/dashboard/employerDashboard.dart';
-import 'package:highfives_ui/screens/login/login.dart';
+import 'package:highfives_ui/screens/home.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/tnpdashboard.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
 import 'package:highfives_ui/screens/utils/navigationService.dart';
@@ -52,17 +53,18 @@ class MaterialAppWithTheme extends StatelessWidget {
 
 class AppStart extends StatelessWidget {
   final _identityResource = IdentityResource(findPlatform());
-
+  final log = getLogger('AppStart');
   @override
   Widget build(BuildContext context) {
-    print('BUILDING APP START');
+    log.i('BUILDING APP START');
     return FutureBuilder(
       future: _findtoken(TokenType.AccessToken),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           //TODO LOG ERROR
+          log.e(snapshot.hasError);
           basicErrorFlutterToast(
-              "Something Went wrong in Login + ${snapshot.error}");
+              "Something went wrong on main page + ${snapshot.error}");
         }
         if (!snapshot.hasData) return Loading();
         if (snapshot.data != null && snapshot.data != "") {
@@ -82,7 +84,7 @@ class AppStart extends StatelessWidget {
               break;
           }
         } else {
-          return LoginUI();
+          return HomeUi();
         }
       },
     );

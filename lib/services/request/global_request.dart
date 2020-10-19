@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:highfives_ui/logging/logger.dart';
 
 class UiHttpClient {
   var _dio; //TODO Change later
   BaseOptions _options;
-
+  final log = getLogger('UiHttpClient');
   factory UiHttpClient() {
     return _uiHttpClientSingleton;
   }
@@ -30,18 +31,15 @@ class UiHttpClient {
       var response = await dio.get(url);
       return response;
     } on DioError catch (e) {
-      //TODO : LOGGING
+      log.e(e);
 
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
       if (e.response != null) {
-        print(e.response.data);
-        print(e.response.headers);
-        print(e.response.request);
+        log.e(e.response);
       } else {
         // Something happened in setting up or sending the request that triggered an Error
-        print(e.request);
-        print(e.message);
+        log.e(e.message);
       }
       return null;
     }
@@ -53,7 +51,7 @@ class UiHttpClient {
       var response = await dio.post(url, data: body);
       return response;
     } on DioError catch (e) {
-      //TODO : LOGGING
+      log.e(e);
 
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
