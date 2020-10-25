@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/constants/const/business.dart';
+import 'package:highfives_ui/locator.dart';
+import 'package:highfives_ui/screens/statics/howWeWork/howWeWork.dart';
+import 'package:highfives_ui/screens/utils/navigationService.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
 import 'package:highfives_ui/utils/themeChanger.dart';
 import 'package:provider/provider.dart';
@@ -24,19 +27,8 @@ class NavBarCommon extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: Image(
-                  image: AssetImage("assets/images/logo.png"),
-                ),
-              ),
-              Text(
-                COMPANY_NAME,
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
+          Image(
+            image: AssetImage("assets/images/iconwithtext.png"),
           ),
           InkWell(
             onTap: () {
@@ -92,13 +84,38 @@ class NavBarCommon extends StatelessWidget {
       ),
     );
   }
-}
 
-List<Widget> getListOfNavHeadings(BuildContext context) {
-  return NAV_HEADLINES.map((headline) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(40, 30, 0, 30),
-      child: Text(headline, style: Theme.of(context).textTheme.headline4),
+  static List<Widget> getListOfNavHeadings(BuildContext context) {
+    List<Widget> navHeadings = List<Widget>();
+    Widget howWeWork = Container(
+      padding: EdgeInsets.all(20),
+      child: InkWell(
+        onTap: () {
+          locator<NavigationService>().navitgateTo('/' + HowWeWork.route, null);
+        },
+        child: Text(NAV_HEADLINES[0],
+            style: Theme.of(context).textTheme.headline4),
+      ),
     );
-  }).toList();
+    Widget aboutUs = Container(
+      padding: EdgeInsets.all(20),
+      child: InkWell(
+        onTap: () {},
+        child: Text(NAV_HEADLINES[1],
+            style: Theme.of(context).textTheme.headline4),
+      ),
+    );
+    Widget blogs = Container(
+      padding: EdgeInsets.all(20),
+      child: InkWell(
+        onTap: () {},
+        child: Text(NAV_HEADLINES[2],
+            style: Theme.of(context).textTheme.headline4),
+      ),
+    );
+    navHeadings.add(howWeWork);
+    navHeadings.add(aboutUs);
+    navHeadings.add(blogs);
+    return navHeadings;
+  }
 }

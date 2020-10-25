@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:highfives_ui/constants/const/business.dart';
+// import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/screens/login/login.dart';
 import 'package:highfives_ui/screens/signup/signup.dart';
+import 'package:highfives_ui/screens/utils/navbar.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
 import 'package:highfives_ui/utils/themeChanger.dart';
 import 'package:provider/provider.dart';
@@ -28,19 +29,8 @@ class TopNavBarNotLoggedIn extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: Image(
-                  image: AssetImage("assets/images/logo.png"),
-                ),
-              ),
-              Text(
-                COMPANY_NAME,
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
+          Image(
+            image: AssetImage("assets/images/iconwithtext.png"),
           ),
           InkWell(
             onTap: () {
@@ -68,7 +58,7 @@ class TopNavBarNotLoggedIn extends StatelessWidget {
             )
           else
             Row(children: [
-              ...getListOfNavHeadings(context),
+              ...NavBarCommon.getListOfNavHeadings(context),
               InkWell(
                 onTap: () async {
                   //TODO ONCLICK
@@ -119,14 +109,5 @@ class TopNavBarNotLoggedIn extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  List<Widget> getListOfNavHeadings(BuildContext context) {
-    return NAV_HEADLINES.map((headline) {
-      return Padding(
-        padding: EdgeInsets.fromLTRB(30, 30, 0, 30),
-        child: Text(headline, style: Theme.of(context).textTheme.headline4),
-      );
-    }).toList();
   }
 }

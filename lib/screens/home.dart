@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/screens/utils/bottombar.dart';
 import 'package:highfives_ui/screens/utils/topNavBarNotLoggedIn.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
+import 'package:universal_html/js.dart' as js;
 
 class HomeUi extends StatelessWidget {
   @override
@@ -12,12 +14,15 @@ class HomeUi extends StatelessWidget {
         width: size.width,
         height: size.height,
         color: Theme.of(context).primaryColor,
-        child: ListView(
-          children: [
-            TopNavBarNotLoggedIn(),
-            _buildHomeBody(context),
-            BottomBarCommon(size),
-          ],
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              TopNavBarNotLoggedIn(),
+              _buildHomeBody(context),
+              BottomBarCommon(size),
+            ],
+          ),
         ),
       ),
     );
@@ -76,11 +81,13 @@ class LargeChild extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: FlatButton(
-                            onPressed: null,
+                            onPressed: () {
+                              js.context.callMethod("open", [DEMO_FORM_LINK]);
+                            },
                             child: Container(
                               height: 50,
                               child: Row(children: [
-                                Text('Take a tour  ',
+                                Text('Book Demo',
                                     style:
                                         Theme.of(context).textTheme.headline5),
                                 Icon(Icons.trending_flat,
@@ -279,11 +286,13 @@ class SmallChild extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: FlatButton(
-                            onPressed: null,
+                            onPressed: () {
+                              js.context.callMethod("open", [DEMO_FORM_LINK]);
+                            },
                             child: Container(
                               height: 50,
                               child: Row(children: [
-                                Text('Take a tour  ',
+                                Text('Book Demo',
                                     style:
                                         Theme.of(context).textTheme.headline5),
                                 Icon(Icons.trending_flat,
