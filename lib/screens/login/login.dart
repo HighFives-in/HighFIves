@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:highfives_ui/constants/const/business.dart';
+// import 'package:highfives_ui/constants/const/business.dart';
 import 'package:highfives_ui/screens/login/logic.dart';
 import 'package:highfives_ui/screens/signup/signup.dart';
 import 'package:highfives_ui/screens/utils/bottombar.dart';
+import 'package:highfives_ui/screens/utils/navbar.dart';
 import 'package:highfives_ui/utils/responsiveLayout.dart';
 import 'package:highfives_ui/utils/themeChanger.dart';
 import 'package:provider/provider.dart';
@@ -76,7 +77,7 @@ class LoginUI extends StatelessWidget {
             )
           else
             Row(
-              children: [...getListOfNavHeadings(context)]..add(
+              children: [...NavBarCommon.getListOfNavHeadings(context)]..add(
                   InkWell(
                     onTap: () async {
                       //TODO ONCLICK
@@ -104,15 +105,6 @@ class LoginUI extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  List<Widget> getListOfNavHeadings(BuildContext context) {
-    return NAV_HEADLINES.map((headline) {
-      return Padding(
-        padding: EdgeInsets.fromLTRB(40, 30, 0, 30),
-        child: Text(headline, style: Theme.of(context).textTheme.headline4),
-      );
-    }).toList();
   }
 
   Widget _buildLoginBody(BuildContext context) {

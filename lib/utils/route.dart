@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:highfives_ui/app_start.dart';
 import 'package:highfives_ui/screens/employer/dashboard/employerDashboard.dart';
+import 'package:highfives_ui/screens/statics/howWeWork/howWeWork.dart';
 import 'package:highfives_ui/screens/tnp/dashboard/tnpdashboard.dart';
 import 'package:highfives_ui/screens/utils/loading.dart';
+
+final howWeWorkRoute = HowWeWork.route;
 
 class Path {
   final String pathPattern;
@@ -13,6 +16,7 @@ class Path {
 // IMPORTANT NOTE Path(r'\/', (context, match) => AppStart()),
 // should be at the end of list in paths because this is the main path and will match every regex
   static List<Path> paths = [
+    Path(r'^\/HowWeWork', (context, match) => HowWeWork()),
     Path(r'^tnp\/communications\/\d*_\d*', (context, match) => TnpView(match)),
     Path(r'^\/tnp\/communications\/*', (context, match) => TnpView(match)),
     Path(r'\/tnp\/communications', (context, match) => TnpView(match)),
