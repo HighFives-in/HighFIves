@@ -19,14 +19,12 @@ class LoginUI extends StatelessWidget {
         width: size.width,
         height: size.height,
         color: Theme.of(context).primaryColor,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _buildTopNavBar(context),
-              _buildLoginBody(context),
-              BottomBarCommon(size),
-            ],
-          ),
+        child: ListView(
+          children: [
+            _buildTopNavBar(context),
+            _buildLoginBody(context),
+            BottomBarCommon(size),
+          ],
         ),
       ),
     );
@@ -49,19 +47,8 @@ class LoginUI extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: Image(
-                  image: AssetImage("assets/images/logo.png"),
-                ),
-              ),
-              Text(
-                COMPANY_NAME,
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
+          Image(
+            image: AssetImage("assets/images/iconwithtext.png"),
           ),
           InkWell(
             onTap: () {
@@ -94,7 +81,7 @@ class LoginUI extends StatelessWidget {
                     onTap: () async {
                       //TODO ONCLICK
                       Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => SignupUI()));
+                          MaterialPageRoute(builder: (context) => SignupUI()));
                     },
                     child: Container(
                       margin: EdgeInsets.fromLTRB(50, 30, 100, 30),
@@ -141,7 +128,7 @@ class LargeChild extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 100),
+        SizedBox(height: 50),
         SizedBox(
           height: 600,
           child: Stack(
@@ -149,7 +136,7 @@ class LargeChild extends StatelessWidget {
             children: [
               FractionallySizedBox(
                 alignment: Alignment.bottomLeft,
-                widthFactor: 0.55,
+                widthFactor: 0.45,
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border(
@@ -157,14 +144,14 @@ class LargeChild extends StatelessWidget {
                             width: 1, color: Theme.of(context).dividerColor)),
                   ),
                   child: Image(
-                    image: AssetImage("assets/images/people_highfive.png"),
+                    image: AssetImage("assets/images/static_home.png"),
                     fit: BoxFit.contain,
                   ),
                 ),
               ),
               FractionallySizedBox(
                 alignment: Alignment.centerRight,
-                widthFactor: 0.45,
+                widthFactor: 0.55,
                 child: Container(
                   // color: Colors.green,
                   child: Padding(
@@ -191,6 +178,7 @@ class LargeChild extends StatelessWidget {
             ],
           ),
         ),
+        SizedBox(height: 50),
       ],
     );
   }
@@ -233,7 +221,7 @@ class SmallChild extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 child: Container(
                   child: Image(
-                    image: AssetImage("assets/images/people_highfive.png"),
+                    image: AssetImage("assets/images/static_home.png"),
                     fit: BoxFit.contain,
                   ),
                 ),
