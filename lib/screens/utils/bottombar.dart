@@ -125,9 +125,14 @@ class LargeBottom extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               SizedBox(height: 40),
-              FlatButton(
-                onPressed: () {},
-                child: Text('highfives.in@gmail.com',
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: SelectableText('highfives.in@gmail.com',
+                    style: Theme.of(context).textTheme.headline5),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: SelectableText('+91-9569555585 \n +91-7986778923',
                     style: Theme.of(context).textTheme.headline5),
               ),
               SizedBox(
@@ -247,10 +252,15 @@ class SmallBottom extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyText1,
             ),
             SizedBox(height: 20),
-            FlatButton(
-              onPressed: () {},
-              textColor: Theme.of(context).primaryColor,
-              child: Text('highfives.in@gmail.com'),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: SelectableText('highfives.in@gmail.com',
+                  style: Theme.of(context).textTheme.headline5),
+            ),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: SelectableText('+91-9569555585 \n +91-7986778923',
+                  style: Theme.of(context).textTheme.headline5),
             ),
             SizedBox(
               height: 20,

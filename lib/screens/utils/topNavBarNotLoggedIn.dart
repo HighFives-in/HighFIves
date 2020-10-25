@@ -28,19 +28,8 @@ class TopNavBarNotLoggedIn extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: Image(
-                  image: AssetImage("assets/images/logo.png"),
-                ),
-              ),
-              Text(
-                COMPANY_NAME,
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
+          Image(
+            image: AssetImage("assets/images/iconwithtext.png"),
           ),
           InkWell(
             onTap: () {
